@@ -3,7 +3,6 @@ module "config" {
 
   enable_telemetry = var.enable_telemetry
 
-  # this is in variables.tf
   starter_locations               = var.starter_locations
   subscription_id_connectivity    = var.subscription_id_connectivity
   subscription_id_identity        = var.subscription_id_identity
@@ -12,7 +11,6 @@ module "config" {
 
   custom_replacements = var.custom_replacements
 
-  # this variables depends if its virtural wan or hub and spoke (variables.connectivity.hub_and_spoke_vnet_virtual_networks)
   connectivity_resource_groups        = var.connectivity_resource_groups
   hub_and_spoke_vnet_settings         = var.hub_and_spoke_vnet_settings
   hub_and_spoke_vnet_virtual_networks = var.hub_and_spoke_vnet_virtual_networks
