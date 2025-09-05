@@ -24,6 +24,7 @@ locals {
   resource_groups = {
     resource_groups = module.resource_groups
   }
+  # this is in config-templating/outputs.tf
   hub_and_spoke_vnet_settings         = merge(module.config.hub_and_spoke_vnet_settings, local.resource_groups)
   hub_and_spoke_vnet_virtual_networks = (merge({ vnets = module.config.hub_and_spoke_vnet_virtual_networks }, local.resource_groups)).vnets
   virtual_wan_settings                = merge(module.config.virtual_wan_settings, local.resource_groups)
