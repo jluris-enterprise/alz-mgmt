@@ -19,13 +19,13 @@ terraform {
     }
   }
   backend "azurerm" {
-    subscription_id      = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
-    resource_group_name  = "rg-alz-mgmt-state-uksouth-001"
-    storage_account_name = "stoalzmgmuks001ckue"
-    container_name       = "mgmt-tfstate"
-    key                  = "alzmgmt.tfstate"
+    # subscription_id      = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
+    # resource_group_name  = "rg-alz-mgmt-state-uksouth-001"
+    # storage_account_name = "stoalzmgmuks001ckue"
+    # container_name       = "mgmt-tfstate"
+    # key                  = "terraform.tfstate"
 
-    use_azuread_auth = true
+    # use_azuread_auth = true
   }
 }
 
