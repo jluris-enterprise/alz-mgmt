@@ -46,6 +46,3 @@ terraform apply -var-file ./examples/full-multi-region/hub-and-spoke-vnet.tfvars
 terraform init
 terraform apply -var-file ./examples/full-multi-region/virtual-wan.tfvars
 ```
-
-
-# Errors
