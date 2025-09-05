@@ -18,7 +18,15 @@ terraform {
       version = "~> 2.5"
     }
   }
-  backend "azurerm" {}
+  backend "azurerm" {
+    subscription_id      = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
+    resource_group_name  = "rg-alz-mgmt-state-uksouth-001"
+    storage_account_name = "stoalzmgmuks001ckue"
+    container_name       = "mgmt-tfstate"
+    key                  = "alzmgmt.tfstate"
+
+    use_azuread_auth = true
+  }
 }
 
 provider "alz" {
@@ -64,6 +72,18 @@ provider "azurerm" {
       prevent_deletion_if_contains_resources = false
     }
   }
+}
+
+provider "azurerm" {
+  resource_provider_registrations = "none"
+  alias                           = "identity"
+  subscription_id                 = var.subscription_id_identity
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
+
 }
 
 provider "azapi" {
