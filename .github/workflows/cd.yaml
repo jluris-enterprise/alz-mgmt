@@ -9,9 +9,10 @@ on:
       terraform_action:
         description: 'Terraform Action to perform'
         required: true
-        default: 'apply'
+        default: 'plan'
         type: choice
         options:
+          - 'plan'
           - 'apply'
           - 'destroy'
       terraform_cli_version:

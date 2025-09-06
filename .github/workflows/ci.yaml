@@ -14,12 +14,12 @@ on:
 
 jobs:
   validate_and_plan:
-    uses: jluris-enterprise/alz-mgmt-templates/.github/workflows/ci-template.yaml@main
+    uses: jluris-enterprise/alz-mgmt-templates/.github/workflows/ci-template.yaml@main # It calls the reusable workflow from the alz-mgmt-templates repository in main branch
     name: 'CI'
     permissions:
-      id-token: write
-      contents: read
-      pull-requests: write
+      id-token: write # To authenticate with OIDC
+      contents: read # To checkout the code from the repository
+      pull-requests: write # To post PR comments with the plan output
     with:
-      root_module_folder_relative_path: '.'
+      root_module_folder_relative_path: '.' # Path to the root module where the terraform.tf or main.tf is located
       terraform_cli_version: ${{ inputs.terraform_cli_version }}
