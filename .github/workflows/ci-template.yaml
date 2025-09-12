@@ -36,6 +36,7 @@ jobs:
           -check
 
       - name: Terraform Init
+        # backend=false to skip backend initialization/configuration as we are only validating the configuration.
         run: |
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
@@ -53,8 +54,8 @@ jobs:
     needs: validate
     runs-on:
       ubuntu-latest
-    concurrency: mgmt-tfstate
-    environment: alz-mgmt-plan
+    concurrency: mgmt-tfstate # Ensure only one plan/apply at a time to avoid state file conflicts this is the name of storage container as well where tfstate is stored.
+    environment: alz-mgmt-plan # # this is in the environment variable for the repository.
     permissions:
       # NOTE: When modifying the token subject claims and adding `environment`.
       # If the `id-token` permission is granted at the workflow level
@@ -64,11 +65,12 @@ jobs:
       contents: read
       pull-requests: write
     env:
-      ARM_CLIENT_ID: "${{ vars.AZURE_CLIENT_ID }}"
+      # this is in the secrets and variables/actions for the repository.
+      ARM_CLIENT_ID: "${{ vars.AZURE_CLIENT_ID }}" # # azure managed identity - id-alz-mgmt-uksouth-plan-001 with federated cred and rbac roles
       ARM_SUBSCRIPTION_ID: "${{ vars.AZURE_SUBSCRIPTION_ID }}"
       ARM_TENANT_ID: "${{ vars.AZURE_TENANT_ID }}"
-      ARM_USE_AZUREAD: true
-      ARM_USE_OIDC: true
+      ARM_USE_AZUREAD: true # # Use Azure AD authentication for the id-alz-mgmt-uksouth-plan-001 managed identity
+      ARM_USE_OIDC: true # most secure way for GitHub Actions to authenticate to Azure.
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -76,6 +78,7 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v3
         with:
+          #  is a deliberate choice to simplify the execution environment and give you direct, explicit control over how the Terraform CLI is invoked within your workflows.
           terraform_wrapper: false
           terraform_version: ${{ inputs.terraform_cli_version }}
 
@@ -98,10 +101,14 @@ jobs:
           -input=false
 
       - name: Update Pull Request
+        # success() || failure(): This ensures the step runs regardless of whether the previous step (terraform plan with id: plan) 
+        # succeeded or failed. This is crucial because you want to know the outcome of the plan no matter what.
+        #  This limits the step to only run when the workflow is triggered by a pull request event
         if: (success() || failure()) && github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          # steps.plan.outcome: This is a variable that dynamically injects the result of the id:plan in steps
           script: |
             const output = `#### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
