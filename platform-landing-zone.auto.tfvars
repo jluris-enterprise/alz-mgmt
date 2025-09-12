@@ -237,10 +237,10 @@ management_group_settings = {
       subscription_id       = "$${subscription_id_management}"
       management_group_name = "management"
     }
-    # security = {
-    #   subscription_id       = "$${subscription_id_security}"
-    #   management_group_name = "security"
-    # }
+    security = {
+      subscription_id       = "$${subscription_id_security}"
+      management_group_name = "security"
+    }
   }
   policy_assignments_to_modify = {
     alz = {
