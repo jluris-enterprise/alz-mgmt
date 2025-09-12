@@ -82,4 +82,4 @@ management_groups:
   archetypes:
   - decommissioned_custom
   exists: false
-  parent_id: alz
+  parent_id: jluris-enterprise
