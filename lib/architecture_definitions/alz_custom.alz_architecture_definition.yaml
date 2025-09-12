@@ -47,14 +47,14 @@ management_groups:
   archetypes:
   - sandbox_custom
   exists: false
-  parent_id: alz
+  parent_id: jluris-enterprise
 
 - id: security
   display_name: Security
   archetypes:
   - security_custom
   exists: false
-  parent_id: alz
+  parent_id: jluris-enterprise
 
 - id: management
   display_name: Management
