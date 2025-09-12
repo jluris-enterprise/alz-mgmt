@@ -407,7 +407,7 @@ hub_and_spoke_vnet_virtual_networks = {
       dns_zones = {
         resource_group_name = "$${dns_resource_group_name}"
         private_link_private_dns_zones_regex_filter = {
-          enabled = false
+          enabled = true
         }
         # private_link_private_dns_zones = {
         #   azure_storage_blob = {
