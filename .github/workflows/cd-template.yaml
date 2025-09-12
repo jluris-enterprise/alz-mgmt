@@ -61,7 +61,7 @@ jobs:
       # -name: Terraform Plan is a condition if the input terraform_action is destroy then sets the name to Terraform Plan for Destroy else for Apply
       # -out=tfplan: Save the plan to a file to be used in the apply step
       # -input=false: Prevents Terraform from prompting for input during the plan operation, which is essential for automated workflows. \
-      # # -destroy: Indicates that the plan is for a destroy operation. This flag is included only if the terraform_action input is set to 'destroy'. \
+      # -destroy: Indicates that the plan is for a destroy operation. This flag is included only if the terraform_action input is set to 'destroy'. \
       - name: Terraform Plan for ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         run: |
           # shellcheck disable=SC2086
@@ -103,6 +103,7 @@ jobs:
   apply:
     needs: plan
     name: Apply with Terraform
+    if: ${{ inputs.terraform_action == 'apply' || inputs.terraform_action == 'destroy' }}
     runs-on:
       ubuntu-latest
     concurrency: mgmt-tfstate
