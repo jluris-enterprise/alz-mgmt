@@ -141,3 +141,12 @@ Outcome: The infrastructure is deployed in Azure.
 ###
 
 # Errors 
+ Error: architectureDataSource.Read() Error creating architecture alz_custom
+│ 
+│   with module.management_groups[0].module.management_groups.data.alz_architecture.this,
+│   on .terraform/modules/management_groups.management_groups/main.tf line 1, in data "alz_architecture" "this":
+│    1: data "alz_architecture" "this" {
+│ 
+│ Hierarchy.FromArchitecture: error getting architecture `alz_custom`
+╵
+change the architecture_name  = "JLuris Enterprise" in management group settings
