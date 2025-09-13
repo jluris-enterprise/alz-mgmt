@@ -3,7 +3,7 @@ name: 02 Azure Landing Zones Continuous Delivery
 on:
   push:
     branches:
-      - main
+      - import_management_groups_level_2
   workflow_dispatch:
     inputs:
       terraform_action:

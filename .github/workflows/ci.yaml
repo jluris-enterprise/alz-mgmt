@@ -3,7 +3,7 @@ name: 01 Azure Landing Zones Continuous Integration
 on:
   pull_request:
     branches:
-      - main
+      - import_management_groups_level_2
   workflow_dispatch:
     inputs:
       terraform_cli_version:
