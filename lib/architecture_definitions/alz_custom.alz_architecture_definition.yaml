@@ -1,7 +1,7 @@
 name: "JLuris Enterprise"
 management_groups:
 - id: jluris-enterprise
-  display_name: Azure Landing Zones
+  display_name: JLuris Enterprise
   archetypes:
   - root_custom
   exists: false
