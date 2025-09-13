@@ -237,10 +237,10 @@ management_group_settings = {
       subscription_id       = "$${subscription_id_management}"
       management_group_name = "management"
     }
-    # security = {
-    #   subscription_id       = "$${subscription_id_security}"
-    #   management_group_name = "security"
-    # }
+    security = {
+      subscription_id       = "$${subscription_id_security}"
+      management_group_name = "security"
+    }
   }
   policy_assignments_to_modify = {
     alz = {
@@ -406,7 +406,6 @@ hub_and_spoke_vnet_virtual_networks = {
       enabled = "$${primary_private_dns_zones_enabled}"
       dns_zones = {
         resource_group_name = "$${dns_resource_group_name}"
-        # 
         private_link_private_dns_zones_regex_filter = {
           enabled = false
         }
