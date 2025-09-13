@@ -410,9 +410,9 @@ hub_and_spoke_vnet_virtual_networks = {
           enabled = false
         }
         private_link_private_dns_zones = {
-          azure_storage_blob = {
-            zone_name = "privatelink.blob.core.windows.net"
-          },
+          # azure_storage_blob = {
+          #   zone_name = "privatelink.blob.core.windows.net"
+          # },
         #   azure_key_vault = {
         #     zone_name = "privatelink.vaultcore.azure.net"
         #   },
