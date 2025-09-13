@@ -410,9 +410,9 @@ hub_and_spoke_vnet_virtual_networks = {
           enabled = false
         }
         private_link_private_dns_zones = {
-          # "azure_acr_registry" : {
-          #   "zone_name" : "privatelink.azurecr.io"
-          # },
+          "azure_acr_registry" : {
+            "zone_name" : "privatelink.azurecr.io"
+          },
           # "azure_ai_cog_svcs" : {
           #   "zone_name" : "privatelink.cognitiveservices.azure.com"
           # },
@@ -422,9 +422,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_ai_services" : {
           #   "zone_name" : "privatelink.services.ai.azure.com"
           # },
-          # "azure_aks_mgmt" : {
-          #   "zone_name" : "privatelink.{regionName}.azmk8s.io"
-          # },
+          "azure_aks_mgmt" : {
+            "zone_name" : "privatelink.{regionName}.azmk8s.io"
+          },
           # "azure_api_management" : {
           #   "zone_name" : "privatelink.azure-api.net"
           # },
@@ -494,9 +494,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_cosmos_db_table" : {
           #   "zone_name" : "privatelink.table.cosmos.azure.com"
           # },
-          # "azure_data_explorer" : {
-          #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
-          # },
+          "azure_data_explorer" : {
+            "zone_name" : "privatelink.{regionName}.kusto.windows.net"
+          },
           # "azure_data_factory" : {
           #   "zone_name" : "privatelink.datafactory.azure.net"
           # },
@@ -548,9 +548,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_iot_hub_update" : {
           #   "zone_name" : "privatelink.api.adu.microsoft.com"
           # },
-          # "azure_key_vault" : {
-          #   "zone_name" : "privatelink.vaultcore.azure.net"
-          # },
+          "azure_key_vault" : {
+            "zone_name" : "privatelink.vaultcore.azure.net"
+          },
           # "azure_log_analytics" : {
           #   "zone_name" : "privatelink.oms.opinsights.azure.com"
           # },
