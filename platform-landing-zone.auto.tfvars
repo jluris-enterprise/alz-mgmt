@@ -642,9 +642,9 @@ hub_and_spoke_vnet_virtual_networks = {
           #   },
           #   "zone_name" : "privatelink.{partitionId}.azurestaticapps.net"
           # },
-          # "azure_storage_blob" : {
-          #   "zone_name" : "privatelink.blob.core.windows.net"
-          # },
+          "azure_storage_blob" : {
+            "zone_name" : "privatelink.blob.core.windows.net"
+          },
           # "azure_storage_file" : {
           #   "zone_name" : "privatelink.file.core.windows.net"
           # },
