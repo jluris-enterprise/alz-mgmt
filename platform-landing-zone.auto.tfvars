@@ -33,12 +33,12 @@ custom_replacements = {
     management_resource_group_name               = "rg-management-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "rg-hub-$${starter_location_01}"
     # connectivity_hub_secondary_resource_group_name = "rg-hub-$${starter_location_02}"
-    dns_resource_group_name        = "rg-hub-dns-$${starter_location_01}"
+    dns_resource_group_name = "rg-hub-dns-$${starter_location_01}"
     # ddos_resource_group_name       = "rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name = "rg-asc-export-$${starter_location_01}"
 
     # Resource names management
-    log_analytics_workspace_name            = "law-management-$${starter_location_01}"
+    log_analytics_workspace_name = "law-management-$${starter_location_01}"
     # ddos_protection_plan_name               = "ddos-$${starter_location_01}"
     ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
     dcr_change_tracking_name                = "dcr-change-tracking"
@@ -138,7 +138,7 @@ custom_replacements = {
   NOTE: You cannot refer to another custom resource group identifier in this variable.
   */
   resource_group_identifiers = {
-    management_resource_group_id           = "/subscriptions/$${subscription_id_management}/resourcegroups/$${management_resource_group_name}"
+    management_resource_group_id = "/subscriptions/$${subscription_id_management}/resourcegroups/$${management_resource_group_name}"
     # ddos_protection_plan_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourcegroups/$${ddos_resource_group_name}"
     primary_connectivity_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${connectivity_hub_primary_resource_group_name}"
     # secondary_connectivity_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${connectivity_hub_secondary_resource_group_name}"
@@ -220,9 +220,9 @@ management_group_settings = {
     ama_user_assigned_managed_identity_name     = "$${ama_user_assigned_managed_identity_name}"
     log_analytics_workspace_id                  = "$${log_analytics_workspace_id}"
     # ddos_protection_plan_id                     = "$${ddos_protection_plan_id}"
-    private_dns_zone_subscription_id            = "$${subscription_id_connectivity}"
-    private_dns_zone_region                     = "$${starter_location_01}"
-    private_dns_zone_resource_group_name        = "$${dns_resource_group_name}"
+    private_dns_zone_subscription_id     = "$${subscription_id_connectivity}"
+    private_dns_zone_region              = "$${starter_location_01}"
+    private_dns_zone_resource_group_name = "$${dns_resource_group_name}"
   }
   subscription_placement = {
     identity = {
@@ -410,30 +410,265 @@ hub_and_spoke_vnet_virtual_networks = {
           enabled = false
         }
         private_link_private_dns_zones = {
-          # azure_storage_blob = {
-          #   zone_name = "privatelink.blob.core.windows.net"
-          # },
-          # azure_key_vault = {
-          #   zone_name = "privatelink.vaultcore.azure.net"
-          # },
-          # azure_acr_registry = {
-          #   zone_name = "privatelink.azurecr.io"
-          # },
-          # azure_data_explorer = {
-          #   zone_name = "privatelink.{regionName}.kusto.windows.net"
-          # },
-          # azure_acr_data = {
-          #   zone_name = "{regionName}.data.privatelink.azurecr.io"
-          # },
-          # azure_aks_mgmt = {
-          #   zone_name = "privatelink.{regionName}.azmk8s.io"
-          # },
-          # azure_backup = {
-          #   zone_name = "privatelink.{regionCode}.backup.windowsazure.com"
-          # },
-          # azure_container_apps = {
-          #   zone_name = "privatelink.{regionName}.azurecontainerapps.io"
-          # },
+          "azure_acr_registry" : {
+            "zone_name" : "privatelink.azurecr.io"
+          },
+          "azure_ai_cog_svcs" : {
+            "zone_name" : "privatelink.cognitiveservices.azure.com"
+          },
+          "azure_ai_oai" : {
+            "zone_name" : "privatelink.openai.azure.com"
+          },
+          "azure_ai_services" : {
+            "zone_name" : "privatelink.services.ai.azure.com"
+          },
+          "azure_aks_mgmt" : {
+            "zone_name" : "privatelink.{regionName}.azmk8s.io"
+          },
+          "azure_api_management" : {
+            "zone_name" : "privatelink.azure-api.net"
+          },
+          "azure_app_configuration" : {
+            "zone_name" : "privatelink.azconfig.io"
+          },
+          "azure_app_service" : {
+            "zone_name" : "privatelink.azurewebsites.net"
+          },
+          "azure_arc_guest_configuration" : {
+            "zone_name" : "privatelink.guestconfiguration.azure.com"
+          },
+          "azure_arc_hybrid_compute" : {
+            "zone_name" : "privatelink.his.arc.azure.com"
+          },
+          "azure_arc_kubernetes" : {
+            "zone_name" : "privatelink.dp.kubernetesconfiguration.azure.com"
+          },
+          "azure_attestation" : {
+            "zone_name" : "privatelink.attest.azure.net"
+          },
+          "azure_automation" : {
+            "zone_name" : "privatelink.azure-automation.net"
+          },
+          "azure_avd_feed_mgmt" : {
+            "zone_name" : "privatelink.wvd.microsoft.com"
+          },
+          "azure_avd_global" : {
+            "zone_name" : "privatelink-global.wvd.microsoft.com"
+          },
+          "azure_backup" : {
+            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          },
+          "azure_batch" : {
+            "zone_name" : "privatelink.batch.azure.com"
+          },
+          "azure_bot_svc_bot" : {
+            "zone_name" : "privatelink.directline.botframework.com"
+          },
+          "azure_bot_svc_token" : {
+            "zone_name" : "privatelink.token.botframework.com"
+          },
+          "azure_container_apps" : {
+            "zone_name" : "privatelink.{regionName}.azurecontainerapps.io"
+          },
+          "azure_cosmos_db_analytical" : {
+            "zone_name" : "privatelink.analytics.cosmos.azure.com"
+          },
+          "azure_cosmos_db_cassandra" : {
+            "zone_name" : "privatelink.cassandra.cosmos.azure.com"
+          },
+          "azure_cosmos_db_gremlin" : {
+            "zone_name" : "privatelink.gremlin.cosmos.azure.com"
+          },
+          "azure_cosmos_db_mongo" : {
+            "zone_name" : "privatelink.mongo.cosmos.azure.com"
+          },
+          "azure_cosmos_db_mongo_vcore" : {
+            "zone_name" : "privatelink.mongocluster.cosmos.azure.com"
+          },
+          "azure_cosmos_db_postgres" : {
+            "zone_name" : "privatelink.postgres.cosmos.azure.com"
+          },
+          "azure_cosmos_db_sql" : {
+            "zone_name" : "privatelink.documents.azure.com"
+          },
+          "azure_cosmos_db_table" : {
+            "zone_name" : "privatelink.table.cosmos.azure.com"
+          },
+          "azure_data_explorer" : {
+            "zone_name" : "privatelink.{regionName}.kusto.windows.net"
+          },
+          "azure_data_factory" : {
+            "zone_name" : "privatelink.datafactory.azure.net"
+          },
+          "azure_data_factory_portal" : {
+            "zone_name" : "privatelink.adf.azure.com"
+          },
+          "azure_data_lake_gen2" : {
+            "zone_name" : "privatelink.dfs.core.windows.net"
+          },
+          "azure_databricks_ui_api" : {
+            "zone_name" : "privatelink.azuredatabricks.net"
+          },
+          "azure_digital_twins" : {
+            "zone_name" : "privatelink.digitaltwins.azure.net"
+          },
+          "azure_event_grid" : {
+            "zone_name" : "privatelink.eventgrid.azure.net"
+          },
+          "azure_file_sync" : {
+            "zone_name" : "privatelink.afs.azure.net"
+          },
+          "azure_grafana" : {
+            "zone_name" : "privatelink.grafana.azure.com"
+          },
+          "azure_hdinsight" : {
+            "zone_name" : "privatelink.azurehdinsight.net"
+          },
+          "azure_healthcare" : {
+            "zone_name" : "privatelink.azurehealthcareapis.com"
+          },
+          "azure_healthcare_dicom" : {
+            "zone_name" : "privatelink.dicom.azurehealthcareapis.com"
+          },
+          "azure_healthcare_fhir" : {
+            "zone_name" : "privatelink.fhir.azurehealthcareapis.com"
+          },
+          "azure_healthcare_workspaces" : {
+            "zone_name" : "privatelink.workspace.azurehealthcareapis.com"
+          },
+          "azure_iot_central" : {
+            "zone_name" : "privatelink.azureiotcentral.com"
+          },
+          "azure_iot_hub" : {
+            "zone_name" : "privatelink.azure-devices.net"
+          },
+          "azure_iot_hub_provisioning" : {
+            "zone_name" : "privatelink.azure-devices-provisioning.net"
+          },
+          "azure_iot_hub_update" : {
+            "zone_name" : "privatelink.api.adu.microsoft.com"
+          },
+          "azure_key_vault" : {
+            "zone_name" : "privatelink.vaultcore.azure.net"
+          },
+          "azure_log_analytics" : {
+            "zone_name" : "privatelink.oms.opinsights.azure.com"
+          },
+          "azure_log_analytics_data" : {
+            "zone_name" : "privatelink.ods.opinsights.azure.com"
+          },
+          "azure_managed_hsm" : {
+            "zone_name" : "privatelink.managedhsm.azure.net"
+          },
+          "azure_managed_prometheus" : {
+            "zone_name" : "privatelink.{regionName}.prometheus.monitor.azure.com"
+          },
+          "azure_maria_db_server" : {
+            "zone_name" : "privatelink.mariadb.database.azure.com"
+          },
+          "azure_media_services_delivery" : {
+            "zone_name" : "privatelink.media.azure.net"
+          },
+          "azure_migration_service" : {
+            "zone_name" : "privatelink.prod.migration.windowsazure.com"
+          },
+          "azure_ml" : {
+            "zone_name" : "privatelink.api.azureml.ms"
+          },
+          "azure_ml_notebooks" : {
+            "zone_name" : "privatelink.notebooks.azure.net"
+          },
+          "azure_monitor" : {
+            "zone_name" : "privatelink.monitor.azure.com"
+          },
+          "azure_monitor_agent" : {
+            "zone_name" : "privatelink.agentsvc.azure-automation.net"
+          },
+          "azure_mysql_db_server" : {
+            "zone_name" : "privatelink.mysql.database.azure.com"
+          },
+          "azure_postgres_sql_server" : {
+            "zone_name" : "privatelink.postgres.database.azure.com"
+          },
+          "azure_power_bi_dedicated" : {
+            "zone_name" : "privatelink.pbidedicated.windows.net"
+          },
+          "azure_power_bi_power_query" : {
+            "zone_name" : "privatelink.tip1.powerquery.microsoft.com"
+          },
+          "azure_power_bi_tenant_analysis" : {
+            "zone_name" : "privatelink.analysis.windows.net"
+          },
+          "azure_purview_account" : {
+            "zone_name" : "privatelink.purview.azure.com"
+          },
+          "azure_purview_studio" : {
+            "zone_name" : "privatelink.purviewstudio.azure.com"
+          },
+          "azure_redis_cache" : {
+            "zone_name" : "privatelink.redis.cache.windows.net"
+          },
+          "azure_redis_enterprise" : {
+            "zone_name" : "privatelink.redisenterprise.cache.azure.net"
+          },
+          "azure_search" : {
+            "zone_name" : "privatelink.search.windows.net"
+          },
+          "azure_service_hub" : {
+            "zone_name" : "privatelink.servicebus.windows.net"
+          },
+          "azure_signalr_service" : {
+            "zone_name" : "privatelink.service.signalr.net"
+          },
+          "azure_site_recovery" : {
+            "zone_name" : "privatelink.siterecovery.windowsazure.com"
+          },
+          "azure_sql_server" : {
+            "zone_name" : "privatelink.database.windows.net"
+          },
+          "azure_static_web_apps" : {
+            "zone_name" : "privatelink.azurestaticapps.net"
+          },
+          "azure_static_web_apps_partitioned" : {
+            "custom_iterator" : {
+              "replacement_placeholder" : "partitionId",
+              "replacement_values" : {
+                "1" : "1",
+                "2" : "2",
+                "3" : "3",
+                "4" : "4",
+                "5" : "5"
+              }
+            },
+            "zone_name" : "privatelink.{partitionId}.azurestaticapps.net"
+          },
+          "azure_storage_blob" : {
+            "zone_name" : "privatelink.blob.core.windows.net"
+          },
+          "azure_storage_file" : {
+            "zone_name" : "privatelink.file.core.windows.net"
+          },
+          "azure_storage_queue" : {
+            "zone_name" : "privatelink.queue.core.windows.net"
+          },
+          "azure_storage_table" : {
+            "zone_name" : "privatelink.table.core.windows.net"
+          },
+          "azure_storage_web" : {
+            "zone_name" : "privatelink.web.core.windows.net"
+          },
+          "azure_synapse" : {
+            "zone_name" : "privatelink.azuresynapse.net"
+          },
+          "azure_synapse_dev" : {
+            "zone_name" : "privatelink.dev.azuresynapse.net"
+          },
+          "azure_synapse_sql" : {
+            "zone_name" : "privatelink.sql.azuresynapse.net"
+          },
+          "azure_web_pubsub" : {
+            "zone_name" : "privatelink.webpubsub.azure.com"
+          }
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
