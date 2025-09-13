@@ -413,28 +413,28 @@ hub_and_spoke_vnet_virtual_networks = {
           # azure_storage_blob = {
           #   zone_name = "privatelink.blob.core.windows.net"
           # },
-        #   azure_key_vault = {
-        #     zone_name = "privatelink.vaultcore.azure.net"
-        #   },
-        #   azure_acr_registry = {
-        #     zone_name = "privatelink.azurecr.io"
-        #   },
-        #   azure_data_explorer = {
-        #     zone_name = "privatelink.{regionName}.kusto.windows.net"
-        #   },
-        #   azure_acr_data = {
-        #     zone_name = "{regionName}.data.privatelink.azurecr.io"
-        #   },
-        #   azure_aks_mgmt = {
-        #     zone_name = "privatelink.{regionName}.azmk8s.io"
-        #   },
-        #   azure_backup = {
-        #     zone_name = "privatelink.{regionCode}.backup.windowsazure.com"
-        #   },
-        #   azure_container_apps = {
-        #     zone_name = "privatelink.{regionName}.azurecontainerapps.io"
-        #   },
-        # }
+          # azure_key_vault = {
+          #   zone_name = "privatelink.vaultcore.azure.net"
+          # },
+          # azure_acr_registry = {
+          #   zone_name = "privatelink.azurecr.io"
+          # },
+          # azure_data_explorer = {
+          #   zone_name = "privatelink.{regionName}.kusto.windows.net"
+          # },
+          # azure_acr_data = {
+          #   zone_name = "{regionName}.data.privatelink.azurecr.io"
+          # },
+          # azure_aks_mgmt = {
+          #   zone_name = "privatelink.{regionName}.azmk8s.io"
+          # },
+          # azure_backup = {
+          #   zone_name = "privatelink.{regionCode}.backup.windowsazure.com"
+          # },
+          # azure_container_apps = {
+          #   zone_name = "privatelink.{regionName}.azurecontainerapps.io"
+          # },
+        }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
