@@ -1,10 +1,7 @@
 ---
 name: Continuous Delivery
 on:
-  # This allows the workflow to be called by other workflows cannot be triggered manually
   workflow_call:
-    # this defines the inputs that the calling workflow must provide when invoking this workflow. think of these as a function parameters.
-    # these inputs can be used to customize the behavior of the workflow based on the values provided
     inputs:
       terraform_action:
         description: 'Terraform Action to perform'
@@ -21,7 +18,6 @@ on:
 
 jobs:
   plan:
-    # this plan job is a deployment preparing the infrastructure changes but not applying them yet.
     name: Plan with Terraform
     runs-on:
       ubuntu-latest
@@ -57,11 +53,6 @@ jobs:
           -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
           -backend-config="key=terraform.tfstate"
 
-      
-      # -name: Terraform Plan is a condition if the input terraform_action is destroy then sets the name to Terraform Plan for Destroy else for Apply
-      # -out=tfplan: Save the plan to a file to be used in the apply step
-      # -input=false: Prevents Terraform from prompting for input during the plan operation, which is essential for automated workflows. \
-      # -destroy: Indicates that the plan is for a destroy operation. This flag is included only if the terraform_action input is set to 'destroy'. \
       - name: Terraform Plan for ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         run: |
           # shellcheck disable=SC2086
@@ -91,8 +82,7 @@ jobs:
           if(Test-Path -Path $rootModuleFolderTerraformFolder) {
             Remove-Item -Path $rootModuleFolderTerraformFolder -Recurse -Force
           }
-        
-        # user powershell since the default ubuntu shell does not support some commands in the Create Module Artifact step.
+
         shell: pwsh
 
       - name: Publish Module Artifact
@@ -111,7 +101,6 @@ jobs:
   apply:
     needs: plan
     name: Apply with Terraform
-    if: ${{ inputs.terraform_action == 'apply' || inputs.terraform_action == 'destroy' }}
     runs-on:
       ubuntu-latest
     concurrency: mgmt-tfstate
