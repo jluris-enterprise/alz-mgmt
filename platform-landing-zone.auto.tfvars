@@ -409,7 +409,6 @@ hub_and_spoke_vnet_virtual_networks = {
         private_link_private_dns_zones_regex_filter = {
           enabled = false
         }
-				# Uncomment to enable the private DNS Zone
         private_link_private_dns_zones = {
           "azure_acr_registry" : {
             "zone_name" : "privatelink.azurecr.io"
