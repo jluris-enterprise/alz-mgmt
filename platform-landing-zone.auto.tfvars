@@ -28,7 +28,7 @@ custom_replacements = {
   names = {
     # Defender email security contact
     defender_email_security_contact = "joelluris@gmail.com"
-'
+
     # Resource group names
     management_resource_group_name               = "rg-management-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "rg-hub-$${starter_location_01}"
@@ -37,7 +37,7 @@ custom_replacements = {
     # ddos_resource_group_name       = "rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name = "rg-asc-export-$${starter_location_01}"
 
-    # Resource names management '
+    # Resource names management
     log_analytics_workspace_name = "law-management-$${starter_location_01}"
     # ddos_protection_plan_name               = "ddos-$${starter_location_01}"
     ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
@@ -409,6 +409,7 @@ hub_and_spoke_vnet_virtual_networks = {
         private_link_private_dns_zones_regex_filter = {
           enabled = false
         }
+        # Uncomment to enable Private DNS Zones
         private_link_private_dns_zones = {
           "azure_acr_registry" : {
             "zone_name" : "privatelink.azurecr.io"
