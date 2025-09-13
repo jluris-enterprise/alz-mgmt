@@ -413,15 +413,15 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_acr_registry" : {
             "zone_name" : "privatelink.azurecr.io"
           },
-          # "azure_ai_cog_svcs" : {
-          #   "zone_name" : "privatelink.cognitiveservices.azure.com"
-          # },
-          # "azure_ai_oai" : {
-          #   "zone_name" : "privatelink.openai.azure.com"
-          # },
-          # "azure_ai_services" : {
-          #   "zone_name" : "privatelink.services.ai.azure.com"
-          # },
+          "azure_ai_cog_svcs" : {
+            "zone_name" : "privatelink.cognitiveservices.azure.com"
+          },
+          "azure_ai_oai" : {
+            "zone_name" : "privatelink.openai.azure.com"
+          },
+          "azure_ai_services" : {
+            "zone_name" : "privatelink.services.ai.azure.com"
+          },
           "azure_aks_mgmt" : {
             "zone_name" : "privatelink.{regionName}.azmk8s.io"
           },
@@ -431,9 +431,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_app_configuration" : {
           #   "zone_name" : "privatelink.azconfig.io"
           # },
-          # "azure_app_service" : {
-          #   "zone_name" : "privatelink.azurewebsites.net"
-          # },
+          "azure_app_service" : {
+            "zone_name" : "privatelink.azurewebsites.net"
+          },
           # "azure_arc_guest_configuration" : {
           #   "zone_name" : "privatelink.guestconfiguration.azure.com"
           # },
@@ -455,9 +455,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_avd_global" : {
           #   "zone_name" : "privatelink-global.wvd.microsoft.com"
           # },
-          # "azure_backup" : {
-          #   "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
-          # },
+          "azure_backup" : {
+            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          },
           # "azure_batch" : {
           #   "zone_name" : "privatelink.batch.azure.com"
           # },
@@ -467,9 +467,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_bot_svc_token" : {
           #   "zone_name" : "privatelink.token.botframework.com"
           # },
-          # "azure_container_apps" : {
-          #   "zone_name" : "privatelink.{regionName}.azurecontainerapps.io"
-          # },
+          "azure_container_apps" : {
+            "zone_name" : "privatelink.{regionName}.azurecontainerapps.io"
+          },
           # "azure_cosmos_db_analytical" : {
           #   "zone_name" : "privatelink.analytics.cosmos.azure.com"
           # },
@@ -497,9 +497,9 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_data_explorer" : {
             "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           },
-          # "azure_data_factory" : {
-          #   "zone_name" : "privatelink.datafactory.azure.net"
-          # },
+          "azure_data_factory" : {
+            "zone_name" : "privatelink.datafactory.azure.net"
+          },
           # "azure_data_factory_portal" : {
           #   "zone_name" : "privatelink.adf.azure.com"
           # },
@@ -518,9 +518,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_file_sync" : {
           #   "zone_name" : "privatelink.afs.azure.net"
           # },
-          # "azure_grafana" : {
-          #   "zone_name" : "privatelink.grafana.azure.com"
-          # },
+          "azure_grafana" : {
+            "zone_name" : "privatelink.grafana.azure.com"
+          },
           # "azure_hdinsight" : {
           #   "zone_name" : "privatelink.azurehdinsight.net"
           # },
@@ -539,9 +539,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_iot_central" : {
           #   "zone_name" : "privatelink.azureiotcentral.com"
           # },
-          # "azure_iot_hub" : {
-          #   "zone_name" : "privatelink.azure-devices.net"
-          # },
+          "azure_iot_hub" : {
+            "zone_name" : "privatelink.azure-devices.net"
+          },
           # "azure_iot_hub_provisioning" : {
           #   "zone_name" : "privatelink.azure-devices-provisioning.net"
           # },
@@ -551,12 +551,12 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_key_vault" : {
             "zone_name" : "privatelink.vaultcore.azure.net"
           },
-          # "azure_log_analytics" : {
-          #   "zone_name" : "privatelink.oms.opinsights.azure.com"
-          # },
-          # "azure_log_analytics_data" : {
-          #   "zone_name" : "privatelink.ods.opinsights.azure.com"
-          # },
+          "azure_log_analytics" : {
+            "zone_name" : "privatelink.oms.opinsights.azure.com"
+          },
+          "azure_log_analytics_data" : {
+            "zone_name" : "privatelink.ods.opinsights.azure.com"
+          },
           # "azure_managed_hsm" : {
           #   "zone_name" : "privatelink.managedhsm.azure.net"
           # },
@@ -584,9 +584,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_monitor_agent" : {
           #   "zone_name" : "privatelink.agentsvc.azure-automation.net"
           # },
-          # "azure_mysql_db_server" : {
-          #   "zone_name" : "privatelink.mysql.database.azure.com"
-          # },
+          "azure_mysql_db_server" : {
+            "zone_name" : "privatelink.mysql.database.azure.com"
+          },
           # "azure_postgres_sql_server" : {
           #   "zone_name" : "privatelink.postgres.database.azure.com"
           # },
@@ -623,9 +623,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_site_recovery" : {
           #   "zone_name" : "privatelink.siterecovery.windowsazure.com"
           # },
-          # "azure_sql_server" : {
-          #   "zone_name" : "privatelink.database.windows.net"
-          # },
+          "azure_sql_server" : {
+            "zone_name" : "privatelink.database.windows.net"
+          },
           # "azure_static_web_apps" : {
           #   "zone_name" : "privatelink.azurestaticapps.net"
           # },
