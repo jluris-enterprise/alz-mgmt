@@ -46,3 +46,6 @@ terraform apply -var-file ./examples/full-multi-region/hub-and-spoke-vnet.tfvars
 terraform init
 terraform apply -var-file ./examples/full-multi-region/virtual-wan.tfvars
 ```
+
+# 📑Policy Membership
+https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz/archetype_definitions
