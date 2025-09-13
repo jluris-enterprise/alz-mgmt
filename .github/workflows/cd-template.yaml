@@ -69,8 +69,16 @@ jobs:
           -chdir="${{inputs.root_module_folder_relative_path}}" \
           plan \
           -out=tfplan \
+          -no-color \
           -input=false \
           ${{ inputs.terraform_action == 'destroy' && '-destroy' || '' }}
+
+          terraform \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          show \
+          -no-color \
+          tfplan > tfplan.txt
+
 
       - name: Create Module Artifact
         run: |
