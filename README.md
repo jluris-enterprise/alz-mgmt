@@ -140,3 +140,4 @@ Outcome: The infrastructure is deployed in Azure.
 
 ###
 
+# Errors 
