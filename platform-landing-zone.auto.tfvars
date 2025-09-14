@@ -274,7 +274,7 @@ management_group_settings = {
         Deploy-Private-DNS-Zones = {
           enforcement_mode = "DoNotEnforce"
           parameters = {
-            "azureStorageBlobPrivateDnsZoneId" = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+            azureStorageBlobPrivateDnsZoneId = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
           }
         }
       }
@@ -433,6 +433,16 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_key_vault" : {
             "zone_name" : "privatelink.vaultcore.azure.net"
           },
+          "azure_aks_mgmt" : {
+            "zone_name" : "privatelink.{regionName}.azmk8s.io"
+          },
+          "azure_backup" : {
+            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          },
+          "azure_data_explorer" : {
+            "zone_name" : "privatelink.{regionName}.kusto.windows.net"
+          },
+
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
