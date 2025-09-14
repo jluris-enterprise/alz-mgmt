@@ -35,6 +35,13 @@ management_groups:
   exists: false
   parent_id: landingzones
 
+- id: development
+  display_name: Development
+  archetypes:
+  - online_custom
+  exists: false
+  parent_id: corp
+
 - id: sandbox
   display_name: Sandbox
   archetypes:
