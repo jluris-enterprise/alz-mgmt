@@ -1,4 +1,4 @@
-name: JLuris Enterprise jl-enterprise
+name: JLuris Enterprise
 management_groups:
 - id: jl-enterprise
   display_name: JLuris Landing Zones
