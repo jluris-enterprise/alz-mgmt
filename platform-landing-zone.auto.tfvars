@@ -422,9 +422,14 @@ hub_and_spoke_vnet_virtual_networks = {
         private_link_private_dns_zones_regex_filter = {
           enabled = false
         }
-        # private_link_private_dns_zones = {
-        # }
-      }
+        private_link_private_dns_zones = {
+          "azure_acr_registry": {
+            "zone_name": "privatelink.azurecr.io"
+          },
+          "azure_key_vault": {
+            "zone_name": "privatelink.vault.azure.net"
+          }
+        }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
     }
