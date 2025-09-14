@@ -272,9 +272,10 @@ management_group_settings = {
     corp = {
       policy_assignments = {
         Deploy-Private-DNS-Zones = {
-          "azureStorageBlobPrivateDnsZoneId" = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
-          "azureKeyVaultPrivateDnsZoneId"    = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
-          "azureAcrPrivateDnsZoneId"         = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.azurecr.io"
+          enforcement_mode = "DoNotEnforce"
+          parameters = {
+            "azureStorageBlobPrivateDnsZoneId" = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+          }
         }
       }
     }
