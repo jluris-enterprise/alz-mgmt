@@ -269,15 +269,15 @@ management_group_settings = {
         }
       }
     }
-    # corp = {
-    #   policy_assignments = {
-    #     Deploy-Private-DNS-Zones = {
-    #       azureStorageBlobPrivateDnsZoneId = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
-    #       azureKeyVaultPrivateDnsZoneId    = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
-
-    #     }
-    #   }
-    # }
+    corp = {
+      policy_assignments = {
+        Deploy-Private-DNS-Zones = {
+          "azureStorageBlobPrivateDnsZoneId" = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+          "azureKeyVaultPrivateDnsZoneId"    = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
+          "azureAcrPrivateDnsZoneId"         = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.azurecr.io"
+        }
+      }
+    }
 
   }
   /*
@@ -423,13 +423,17 @@ hub_and_spoke_vnet_virtual_networks = {
           enabled = false
         }
         private_link_private_dns_zones = {
-          "azure_acr_registry": {
-            "zone_name": "privatelink.azurecr.io"
+          "azure_acr_registry" : {
+            "zone_name" : "privatelink.azurecr.io"
           },
-          "azure_key_vault": {
-            "zone_name": "privatelink.vault.azure.net"
-          }
+          "azure_storage_blob" : {
+            "zone_name" : "privatelink.blob.core.windows.net"
+          },
+          "azure_key_vault" : {
+            "zone_name" : "privatelink.vaultcore.azure.net"
+          },
         }
+      }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
     }
