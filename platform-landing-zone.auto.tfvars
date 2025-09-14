@@ -269,17 +269,16 @@ management_group_settings = {
         }
       }
     }
-    corp = {
-      policy_assignments = {
-        Deploy-Private-DNS-Zones = {
-          enforcement_mode = "DoNotEnforce"
-          parameters = {
-            azureStorageBlobPrivateDnsZoneId = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
-          }
-        }
-      }
-    }
-
+    # corp = {
+    #   policy_assignments = {
+    #     Deploy-Private-DNS-Zones = {
+    #       enforcement_mode = "DoNotEnforce"
+    #       parameters = {
+    #         azureStorageBlobPrivateDnsZoneId = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+    #       }
+    #     }
+    #   }
+    # }
   }
   /*
   # Example of how to add management group role assignments
