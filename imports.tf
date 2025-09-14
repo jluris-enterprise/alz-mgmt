@@ -1,4 +1,5 @@
+# Import the existing MG into the exact resource address TF is trying to create
 # import {
-#   to = azurerm_resource_group.rg_platform_landing_zone.id
-#   id = "/subscriptions/${var.subscription_id_platform}/resourceGroups/${var.platform_landing_zone_resource_group_name}"
+#   to = module.management_groups[0].module.management_groups.azapi_resource.management_groups_level_2["security"]
+#   id = "/providers/Microsoft.Management/managementGroups/security"
 # }
