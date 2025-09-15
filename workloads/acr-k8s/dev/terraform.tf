@@ -23,6 +23,7 @@ terraform {
 
 provider "azurerm" {
   resource_provider_registrations = "none"
+  subscription_id = ""
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -33,7 +34,7 @@ provider "azurerm" {
 provider "azurerm" {
   resource_provider_registrations = "none"
   alias                           = "management"
-  subscription_id                 = try(var.subscription_ids["management"], var.subscription_id_management)
+  subscription_id                 = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -44,10 +45,11 @@ provider "azurerm" {
 provider "azurerm" {
   resource_provider_registrations = "none"
   alias                           = "connectivity"
-  subscription_id                 = try(var.subscription_ids["connectivity"], var.subscription_id_connectivity)
+  subscription_id                 = "2bb0667b-d883-4406-b19a-a3083ba05bd8"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
     }
   }
 }
+
