@@ -1,17 +1,21 @@
 terraform {
-  required_version = "~> 1.12"
+  required_version = "~> 1.13"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.0"
+      version = "4.44"
     }
     azapi = {
       source  = "Azure/azapi"
-      version = "~> 2.0"
+      version = "2.6.1"
     }
     local = {
       source  = "hashicorp/local"
       version = "~> 2.5"
+    }
+     random = {
+      source = "hashicorp/random"
+      version = "3.7.2"
     }
   }
   backend "azurerm" {}
@@ -46,10 +50,4 @@ provider "azurerm" {
       prevent_deletion_if_contains_resources = false
     }
   }
-}
-
-provider "azapi" {
-  alias                      = "connectivity"
-  skip_provider_registration = true
-  subscription_id            = try(var.subscription_ids["connectivity"], var.subscription_id_connectivity)
 }
