@@ -5,4 +5,9 @@ resource "random_string" "unique_name" {
     numeric = false
 }
 
-module "resource_group" { source = ""}
+module "avm-res-resources-resourcegroup" {
+  source  = "Azure/avm-res-resources-resourcegroup/azurerm"
+  version = "0.2.1"
+
+    
+}
