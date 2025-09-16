@@ -34,3 +34,27 @@ variable "resource_name_workload" {
   }
 }
 
+variable "resource_name_environment" {
+  type        = string
+  description = "The name segment for the environment"
+  default     = "dev"
+  validation {
+    condition     = can(regex("^[a-z0-9]+$", var.resource_name_environment))
+    error_message = "The name segment for the environment must only contain lowercase letters and numbers"
+  }
+  validation {
+    condition     = length(var.resource_name_environment) <= 6
+    error_message = "The name segment for the environment must be 4 characters or less"
+  }
+}
+
+variable "resource_name_sequence_start" {
+  type        = number
+  description = "The number to use for the resource names"
+  default     = 1
+  validation {
+    condition     = var.resource_name_sequence_start >= 1 && var.resource_name_sequence_start <= 999
+    error_message = "The number must be between 1 and 999"
+  }
+}
+
