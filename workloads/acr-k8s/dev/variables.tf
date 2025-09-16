@@ -23,7 +23,7 @@ variable "location" {
 variable "resource_name_workload" {
   type        = string
   description = "The name segment for the workload"
-  default     = "demo"
+  default     = "dev"
   validation {
     condition     = can(regex("^[a-z0-9]+$", var.resource_name_workload))
     error_message = "The name segment for the workload must only contain lowercase letters and numbers"
