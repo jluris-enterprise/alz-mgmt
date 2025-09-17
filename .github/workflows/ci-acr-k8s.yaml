@@ -1,16 +1,11 @@
 ---
-name: Continous Delivery - ACR-K8s
+name: 01 Azure Landing Zones Continuous Integration
 on:
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
-      terraform_action:
-        description: 'Terraform Action to perform'
-        required: true
-        default: 'apply'
-        type: choice
-        options:
-          - 'apply'
-          - 'destroy'
       terraform_cli_version:
         description: 'Terraform CLI Version'
         required: true
@@ -18,13 +13,13 @@ on:
         type: string
 
 jobs:
-  plan_and_apply:
+  validate_and_plan:
     uses: jluris-enterprise/alz-mgmt/.github/workflows/ci-template-acr-k8s.yaml@main
-    name: 'CD'
+    name: 'CI'
     permissions:
       id-token: write
       contents: read
+      pull-requests: write
     with:
-      terraform_action: ${{ inputs.terraform_action }}
       root_module_folder_relative_path: 'workloads/k8s/dev'
       terraform_cli_version: ${{ inputs.terraform_cli_version }}
