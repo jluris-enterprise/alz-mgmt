@@ -1,12 +1,9 @@
 ---
 name: Continous Integration - ACR-K8s
+
 on:
   workflow_call:
     inputs:
-      terraform_action:
-        description: 'Terraform Action to perform'
-        default: 'apply'
-        type: string
       root_module_folder_relative_path:
         description: 'Root Module Folder Relative Path'
         default: 'workloads/k8s/dev'
