@@ -23,10 +23,10 @@ terraform {
   # }
 
   backend "azurerm" {
-    resource_group_name  = "rg-alz-mgmt-state-uksouth-001"
-    storage_account_name = "stoalzmgmuks001yopc"
-    container_name       = "dev-tfstate"
-    key                  = "development.tfstate"
+    # resource_group_name  = "rg-alz-mgmt-state-uksouth-001"
+    # storage_account_name = "stoalzmgmuks001yopc"
+    # container_name       = "dev-tfstate"
+    # key                  = "development.tfstate"
   }
 }
 
