@@ -1,24 +1,31 @@
 terraform {
-  required_version = "~> 1.12"
+  required_version = "~> 1.13"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.0"
+      version = "4.44"
     }
     azapi = {
       source  = "Azure/azapi"
-      version = "~> 2.0"
+      version = "2.6.1"
     }
     local = {
       source  = "hashicorp/local"
       version = "~> 2.5"
     }
+     random = {
+      source = "hashicorp/random"
+      version = "3.7.2"
+    }
   }
-  backend "azurerm" {}
+  backend "local" {
+    path = "./terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
-  resource_provider_registrations = "none"
+  resource_provider_registrations = "extended"
+  subscription_id = "0f360a6d-0f50-47f1-8530-48fdc5828b03"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -29,7 +36,7 @@ provider "azurerm" {
 provider "azurerm" {
   resource_provider_registrations = "none"
   alias                           = "management"
-  subscription_id                 = try(var.subscription_ids["management"], var.subscription_id_management)
+  subscription_id                 = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -40,7 +47,7 @@ provider "azurerm" {
 provider "azurerm" {
   resource_provider_registrations = "none"
   alias                           = "connectivity"
-  subscription_id                 = try(var.subscription_ids["connectivity"], var.subscription_id_connectivity)
+  subscription_id                 = "2bb0667b-d883-4406-b19a-a3083ba05bd8"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -48,8 +55,3 @@ provider "azurerm" {
   }
 }
 
-provider "azapi" {
-  alias                      = "connectivity"
-  skip_provider_registration = true
-  subscription_id            = try(var.subscription_ids["connectivity"], var.subscription_id_connectivity)
-}
