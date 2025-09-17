@@ -13,8 +13,8 @@ terraform {
       source  = "hashicorp/local"
       version = "~> 2.5"
     }
-     random = {
-      source = "hashicorp/random"
+    random = {
+      source  = "hashicorp/random"
       version = "3.7.2"
     }
   }
@@ -25,7 +25,7 @@ terraform {
 
 provider "azurerm" {
   resource_provider_registrations = "extended"
-  subscription_id = "0f360a6d-0f50-47f1-8530-48fdc5828b03"
+  subscription_id                 = "0f360a6d-0f50-47f1-8530-48fdc5828b03"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
