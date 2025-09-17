@@ -11,7 +11,7 @@ variable "location" {
   type        = string
   description = "The location/region where the resources will be created. Must be in the short form (e.g. 'uksouth')"
   validation {
-    condition     = can(regex("^[a-z0-9-]+$", var.location))
+    condition     = can(regex("^(uksouth)", var.location))
     error_message = "The location must only contain lowercase letters, numbers, and hyphens"
   }
   validation {
@@ -20,13 +20,27 @@ variable "location" {
   }
 }
 
+variable "resource_name_location_short" {
+  type        = string
+  description = "The short name segment for the location"
+  default     = ""
+  validation {
+    condition     = length(var.resource_name_location_short) == 0 || can(regex("^[a-z]+$", var.resource_name_location_short))
+    error_message = "The short name segment for the location must only contain lowercase letters"
+  }
+  validation {
+    condition     = length(var.resource_name_location_short) <= 3
+    error_message = "The short name segment for the location must be 3 characters or less"
+  }
+}
+
 variable "resource_name_workload" {
   type        = string
   description = "The name segment for the workload"
   default     = "acr-k8s"
   validation {
-    condition     = can(regex("^[a-z0-9]+$", var.resource_name_workload))
-    error_message = "The name segment for the workload must only contain lowercase letters and numbers"
+    condition     = can(regex("^[a-z0-9-]+$", var.resource_name_workload))
+    error_message = "The name segment for the workload must only contain lowercase letters, numbers and hyphens"
   }
   validation {
     condition     = length(var.resource_name_workload) <= 8
