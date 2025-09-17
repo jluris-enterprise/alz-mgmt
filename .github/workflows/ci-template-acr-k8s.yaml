@@ -1,5 +1,5 @@
 ---
-name: Continuous Integration
+name: Continuous Integration - ACR-K8s
 on:
   workflow_call:
     inputs:
@@ -30,14 +30,11 @@ jobs:
 
       - name: Terraform Format Check
         run: |
-          terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
-          fmt -check
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" fmt -check
 
       - name: Terraform Init
         run: |
-          terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" init
           init \
           -backend=false
 
@@ -85,8 +82,8 @@ jobs:
           init \
           -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
-          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
-          -backend-config="key=terraform.tfstate"
+          -backend-config="container_name=${{vars.BACKEND_AZURE_DEV_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
+          -backend-config="key=dev.tfstate"
 
       - name: Terraform Plan
         id: plan
