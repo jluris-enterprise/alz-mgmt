@@ -1,5 +1,5 @@
 ---
-name: CI - ACR-K8s
+name: Continous Integration - ACR-K8s
 on:
   workflow_dispatch:
     inputs:
