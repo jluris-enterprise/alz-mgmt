@@ -22,7 +22,7 @@ terraform {
   #   path = "./terraform.tfstate"
   # }
 
-  backend azurerm {}
+  backend "azurerm" {}
 }
 
 provider "azurerm" {
