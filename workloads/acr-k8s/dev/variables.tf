@@ -3,7 +3,7 @@ variable "resource_name_templates" {
   description = "A map of resource names to use"
   default = {
     resource_group_name = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
-
+    uami_name = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
   }
 }
 
@@ -72,3 +72,8 @@ variable "resource_name_sequence_start" {
   }
 }
 
+variable "tags" {
+  type        = map(string)
+  description = "A map of tags to apply to resources"
+  default     = false
+}
