@@ -45,7 +45,9 @@ jobs:
     name: Validate Terraform Plan
     needs: validate
     runs-on: ubuntu-latest
-    concurrency: mgmt-tfstate
+    concurrency:
+      group: mgmt-tfstate
+      cancel-in-progress: true
     environment: alz-mgmt-plan
     permissions:
       # NOTE: When modifying the token subject claims and adding `environment`.
