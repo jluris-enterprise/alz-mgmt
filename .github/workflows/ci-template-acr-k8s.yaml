@@ -5,7 +5,7 @@ on:
     inputs:
       root_module_folder_relative_path:
         description: 'Root Module Folder Relative Path'
-        default: 'workloads/k8s/dev'
+        default: 'workloads/acr-k8s/dev'
         type: string
       terraform_cli_version:
         description: 'Terraform CLI Version'
