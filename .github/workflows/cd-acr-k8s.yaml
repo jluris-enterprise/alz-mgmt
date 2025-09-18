@@ -1,5 +1,5 @@
 ---
-name: 02 Azure Landing Zones Continuous Delivery
+name: 02 ACR-K8s Continuous Delivery
 on:
   workflow_dispatch:
     inputs:
