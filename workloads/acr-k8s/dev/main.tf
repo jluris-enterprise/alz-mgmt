@@ -10,5 +10,5 @@ module "avm-res-resources-resourcegroup" {
   version  = "0.2.1"
   name     = local.resource_names.resource_group_name
   location = var.location
-  # tags = var.tags
+  tags     = var.tags
 }
