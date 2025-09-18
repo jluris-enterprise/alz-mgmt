@@ -1,5 +1,5 @@
 ---
-name: Continuous Delivery
+name: Continuous Delivery - ACR-K8s
 on:
   workflow_call:
     inputs:
