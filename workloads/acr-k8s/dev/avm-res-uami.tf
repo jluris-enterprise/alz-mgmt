@@ -6,4 +6,5 @@ module "avm-res-managedidentity-userassignedidentity" {
   location            = var.location
   resource_group_name = module.avm-res-resources-resourcegroup.name
   tags                = var.tags
+  
 }
