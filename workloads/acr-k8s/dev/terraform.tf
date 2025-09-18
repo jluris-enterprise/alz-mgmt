@@ -56,4 +56,3 @@ provider "azurerm" {
     }
   }
 }
-
