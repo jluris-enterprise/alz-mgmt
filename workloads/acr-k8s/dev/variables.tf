@@ -75,5 +75,4 @@ variable "resource_name_sequence_start" {
 variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to resources"
-  default     = false
 }
