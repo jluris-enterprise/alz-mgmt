@@ -1,6 +1,6 @@
 module "management_resources" {
   source  = "Azure/avm-ptn-alz-management/azurerm"
-  version = "0.9.0"
+  version = "0.7.0"
 
   automation_account_name                                    = try(var.management_resource_settings.automation_account_name, "aa-management-${var.management_resource_settings.location}")
   location                                                   = var.management_resource_settings.location
@@ -21,7 +21,7 @@ module "management_resources" {
   log_analytics_workspace_daily_quota_gb                     = try(var.management_resource_settings.log_analytics_workspace_daily_quota_gb, null)
   log_analytics_workspace_internet_ingestion_enabled         = try(var.management_resource_settings.log_analytics_workspace_internet_ingestion_enabled, true)
   log_analytics_workspace_internet_query_enabled             = try(var.management_resource_settings.log_analytics_workspace_internet_query_enabled, true)
-  # log_analytics_workspace_local_authentication_disabled      = try(var.management_resource_settings.log_analytics_workspace_local_authentication_disabled, false)
+  log_analytics_workspace_local_authentication_disabled      = try(var.management_resource_settings.log_analytics_workspace_local_authentication_disabled, false)
   log_analytics_workspace_reservation_capacity_in_gb_per_day = try(var.management_resource_settings.log_analytics_workspace_reservation_capacity_in_gb_per_day, null)
   log_analytics_workspace_retention_in_days                  = try(var.management_resource_settings.log_analytics_workspace_retention_in_days, null)
   log_analytics_workspace_sku                                = try(var.management_resource_settings.log_analytics_workspace_sku, null)
