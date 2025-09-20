@@ -22,7 +22,7 @@ jobs:
     runs-on:
       ubuntu-latest
     concurrency: mgmt-tfstate
-    environment: awl-mgmt
+    environment: awl-mgmt-apply
     permissions:
       id-token: write
       contents: read
@@ -96,7 +96,7 @@ jobs:
     runs-on:
       ubuntu-latest
     concurrency: mgmt-tfstate
-    environment: awl-mgmt
+    environment: awl-mgmt-apply
     permissions:
       id-token: write
       contents: read
