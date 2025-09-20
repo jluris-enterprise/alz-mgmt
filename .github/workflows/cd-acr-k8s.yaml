@@ -19,7 +19,7 @@ on:
 
 jobs:
   plan_and_apply:
-    uses: jluris-enterprise/alz-mgmt/.github/workflows/cd-template.yaml@main
+    uses: jluris-enterprise/alz-mgmt/.github/workflows/cd-acr-k8s-template.yaml@main
     name: 'CD'
     permissions:
       id-token: write
