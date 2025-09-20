@@ -429,18 +429,18 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_storage_blob" : {
           #   "zone_name" : "privatelink.blob.core.windows.net"
           # },
-          "azure_key_vault" : {
-            "zone_name" : "privatelink.vaultcore.azure.net"
-          },
-          "azure_aks_mgmt" : {
-            "zone_name" : "privatelink.{regionName}.azmk8s.io"
-          },
-          "azure_backup" : {
-            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
-          },
-          "azure_data_explorer" : {
-            "zone_name" : "privatelink.{regionName}.kusto.windows.net"
-          },
+          # "azure_key_vault" : {
+          #   "zone_name" : "privatelink.vaultcore.azure.net"
+          # },
+          # "azure_aks_mgmt" : {
+          #   "zone_name" : "privatelink.{regionName}.azmk8s.io"
+          # },
+          # "azure_backup" : {
+          #   "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          # },
+          # "azure_data_explorer" : {
+          #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
+          # },
 
         }
       }
