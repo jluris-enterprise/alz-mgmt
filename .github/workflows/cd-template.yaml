@@ -47,7 +47,7 @@ jobs:
         run: |
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
-          init -upgrade \
+          init \
           -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
           -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
@@ -106,7 +106,7 @@ jobs:
       ARM_TENANT_ID: "${{ vars.AZURE_TENANT_ID }}"
       ARM_USE_AZUREAD: true
       ARM_USE_OIDC: true
-      AZAPI_RETRY_GET_AFTER_PUT_MAX_TIME: "5m" # Accounts for eventually consistent management group permissions propagation
+      AZAPI_RETRY_GET_AFTER_PUT_MAX_TIME: "60m" # Accounts for eventually consistent management group permissions propagation
 
     steps:
       - name: Download a Build Artifact
