@@ -27,7 +27,7 @@ jobs:
       id-token: write
       contents: read
     env:
-      ARM_CLIENT_ID: "${{ vars.AZURE_AWL_CLIENT_ID }}"
+      ARM_CLIENT_ID: "${{ vars.AZURE_AWL_APPLY_CLIENT_ID }}"
       ARM_SUBSCRIPTION_ID: "${{ vars.AZURE_SUBSCRIPTION_ID }}"
       ARM_TENANT_ID: "${{ vars.AZURE_TENANT_ID }}"
       ARM_USE_AZUREAD: true
@@ -128,7 +128,7 @@ jobs:
           -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
           -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
-          -backend-config="key=terraform.tfstate"
+          -backend-config="key=development.tfstate"
 
       - name: Terraform ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         run: |
