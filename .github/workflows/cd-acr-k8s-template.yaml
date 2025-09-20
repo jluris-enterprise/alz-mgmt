@@ -1,5 +1,5 @@
 ---
-name: Continuous Delivery - ACR-K8s
+name: Continuous Delivery Template- ACR-K8s
 on:
   workflow_call:
     inputs:

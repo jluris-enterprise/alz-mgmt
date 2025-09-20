@@ -1,5 +1,5 @@
 ---
-name: Continuous Integration - ACR-K8s
+name: Continuous Integration Template - ACR-K8s
 on:
   workflow_call:
     inputs:

@@ -1,5 +1,5 @@
 ---
-name: ACR-K8s Continuous Delivery
+name: Continuous Delivery - ACR-K8s
 on:
   workflow_dispatch:
     inputs:
