@@ -36,7 +36,9 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform -chdir="${{inputs.root_module_folder_relative_path}}" init -backend=false
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" \
+          init \
+          -backend=false
 
       - name: Terraform Validate
         run: |
