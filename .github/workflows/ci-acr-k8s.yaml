@@ -1,5 +1,5 @@
 ---
-name: ACR-K8s Continuous Integration
+name: Continuous Integration - ACR-K8s
 on:
   pull_request:
     branches:
