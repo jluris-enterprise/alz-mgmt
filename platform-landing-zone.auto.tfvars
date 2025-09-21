@@ -441,7 +441,6 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_data_explorer" : {
           #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           # },
-
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
