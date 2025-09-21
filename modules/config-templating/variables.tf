@@ -18,10 +18,10 @@ variable "subscription_id_management" {
   description = "value of the subscription id for the Management subscription"
 }
 
-variable "subscription_id_security" {
-  type        = string
-  description = "value of the subscription id for the Security subscription"
-}
+# variable "subscription_id_security" {
+#   type        = string
+#   description = "value of the subscription id for the Security subscription"
+# }
 
 variable "root_parent_management_group_id" {
   type        = string
