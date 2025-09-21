@@ -1,4 +1,4 @@
-name: JLuris Enterprise jl-enterprise
+name: JLuris Enterprise
 management_groups:
 - id: jl-enterprise
   display_name: JLuris Landing Zones
@@ -34,6 +34,13 @@ management_groups:
   - online_custom
   exists: false
   parent_id: landingzones
+
+- id: development
+  display_name: Development
+  archetypes:
+  - online_custom
+  exists: false
+  parent_id: online
 
 - id: sandbox
   display_name: Sandbox
