@@ -40,7 +40,7 @@ management_groups:
   archetypes:
   - online_custom
   exists: false
-  parent_id: online
+  parent_id: corp
 
 - id: sandbox
   display_name: Sandbox
