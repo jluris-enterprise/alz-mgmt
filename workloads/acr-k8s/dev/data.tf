@@ -13,3 +13,14 @@ module "regions" {
   source  = "Azure/avm-utl-regions/azurerm"
   version = "0.5.0"
 }
+
+
+# data "azapi_resource_id" "node_user_assigned_identity" {
+#   type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
+#   resource_id = var.node_user_assigned_identity_id
+# }
+
+# data "azapi_resource_id" "kubelet_user_assigned_identity" {
+#   type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
+#   resource_id = var.kubelet_user_assigned_identity_id
+# }

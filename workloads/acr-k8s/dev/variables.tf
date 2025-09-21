@@ -3,7 +3,7 @@ variable "resource_name_templates" {
   description = "A map of resource names to use"
   default = {
     resource_group_name = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
-    uami_name           = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
+    # uami_name           = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
   }
 }
 
@@ -75,4 +75,24 @@ variable "resource_name_sequence_start" {
 variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to resources"
+}
+
+variable "user_assigned_managed_identities" {
+  type = map(object({
+    sequence_start = optional(number)
+    name           = string
+  }))
+  description = "A map of user assigned managed identities to create"
+  default = {
+    uami = {
+      name = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
+    }
+    kubelet = {
+      name = "uami-kubelet-$${workload}-$${environment}-$${location}-$${sequence}"
+    }
+    # for node uami
+    kubernetes = {
+      name = "uami-kubernetes-$${workload}-$${environment}-$${location}-$${sequence}"
+    }
+  }
 }
