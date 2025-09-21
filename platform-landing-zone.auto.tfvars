@@ -447,9 +447,6 @@ hub_and_spoke_vnet_virtual_networks = {
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
     }
-      auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
-      auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
-    }
     private_dns_resolver = {
       enabled               = "$${primary_private_dns_resolver_enabled}"
       subnet_address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
