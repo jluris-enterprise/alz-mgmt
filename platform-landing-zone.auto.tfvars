@@ -209,7 +209,7 @@ management_group_settings = {
   # It refers to the alz_custom.alz_architecture_definition.yaml file in the lib folder.
   # Do not change this value unless you have created another architecture definition
   # with the name value specified below.
-  architecture_name  = "JLuris Enterprise ALZ"
+  architecture_name  = "JLuris Enterprise"
   location           = "$${starter_location_01}"
   parent_resource_id = "$${root_parent_management_group_id}"
   policy_default_values = {
@@ -426,21 +426,21 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_acr_registry" : {
             "zone_name" : "privatelink.azurecr.io"
           },
-          # "azure_storage_blob" : {
-          #   "zone_name" : "privatelink.blob.core.windows.net"
-          # },
-          # "azure_key_vault" : {
-          #   "zone_name" : "privatelink.vaultcore.azure.net"
-          # },
-          # "azure_aks_mgmt" : {
-          #   "zone_name" : "privatelink.{regionName}.azmk8s.io"
-          # },
-          # "azure_backup" : {
-          #   "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
-          # },
-          # "azure_data_explorer" : {
-          #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
-          # },
+          "azure_storage_blob" : {
+            "zone_name" : "privatelink.blob.core.windows.net"
+          },
+          "azure_key_vault" : {
+            "zone_name" : "privatelink.vaultcore.azure.net"
+          },
+          "azure_aks_mgmt" : {
+            "zone_name" : "privatelink.{regionName}.azmk8s.io"
+          },
+          "azure_backup" : {
+            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          },
+          "azure_data_explorer" : {
+            "zone_name" : "privatelink.{regionName}.kusto.windows.net"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
