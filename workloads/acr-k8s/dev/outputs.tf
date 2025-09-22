@@ -1,7 +1,6 @@
 output "resource_names" {
   description = "The names of resources created in this module"
   value       = local.resource_names
-  
 }
 
 output "uami_principal_id" {
