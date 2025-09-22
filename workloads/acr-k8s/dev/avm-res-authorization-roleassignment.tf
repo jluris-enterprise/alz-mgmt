@@ -1,17 +1,17 @@
-module "avm-res-authorization-roleassignment" {
+module "role_ssignment" {
   source  = "Azure/avm-res-authorization-roleassignment/azurerm"
   version = "0.3.0"
 
   role_assignments_azure_resource_manager = {
     uami_contributor = {
-      principal_id         = module.avm-res-managedidentity-userassignedidentity["uami"].principal_id
+      principal_id         = module.user_assigned_managed_identity["kubernetes"].principal_id
       role_definition_name = "Contributor"
-      scope                = module.avm-res-resources-resourcegroup.resource_id
+      scope                = module.resource_group.resource_id
     }
-    uami_kubelet = {
-      principal_id         = module.avm-res-managedidentity-userassignedidentity["kubelet"].principal_id
-      role_definition_name = "Reader"
-      scope                = module.avm-res-resources-resourcegroup.resource_id
+    uami_kubernetes = {
+      principal_id         = module.user_assigned_managed_identity["kubernetes"].principal_id
+      role_definition_name = "Managed Identity Operator"
+      scope                = module.user_assigned_managed_identity["kubelet"].principal_id
     }
   }
 }
