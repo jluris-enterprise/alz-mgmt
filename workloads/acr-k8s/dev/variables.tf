@@ -7,33 +7,6 @@ variable "resource_name_templates" {
   }
 }
 
-variable "location" {
-  type        = string
-  description = "The location/region where the resources will be created. Must be in the short form (e.g. 'uksouth')"
-  validation {
-    condition     = can(regex("^(uksouth)", var.location))
-    error_message = "The location must only contain lowercase letters, numbers, and hyphens"
-  }
-  validation {
-    condition     = length(var.location) <= 20
-    error_message = "The location must be 20 characters or less"
-  }
-}
-
-variable "resource_name_location_short" {
-  type        = string
-  description = "The short name segment for the location"
-  default     = ""
-  validation {
-    condition     = length(var.resource_name_location_short) == 0 || can(regex("^[a-z]+$", var.resource_name_location_short))
-    error_message = "The short name segment for the location must only contain lowercase letters"
-  }
-  validation {
-    condition     = length(var.resource_name_location_short) <= 3
-    error_message = "The short name segment for the location must be 3 characters or less"
-  }
-}
-
 variable "resource_name_workload" {
   type        = string
   description = "The name segment for the workload"
@@ -62,6 +35,19 @@ variable "resource_name_environment" {
   }
 }
 
+variable "location" {
+  type        = string
+  description = "The location/region where the resources will be created. Must be in the short form (e.g. 'uksouth')"
+  validation {
+    condition     = can(regex("^(uksouth)", var.location))
+    error_message = "The location must only contain lowercase letters, numbers, and hyphens"
+  }
+  validation {
+    condition     = length(var.location) <= 20
+    error_message = "The location must be 20 characters or less"
+  }
+}
+
 variable "resource_name_sequence_start" {
   type        = number
   description = "The number to use for the resource names"
@@ -69,6 +55,20 @@ variable "resource_name_sequence_start" {
   validation {
     condition     = var.resource_name_sequence_start >= 1 && var.resource_name_sequence_start <= 999
     error_message = "The number must be between 1 and 999"
+  }
+}
+
+variable "resource_name_location_short" {
+  type        = string
+  description = "The short name segment for the location"
+  default     = ""
+  validation {
+    condition     = length(var.resource_name_location_short) == 0 || can(regex("^[a-z]+$", var.resource_name_location_short))
+    error_message = "The short name segment for the location must only contain lowercase letters"
+  }
+  validation {
+    condition     = length(var.resource_name_location_short) <= 3
+    error_message = "The short name segment for the location must be 3 characters or less"
   }
 }
 

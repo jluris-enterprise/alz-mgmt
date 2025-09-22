@@ -1,5 +1,6 @@
 terraform {
-  required_version = "~> 1.13"
+  # required_version = "~> 1.13"
+  required_version = "1.11.2"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -25,15 +26,26 @@ terraform {
   # backend "azurerm" {}
 }
 
+# provider "azurerm" {
+#   resource_provider_registrations = "extended"
+#   subscription_id                 = "0f360a6d-0f50-47f1-8530-48fdc5828b03"
+#   features {
+#     resource_group {
+#       prevent_deletion_if_contains_resources = false
+#     }
+#   }
+# }
+
 provider "azurerm" {
   resource_provider_registrations = "extended"
-  subscription_id                 = "0f360a6d-0f50-47f1-8530-48fdc5828b03"
+  subscription_id                 = "19c15268-0311-4b70-bbc1-6b92d3073cd8"
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
     }
   }
 }
+
 
 provider "azurerm" {
   resource_provider_registrations = "none"

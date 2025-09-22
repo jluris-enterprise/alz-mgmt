@@ -1,3 +1,4 @@
+# This is a local map that defines the actual values to substitute into the templates:
 locals {
   name_replacements = {
     workload    = var.resource_name_workload

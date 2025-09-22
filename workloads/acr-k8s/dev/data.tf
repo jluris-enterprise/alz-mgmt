@@ -14,23 +14,38 @@ module "regions" {
   version = "0.5.0"
 }
 
-################################################# AZAPI Resources #################################################
+##################################################################### AZAPI Resources ###############################################################################
 
 data "azapi_resource" "resource_group" {
-  type        = "Microsoft.Resources/resourceGroups@2021-04-01"
-  resource_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${local.resource_names.resource_group_name}"
-  depends_on = [ module.avm-res-resources-resourcegroup ]
+  type = "Microsoft.Resources/resourceGroups@2021-04-01"
+  # resource_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${local.resource_names.resource_group_name}"
+  resource_id = module.resource_group.resource_id
+  depends_on  = [module.resource_group]
 }
 
+data "azapi_resource_id" "user_assigned_identity" {
+  type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
+  resource_id = module.user_assigned_managed_identity["uami"].resource_id
+}
 
+data "azapi_resource_id" "node_user_assigned_identity" {
+  type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
+  resource_id = module.user_assigned_managed_identity["kubernetes"].resource_id
+}
 
+data "azapi_resource_id" "kubelet_user_assigned_identity" {
+  type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
+  resource_id = module.user_assigned_managed_identity["kubelet"].resource_id
+}
 
-# data "azapi_resource_id" "node_user_assigned_identity" {
-#   type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
-#   resource_id = var.node_user_assigned_identity_id
-# }
+# To get the client_id and principal_id of a User Assigned Managed Identity use data source
+data "azurerm_user_assigned_identity" "kubelet" {
+  name                = data.azapi_resource_id.kubelet_user_assigned_identity.name
+  resource_group_name = data.azapi_resource_id.kubelet_user_assigned_identity.resource_group_name
+}
 
-# data "azapi_resource_id" "kubelet_user_assigned_identity" {
-#   type        = "Microsoft.ManagedIdentity/userAssignedIdentities@latest"
-#   resource_id = var.kubelet_user_assigned_identity_id
-# }
+# To get the client_id and principal_id of a User Assigned Managed Identity use data source
+data "azurerm_user_assigned_identity" "this" {
+  name                = data.azapi_resource_id.node_user_assigned_identity.name
+  resource_group_name = data.azapi_resource_id.node_user_assigned_identity.resource_group_name
+}
