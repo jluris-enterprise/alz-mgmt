@@ -7,4 +7,5 @@ locals {
   }
 
   resource_names = { for k, v in var.resource_name_templates : k => templatestring(v, local.name_replacements) }
+  uami_names     = { for k, v in var.user_assigned_managed_identities : k => templatestring(v.name, local.name_replacements) }
 }
