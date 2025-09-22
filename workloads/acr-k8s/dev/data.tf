@@ -17,10 +17,12 @@ module "regions" {
 ################################################# AZAPI Resources #################################################
 
 data "azapi_resource" "resource_group" {
-  type        = "Microsoft.Resources/resourceGroups@latest"
+  type        = "Microsoft.Resources/resourceGroups@2021-04-01"
   resource_id = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${local.resource_names.resource_group_name}"
   depends_on = [ module.avm-res-resources-resourcegroup ]
 }
+
+
 
 
 # data "azapi_resource_id" "node_user_assigned_identity" {
