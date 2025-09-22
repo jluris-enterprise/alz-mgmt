@@ -1,3 +1,12 @@
+# Sequence
+https://learn.microsoft.com/en-us/samples/azure-samples/avm-terraform-labs/avm-terraform-labs/
+
+1) copy the registry module in Terraform or AVM
+  * AVM - https://azure.github.io/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/
+  * Terraform Registry - https://registry.terraform.io/browse/modules?provider=azure
+2) Add a variable in resource_name_templates
+3) 
+
 # Errors
 
  Error: Resource not found

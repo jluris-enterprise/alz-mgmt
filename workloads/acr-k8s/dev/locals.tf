@@ -10,3 +10,17 @@ locals {
   resource_names = { for k, v in var.resource_name_templates : k => templatestring(v, local.name_replacements) }
   uami_names     = { for k, v in var.user_assigned_managed_identities : k => templatestring(v.name, local.name_replacements) }
 }
+
+locals {
+  subnets = { for key, value in var.subnets : key => {
+    name             = key
+    address_prefixes = [module.avm-utl-network-ip-addresses.address_prefixes[key]]
+    # network_security_group = value.has_network_security_group ? {
+    #   id = module.network_security_group.resource_id
+    # } : null
+    # nat_gateway = value.has_nat_gateway ? {
+    #   id = module.nat_gateway.resource_id
+    # } : null
+    }
+  }
+}
