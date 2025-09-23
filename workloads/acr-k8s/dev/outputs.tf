@@ -5,7 +5,10 @@ output "resource_names" {
 
 output "resource_ids" {
   value = {
-    resource_group = module.resource_group.resource_id
+    resource_group  = module.resource_group.resource_id
+    virtual_network = module.virtual_network.resource_id
+    aks_cluster     = module.aks_cluster.resource_id
+    acr             = module.container_registry.resource_id
   }
 }
 
