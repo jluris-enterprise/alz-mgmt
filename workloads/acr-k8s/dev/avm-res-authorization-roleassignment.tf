@@ -18,5 +18,11 @@ module "role_assignment" {
       role_definition_name = "AcrPull"
       scope                = module.container_registry.resource_id
     }
+    # azuread_group = {
+    #   principal_id         = data.azuread_group.this.object_id
+    #   role_definition_name = "Azure Kubernetes Service Cluster User Role"
+    #   scope                = module.aks_cluster.resource_id
+    #   depends_on           = [module.aks_cluster]
+    # }
   }
 }

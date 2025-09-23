@@ -18,17 +18,24 @@ module "aks_cluster" {
     auto_scaling_enabled         = false
     max_count                    = 1
     max_pods                     = 64
-    min_count                    = 0
+    min_count                    = 1
     only_critical_addons_enabled = true
+    zones                        = [1, 2, 3]
     upgrade_settings = {
       max_surge = "10%"
     }
   }
 
-  automatic_upgrade_channel = "stable"
+  auto_scaler_profile = {
+    expander = "least-waste"
+  }
+
+  automatic_upgrade_channel = "rapid"
+
   azure_active_directory_role_based_access_control = {
     azure_rbac_enabled = true
-    tenant_id          = data.azurerm_client_config.current.tenant_id
+    # tenant_id          = data.azurerm_client_config.current.tenant_id
+    admin_group_object_ids = [data.azuread_group.this.object_id]
   }
   # defender_log_analytics_workspace_id = azurerm_log_analytics_workspace.workspace.id
   dns_prefix = "cniexample"
@@ -59,10 +66,12 @@ module "aks_cluster" {
     system_assigned            = false
     user_assigned_resource_ids = [module.user_assigned_managed_identity["kubernetes"].resource_id]
   }
+
   network_profile = {
     network_plugin      = "azure"
     network_data_plane  = "azure"
     network_plugin_mode = "overlay"
+    outbound_type       = "loadBalancer"
   }
   node_os_channel_upgrade = "Unmanaged"
 
@@ -96,7 +105,8 @@ module "aks_cluster" {
       }
     }
   }
-  oidc_issuer_enabled = true
+  oidc_issuer_enabled    = true
+  local_account_disabled = true
   # oms_agent = {
   #   log_analytics_workspace_id = azurerm_log_analytics_workspace.workspace.id
   # }
