@@ -1,4 +1,4 @@
-module "role_ssignment" {
+module "role_assignment" {
   source  = "Azure/avm-res-authorization-roleassignment/azurerm"
   version = "0.3.0"
 

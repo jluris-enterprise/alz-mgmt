@@ -8,14 +8,17 @@ module "aks_cluster" {
   tags                = var.tags
 
   default_node_pool = {
-    name                         = "default"
+    name                         = "system01"
+    temporary_name_for_rotation  = "system01b"
     vm_size                      = "Standard_B2s"
+    os_disk_size_gb              = 8
+    sku_tier                     = "Free"
     vnet_subnet_id               = module.virtual_network.subnets["node"].resource_id
     pod_subnet_id                = module.virtual_network.subnets["pods"].resource_id
-    auto_scaling_enabled         = true
-    max_count                    = 4
-    max_pods                     = 30
-    min_count                    = 2
+    auto_scaling_enabled         = false
+    max_count                    = 1
+    max_pods                     = 64
+    min_count                    = 0
     only_critical_addons_enabled = true
     upgrade_settings = {
       max_surge = "10%"
@@ -62,15 +65,17 @@ module "aks_cluster" {
     network_plugin_mode = "overlay"
   }
   node_os_channel_upgrade = "Unmanaged"
+
   node_pools = {
     unp1 = {
       name                 = "userpool1"
       vm_size              = "Standard_B2s"
-      max_count            = 4
-      max_pods             = 30
-      min_count            = 2
-      os_disk_size_gb      = 128
+      max_count            = 1
+      max_pods             = 64
+      min_count            = 1
+      os_disk_size_gb      = 8
       vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
       auto_scaling_enabled = true
       upgrade_settings = {
         max_surge = "10%"
@@ -80,11 +85,12 @@ module "aks_cluster" {
       name                 = "userpool2"
       vm_size              = "Standard_B2s"
       auto_scaling_enabled = true
-      max_count            = 4
-      max_pods             = 30
-      min_count            = 2
-      os_disk_size_gb      = 128
+      max_count            = 1
+      max_pods             = 64
+      min_count            = 1
+      os_disk_size_gb      = 8
       vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
       upgrade_settings = {
         max_surge = "10%"
       }
@@ -103,5 +109,5 @@ module "aks_cluster" {
   }
   workload_identity_enabled = true
 
-  depends_on = [module.user_assigned_managed_identity["kubernetes"]]
+  depends_on = [module.role_assignment["uami_managed_identity_operator"]]
 }
