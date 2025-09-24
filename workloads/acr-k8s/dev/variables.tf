@@ -5,7 +5,7 @@ variable "resource_name_templates" {
     resource_group_name  = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
     virtual_network_name = "vnet-$${workload}-$${environment}-$${location}-$${sequence}"
     aks_cluster_name     = "aks-$${workload}-$${environment}-$${location}-$${sequence}"
-    acr_name             = "acr$${environment}$${location}$${sequence}"
+    acr_name             = "acr$${workload}$${environment}$${location_short}$${sequence}$${uniqueness}"
   }
 }
 

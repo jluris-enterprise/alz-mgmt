@@ -5,6 +5,8 @@ locals {
     environment = var.resource_name_environment
     location    = var.location
     sequence    = format("%03d", var.resource_name_sequence_start)
+    uniqueness = random_string.unique_name.id
+    location_short = var.resource_name_location_short == "" ? module.regions.regions_by_name[var.location].geo_code : var.resource_name_location_short
   }
 
   resource_names = { for k, v in var.resource_name_templates : k => templatestring(v, local.name_replacements) }
