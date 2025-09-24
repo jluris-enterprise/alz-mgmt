@@ -30,7 +30,7 @@ module "aks_cluster" {
     expander = "least-waste"
   }
 
-  automatic_upgrade_channel = "rapid"
+  automatic_upgrade_channel = "stable"
 
   azure_active_directory_role_based_access_control = {
     azure_rbac_enabled = true
@@ -80,9 +80,13 @@ module "aks_cluster" {
       name                 = "userpool1"
       vm_size              = "Standard_B2s"
       max_count            = 1
-      max_pods             = 64
+      max_pods             = 30
       min_count            = 1
       os_disk_size_gb      = 8
+      os_disk_type         = "Ephemeral" # "Ephemeral" uses temporary storage
+      spot_max_price       = -1          # -1 means "pay up to the current market price" (default behavior).
+      priority             = "Spot"
+      eviction_policy      = "Delete"
       vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
       pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
       auto_scaling_enabled = true
@@ -95,9 +99,13 @@ module "aks_cluster" {
       vm_size              = "Standard_B2s"
       auto_scaling_enabled = true
       max_count            = 1
-      max_pods             = 64
+      max_pods             = 30
       min_count            = 1
       os_disk_size_gb      = 8
+      os_disk_type         = "Ephemeral"
+      spot_max_price       = -1
+      priority             = "Spot"
+      eviction_policy      = "Delete"
       vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
       pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
       upgrade_settings = {
