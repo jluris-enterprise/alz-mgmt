@@ -11,11 +11,11 @@ module "aks_cluster" {
     name                         = "system01"
     temporary_name_for_rotation  = "system01b"
     vm_size                      = "Standard_B2s"
-    os_disk_size_gb              = 8
+    os_disk_size_gb              = 30
     sku_tier                     = "Free"
     vnet_subnet_id               = module.virtual_network.subnets["node"].resource_id
     pod_subnet_id                = module.virtual_network.subnets["pods"].resource_id
-    auto_scaling_enabled         = false
+    auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
     min_count                    = 1
@@ -68,49 +68,52 @@ module "aks_cluster" {
   }
 
   network_profile = {
-    network_plugin      = "azure"
-    network_data_plane  = "azure"
-    network_plugin_mode = "overlay"
-    outbound_type       = "loadBalancer"
+    network_plugin     = "azure"
+    network_data_plane = "azure"
+    # network_plugin_mode = "overlay" # remove if your using pod_subnet_id
+    outbound_type = "loadBalancer"
   }
   node_os_channel_upgrade = "Unmanaged"
 
   node_pools = {
     unp1 = {
-      name                 = "userpool1"
-      vm_size              = "Standard_B2s"
-      max_count            = 1
-      max_pods             = 30
-      min_count            = 1
-      os_disk_size_gb      = 8
-      os_disk_type         = "Ephemeral" # "Ephemeral" uses temporary storage
-      spot_max_price       = -1          # -1 means "pay up to the current market price" (default behavior).
-      priority             = "Spot"
-      eviction_policy      = "Delete"
-      vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
-      auto_scaling_enabled = true
-      upgrade_settings = {
-        max_surge = "10%"
-      }
+      name                        = "userpool1"
+      temporary_name_for_rotation = "userpool1b"
+      vm_size                     = "Standard_B2ms"
+      max_count                   = 1
+      max_pods                    = 30
+      min_count                   = 1
+      os_disk_size_gb             = 30
+      os_disk_type                = "Ephemeral" # "Ephemeral" uses temporary storage
+      spot_max_price              = -1          # -1 means "pay up to the current market price" (default behavior).
+      priority                    = "Spot"
+      eviction_policy             = "Delete"
+      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      auto_scaling_enabled        = true
+      # Upgrade settings doesnt support spot nodes
+      # upgrade_settings = {
+      #   max_surge = "10%"
+      # }
     }
     unp2 = {
-      name                 = "userpool2"
-      vm_size              = "Standard_B2s"
-      auto_scaling_enabled = true
-      max_count            = 1
-      max_pods             = 30
-      min_count            = 1
-      os_disk_size_gb      = 8
-      os_disk_type         = "Ephemeral"
-      spot_max_price       = -1
-      priority             = "Spot"
-      eviction_policy      = "Delete"
-      vnet_subnet_id       = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id        = module.virtual_network.subnets["pods"].resource_id
-      upgrade_settings = {
-        max_surge = "10%"
-      }
+      name                        = "userpool2"
+      temporary_name_for_rotation = "userpool2b"
+      vm_size                     = "Standard_B2ms"
+      auto_scaling_enabled        = true
+      max_count                   = 1
+      max_pods                    = 30
+      min_count                   = 1
+      os_disk_size_gb             = 30
+      os_disk_type                = "Ephemeral"
+      spot_max_price              = -1
+      priority                    = "Spot"
+      eviction_policy             = "Delete"
+      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # upgrade_settings = {
+      #   max_surge = "10%"
+      # }
     }
   }
   oidc_issuer_enabled    = true

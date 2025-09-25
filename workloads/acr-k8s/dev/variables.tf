@@ -5,7 +5,7 @@ variable "resource_name_templates" {
     resource_group_name  = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
     virtual_network_name = "vnet-$${workload}-$${environment}-$${location}-$${sequence}"
     aks_cluster_name     = "aks-$${workload}-$${environment}-$${location}-$${sequence}"
-    acr_name             = "acr$${workload}$${environment}$${location_short}$${sequence}$${uniqueness}"
+    acr_name             = "acr$${environment}$${location_short}$${sequence}$${uniqueness}"
   }
 }
 
@@ -105,6 +105,14 @@ variable "subnets" {
     size                       = number
     has_nat_gateway            = bool
     has_network_security_group = bool
+    delegation = optional(list(object({
+      name = string
+      service_delegation = object({
+        name    = string
+        actions = list(string)
+        service = string
+      })
+    })), [])
   }))
   description = "The subnets"
 }

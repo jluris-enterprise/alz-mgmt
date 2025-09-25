@@ -1,11 +1,11 @@
 # This is a local map that defines the actual values to substitute into the templates:
 locals {
   name_replacements = {
-    workload    = var.resource_name_workload
-    environment = var.resource_name_environment
-    location    = var.location
-    sequence    = format("%03d", var.resource_name_sequence_start)
-    uniqueness = random_string.unique_name.id
+    workload       = var.resource_name_workload
+    environment    = var.resource_name_environment
+    location       = var.location
+    sequence       = format("%03d", var.resource_name_sequence_start)
+    uniqueness     = random_string.unique_name.id
     location_short = var.resource_name_location_short == "" ? module.regions.regions_by_name[var.location].geo_code : var.resource_name_location_short
   }
 
@@ -23,6 +23,8 @@ locals {
     # nat_gateway = value.has_nat_gateway ? {
     #   id = module.nat_gateway.resource_id
     # } : null
+    delegation = length(value.delegation) > 0 ? value.delegation : null
+    # delegation = value.delegation != null ? value.delegation : null
     }
   }
 }

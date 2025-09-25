@@ -7,6 +7,16 @@ subnets = {
     size                       = 23
     has_nat_gateway            = false
     has_network_security_group = false
+    delegation = [
+      {
+        name = "aks-pods"
+        service_delegation = {
+          name    = "Microsoft.ContainerService/managedClusters"
+          actions = ["Microsoft.Network/virtualNetworks/subnets/action", "Microsoft.Network/virtualNetworks/subnets/join/action"]
+          service = "Microsoft.ContainerService/managedClusters"
+        }
+      }
+    ]
   }
   node = {
     size                       = 24
