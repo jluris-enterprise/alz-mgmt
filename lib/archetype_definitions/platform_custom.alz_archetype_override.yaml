@@ -1,8 +1,8 @@
 base_archetype: platform
 name: platform_custom
 policy_assignments_to_add: []
-policy_assignments_to_remove: [
-# To disable AMA policies, uncomment the following lines:
+policy_assignments_to_remove: []
+  # To disable AMA policies, uncomment the following lines:
   # DenyAction-DeleteUAMIAMA,
   # Deploy-MDFC-DefSQL-AMA,
   # Deploy-VM-ChangeTrack,
@@ -11,7 +11,6 @@ policy_assignments_to_remove: [
   # Deploy-vmHybr-Monitoring,
   # Deploy-VMSS-ChangeTrack,
   # Deploy-VMSS-Monitoring,
-]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
 policy_set_definitions_to_add: []

@@ -2,6 +2,19 @@ location = "uksouth"
 
 address_space = "172.0.0.0/18"
 
+user_assigned_managed_identities = {
+  uami = {
+    name = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
+  }
+  kubelet = {
+    name = "uami-kubelet-$${workload}-$${environment}-$${location}-$${sequence}"
+  }
+  # for node uami
+  kubernetes = {
+    name = "uami-kubernetes-$${workload}-$${environment}-$${location}-$${sequence}"
+  }
+}
+
 subnets = {
   pods = {
     size                       = 23

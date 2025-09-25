@@ -76,22 +76,9 @@ variable "resource_name_location_short" {
 
 variable "user_assigned_managed_identities" {
   type = map(object({
-    sequence_start = optional(number)
-    name           = string
+    name = string
   }))
   description = "A map of user assigned managed identities to create"
-  default = {
-    uami = {
-      name = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-    kubelet = {
-      name = "uami-kubelet-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-    # for node uami
-    kubernetes = {
-      name = "uami-kubernetes-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-  }
 }
 
 variable "address_space" {
@@ -121,3 +108,4 @@ variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to resources"
 }
+
