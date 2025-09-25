@@ -14,11 +14,11 @@ module "regions" {
   version = "0.5.0"
 }
 
-data "azuread_group" "this" {
-  # display_name = "SG-Container_Administrator"
-  object_id = "1c1de890-2a46-4597-8f88-0e26161cf9a2"
-  security_enabled = true
-}
+# data "azuread_group" "this" {
+#   display_name = "SG-Container_Administrator"
+#   object_id = "1c1de890-2a46-4597-8f88-0e26161cf9a2"
+#   security_enabled = true
+# }
 
 ##################################################################### AZAPI Resources ###############################################################################
 

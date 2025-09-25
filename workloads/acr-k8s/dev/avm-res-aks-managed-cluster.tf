@@ -35,7 +35,7 @@ module "aks_cluster" {
   azure_active_directory_role_based_access_control = {
     azure_rbac_enabled = true
     # tenant_id          = data.azurerm_client_config.current.tenant_id
-    admin_group_object_ids = [data.azuread_group.this.object_id]
+    admin_group_object_ids = ["1c1de890-2a46-4597-8f88-0e26161cf9a2"]
   }
   # defender_log_analytics_workspace_id = azurerm_log_analytics_workspace.workspace.id
   dns_prefix = "cniexample"
