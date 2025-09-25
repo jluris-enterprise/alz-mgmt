@@ -2,8 +2,10 @@ variable "resource_name_templates" {
   type        = map(string)
   description = "A map of resource names to use"
   default = {
-    resource_group_name = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
-    # uami_name           = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
+    resource_group_name  = "rg-$${workload}-$${environment}-$${location}-$${sequence}"
+    virtual_network_name = "vnet-$${workload}-$${environment}-$${location}-$${sequence}"
+    aks_cluster_name     = "aks-$${workload}-$${environment}-$${location}-$${sequence}"
+    acr_name             = "acr$${environment}$${location_short}$${sequence}$${uniqueness}"
   }
 }
 
@@ -72,27 +74,38 @@ variable "resource_name_location_short" {
   }
 }
 
+variable "user_assigned_managed_identities" {
+  type = map(object({
+    name = string
+  }))
+  description = "A map of user assigned managed identities to create"
+}
+
+variable "address_space" {
+  description = "The address space that is used the virtual network"
+  type        = string
+  nullable    = false
+}
+
+variable "subnets" {
+  type = map(object({
+    size                       = number
+    has_nat_gateway            = bool
+    has_network_security_group = bool
+    delegation = optional(list(object({
+      name = string
+      service_delegation = object({
+        name    = string
+        actions = list(string)
+        service = string
+      })
+    })), [])
+  }))
+  description = "The subnets"
+}
+
 variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to resources"
 }
 
-variable "user_assigned_managed_identities" {
-  type = map(object({
-    sequence_start = optional(number)
-    name           = string
-  }))
-  description = "A map of user assigned managed identities to create"
-  default = {
-    uami = {
-      name = "uami-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-    kubelet = {
-      name = "uami-kubelet-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-    # for node uami
-    kubernetes = {
-      name = "uami-kubernetes-$${workload}-$${environment}-$${location}-$${sequence}"
-    }
-  }
-}

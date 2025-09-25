@@ -14,6 +14,11 @@ module "regions" {
   version = "0.5.0"
 }
 
+data "azuread_group" "this" {
+  display_name     = "SG-Container_Administrator"
+  security_enabled = true
+}
+
 ##################################################################### AZAPI Resources ###############################################################################
 
 data "azapi_resource" "resource_group" {
