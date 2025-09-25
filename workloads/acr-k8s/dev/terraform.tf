@@ -1,6 +1,6 @@
 terraform {
   required_version = "~> 1.13"
-  # required_version = "1.11.2"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -39,17 +39,6 @@ provider "azurerm" {
     }
   }
 }
-
-# provider "azurerm" {
-#   resource_provider_registrations = "extended"
-#   subscription_id                 = "19c15268-0311-4b70-bbc1-6b92d3073cd8"
-#   features {
-#     resource_group {
-#       prevent_deletion_if_contains_resources = false
-#     }
-#   }
-# }
-
 
 provider "azurerm" {
   resource_provider_registrations = "none"
