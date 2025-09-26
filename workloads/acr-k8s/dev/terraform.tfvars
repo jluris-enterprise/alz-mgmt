@@ -43,6 +43,19 @@ subnets = {
   }
 }
 
+fic_subjects = {
+  pull_request = {
+    audience = "api://AzureADTokenExchange"
+    issuer   = "https://token.actions.githubusercontent.com"
+    subject  = "repo:jluris-enterprise/flask:pull_request"
+  }
+  github_actions = {
+    audience = "api://AzureADTokenExchange"
+    issuer   = "https://token.actions.githubusercontent.com"
+    subject  = "repo:jluris-enterprise/flask:ref:refs/heads/main"
+  }
+}
+
 tags = {
   environment = "dev"
   workload    = "acr-k8s"

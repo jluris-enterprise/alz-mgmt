@@ -104,6 +104,14 @@ variable "subnets" {
   description = "The subnets"
 }
 
+variable "fic_subjects" {
+  type = map(object({
+    audience = string
+    issuer   = string
+    subject  = string
+  }))
+}
+
 variable "tags" {
   type        = map(string)
   description = "A map of tags to apply to resources"
