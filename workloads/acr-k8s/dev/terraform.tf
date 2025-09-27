@@ -23,10 +23,10 @@ terraform {
       version = "3.5.0"
     }
   }
-  backend "local" {
-    path = "./terraform.tfstate"
-  }
-  # backend "azurerm" {}
+  # backend "local" {
+  #   path = "./terraform.tfstate"
+  # }
+  backend "azurerm" {}
 }
 
 provider "azurerm" {
