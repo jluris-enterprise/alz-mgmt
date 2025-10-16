@@ -9,36 +9,57 @@ https://learn.microsoft.com/en-us/samples/azure-samples/avm-terraform-labs/avm-t
 
 # Errors
 
- Error: Resource not found
+Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubernetes-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
 │
-│   with data.azapi_resource.resource_group,
-│   on data.tf line 19, in data "azapi_resource" "resource_group":
-│   19: data "azapi_resource" "resource_group" {
+│   with module.user_assigned_managed_identity["kubernetes"].azurerm_user_assigned_identity.this,
+│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
+│    2: resource "azurerm_user_assigned_identity" "this" {
 │
-│ resource "Resource: (ResourceId \"/subscriptions/0f360a6d-0f50-47f1-8530-48fdc5828b03/resourceGroups/rg-acr-k8s-dev-uksouth-001\" / Api Version \"2021-04-01\")" not found
-
- # module.aks_cluster.module.nodepools["unp1"].azurerm_kubernetes_cluster_node_pool.this[0] will be updated in-place
-  ~ resource "azurerm_kubernetes_cluster_node_pool" "this" {
-        id                            = "/subscriptions/0f360a6d-0f50-47f1-8530-48fdc5828b03/resourceGroups/rg-acr-k8s-dev-uksouth-001/providers/Microsoft.ContainerService/managedClusters/aks-acr-k8s-dev-uksouth-001/agentPools/userpool1"
-        name                          = "userpool1"
-      ~ node_taints                   = [
-          - "kubernetes.azure.com/scalesetpriority=spot:NoSchedule",
-        ]
-        tags                          = {}
-      + temporary_name_for_rotation   = "userpool1b"
-      ~ vm_size                       = "Standard_B2s" -> "Standard_B2als_v2"
-        # (29 unchanged attributes hidden)
-    }
-
-  # module.aks_cluster.module.nodepools["unp2"].azurerm_kubernetes_cluster_node_pool.this[0] will be updated in-place
-  ~ resource "azurerm_kubernetes_cluster_node_pool" "this" {
-        id                            = "/subscriptions/0f360a6d-0f50-47f1-8530-48fdc5828b03/resourceGroups/rg-acr-k8s-dev-uksouth-001/providers/Microsoft.ContainerService/managedClusters/aks-acr-k8s-dev-uksouth-001/agentPools/userpool2"
-        name                          = "userpool2"
-      ~ node_taints                   = [
-          - "kubernetes.azure.com/scalesetpriority=spot:NoSchedule",
-        ]
-        tags                          = {}
-      + temporary_name_for_rotation   = "userpool2b"
-      ~ vm_size                       = "Standard_B2s" -> "Standard_B2als_v2"
-        # (29 unchanged attributes hidden)
-    }
+│ a resource with the ID
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubernetes-acr-k8s-dev-uaenorth-001" already
+│ exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+╵
+╷
+│ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubelet-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│
+│   with module.user_assigned_managed_identity["kubelet"].azurerm_user_assigned_identity.this,
+│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
+│    2: resource "azurerm_user_assigned_identity" "this" {
+│
+│ a resource with the ID
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubelet-acr-k8s-dev-uaenorth-001" already
+│ exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+╵
+╷
+│ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│
+│   with module.user_assigned_managed_identity["uami"].azurerm_user_assigned_identity.this,
+│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
+│    2: resource "azurerm_user_assigned_identity" "this" {
+│
+│ a resource with the ID
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001" already exists - to
+│ be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+╵
+╷
+│ Error: Failed to create/update resource
+│
+│   with module.virtual_network.azapi_resource.vnet,
+│   on .terraform\modules\virtual_network\main.tf line 3, in resource "azapi_resource" "vnet":
+│    3: resource "azapi_resource" "vnet" {
+│
+│ creating/updating Resource: (ResourceId
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001" / Api Version "2024-07-01"): PUT
+│ https://management.azure.com/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001
+│ --------------------------------------------------------------------------------
+│ RESPONSE 404: 404 Not Found
+│ ERROR CODE: NotFound
+│ --------------------------------------------------------------------------------
+│ {
+│   "error": {
+│     "code": "NotFound",
+│     "message": "Resource /subscriptions/2bb0667b-d883-4406-b19a-a3083ba05bd8/resourceGroups/rg-hub-ddos-uaenorth/providers/Microsoft.Network/ddosProtectionPlans/ddos-uaenorth not found.",
+│     "details": []
+│   }
+│ }
+│ --------------------------------------------------------------------------------
