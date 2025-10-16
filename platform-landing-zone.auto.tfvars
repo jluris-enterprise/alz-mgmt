@@ -45,7 +45,7 @@ custom_replacements = {
     dcr_vm_insights_name                    = "dcr-vm-insights"
 
     # Resource provisioning global connectivity
-    ddos_protection_plan_enabled = false
+    ddos_protection_plan_enabled = true
 
     # Resource provisioning primary connectivity
     primary_firewall_enabled                                             = false
