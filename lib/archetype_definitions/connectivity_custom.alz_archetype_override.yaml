@@ -1,10 +1,11 @@
 base_archetype: connectivity
 name: connectivity_custom
 policy_assignments_to_add: []
-policy_assignments_to_remove: [
-# To remove the DDOS modify policy, uncomment the following line:
-  Enable-DDoS-VNET,
-]
+policy_assignments_to_remove: 
+  [
+    # To remove the DDOS modify policy, uncomment the following line:
+    Enable-DDoS-VNET,
+  ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
 policy_set_definitions_to_add: []
