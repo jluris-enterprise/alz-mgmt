@@ -8,9 +8,4 @@ module "virtual_network" {
   location      = var.location
   name          = local.resource_names.virtual_network_name
   tags          = var.tags
-  
-  ddos_protection_plan = {
-    enable = false
-    id = null
-  }
 }
