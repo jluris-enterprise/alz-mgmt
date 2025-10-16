@@ -39,10 +39,10 @@ variable "resource_name_environment" {
 
 variable "location" {
   type        = string
-  description = "The location/region where the resources will be created. Must be in the short form (e.g. 'uksouth')"
+  description = "The location/region where the resources will be created. Must be in the short form (e.g. 'uaenorth')"
   validation {
-    condition     = can(regex("^(uksouth)", var.location))
-    error_message = "The location must only contain lowercase letters, numbers, and hyphens"
+    condition     = can(regex("^(uaenorth)", var.location))
+    error_message = "The location must only contain lowercase letters, numbers, and hyphens and uaenorth"
   }
   validation {
     condition     = length(var.location) <= 20
