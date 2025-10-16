@@ -10,6 +10,6 @@ module "virtual_network" {
   tags          = var.tags
 
   ddos_protection_plan = {
-    enabled = false
+    enable = false
   }
 }
