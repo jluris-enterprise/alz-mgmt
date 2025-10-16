@@ -12,6 +12,7 @@ policy_assignments_to_remove: [
   # Deploy-VMSS-Monitoring,
 # To remove the DDOS modify policy, uncomment the following line:
   Enable-DDoS-VNET,
+  Deny-Subnet-Without-Nsg
 ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
