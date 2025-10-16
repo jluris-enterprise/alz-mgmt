@@ -1,9 +1,10 @@
 ---
 name: 02 Azure Landing Zones Continuous Delivery
 on:
-  push:
-    branches:
-      - main
+  # push:
+    # branches:
+    #   - main
+  pull_request:
     paths-ignore:
       - 'workloads/**'
   workflow_dispatch:
