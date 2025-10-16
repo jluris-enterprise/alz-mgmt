@@ -9,37 +9,44 @@ https://learn.microsoft.com/en-us/samples/azure-samples/avm-terraform-labs/avm-t
 
 # Errors
 
-Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubernetes-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+╷Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001/federatedIdentityCredentials/fic-pull_request" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_federated_identity_credential" for more information
 │
-│   with module.user_assigned_managed_identity["kubernetes"].azurerm_user_assigned_identity.this,
-│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
-│    2: resource "azurerm_user_assigned_identity" "this" {
+│   with azurerm_federated_identity_credential.this["pull_request"],
+│   on avm-res-authorization-roleassignment.tf line 34, in resource "azurerm_federated_identity_credential" "this":
+│   34: resource "azurerm_federated_identity_credential" "this" {
 │
 │ a resource with the ID
-│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubernetes-acr-k8s-dev-uaenorth-001" already
-│ exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001/federatedIdentityCredentials/fic-pull_request"
+│ already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_federated_identity_credential" for
+│ more information
 ╵
 ╷
-│ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubelet-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001/federatedIdentityCredentials/fic-github_actions" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_federated_identity_credential" for more information
 │
-│   with module.user_assigned_managed_identity["kubelet"].azurerm_user_assigned_identity.this,
-│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
-│    2: resource "azurerm_user_assigned_identity" "this" {
+│   with azurerm_federated_identity_credential.this["github_actions"],
+│   on avm-res-authorization-roleassignment.tf line 34, in resource "azurerm_federated_identity_credential" "this":
+│   34: resource "azurerm_federated_identity_credential" "this" {
 │
 │ a resource with the ID
-│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-kubelet-acr-k8s-dev-uaenorth-001" already
-│ exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001/federatedIdentityCredentials/fic-github_actions"
+│ already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_federated_identity_credential" for
+│ more information
 ╵
 ╷
-│ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+│ Error: unexpected status 409 (409 Conflict) with error: RoleAssignmentExists: The role assignment already exists.
 │
-│   with module.user_assigned_managed_identity["uami"].azurerm_user_assigned_identity.this,
-│   on .terraform\modules\user_assigned_managed_identity\main.tf line 2, in resource "azurerm_user_assigned_identity" "this":
-│    2: resource "azurerm_user_assigned_identity" "this" {
+│   with module.role_assignment.azurerm_role_assignment.basic["uami_managed_identity_operator"],
+│   on .terraform\modules\role_assignment\main.tf line 18, in resource "azurerm_role_assignment" "basic":
+│   18: resource "azurerm_role_assignment" "basic" {
 │
-│ a resource with the ID
-│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001" already exists - to
-│ be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_user_assigned_identity" for more information
+╵
+╷
+│ Error: unexpected status 409 (409 Conflict) with error: RoleAssignmentExists: The role assignment already exists.
+│
+│   with module.role_assignment.azurerm_role_assignment.basic["uami_contributor"],
+│   on .terraform\modules\role_assignment\main.tf line 18, in resource "azurerm_role_assignment" "basic":
+│   18: resource "azurerm_role_assignment" "basic" {
+│
 ╵
 ╷
 │ Error: Failed to create/update resource
@@ -49,7 +56,8 @@ Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb
 │    3: resource "azapi_resource" "vnet" {
 │
 │ creating/updating Resource: (ResourceId
-│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001" / Api Version "2024-07-01"): PUT
+│ "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001" / Api Version
+│ "2024-07-01"): PUT
 │ https://management.azure.com/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001
 │ --------------------------------------------------------------------------------
 │ RESPONSE 404: 404 Not Found
