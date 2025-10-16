@@ -254,13 +254,13 @@ You can use this section to customize the hub virtual networking that will be de
 connectivity_type = "hub_and_spoke_vnet"
 
 connectivity_resource_groups = {
-  #   ddos = {
-  #     name     = "$${ddos_resource_group_name}"
-  #     location = "$${starter_location_01}"
-  #     settings = {
-  #       enabled = "$${ddos_protection_plan_enabled}"
-  #     }
-  #   }
+    ddos = {
+      name     = "$${ddos_resource_group_name}"
+      location = "$${starter_location_01}"
+      settings = {
+        enabled = "$${ddos_protection_plan_enabled}"
+      }
+    }
   vnet_primary = {
     name     = "$${connectivity_hub_primary_resource_group_name}"
     location = "$${starter_location_01}"
@@ -278,12 +278,12 @@ connectivity_resource_groups = {
 }
 
 hub_and_spoke_vnet_settings = {
-  #   ddos_protection_plan = {
-  #     enabled             = "$${ddos_protection_plan_enabled}"
-  #     name                = "$${ddos_protection_plan_name}"
-  #     resource_group_name = "$${ddos_resource_group_name}"
-  #     location            = "$${starter_location_01}"
-  #   }
+    ddos_protection_plan = {
+      enabled             = "$${ddos_protection_plan_enabled}"
+      name                = "$${ddos_protection_plan_name}"
+      resource_group_name = "$${ddos_resource_group_name}"
+      location            = "$${starter_location_01}"
+    }
 }
 
 hub_and_spoke_vnet_virtual_networks = {
