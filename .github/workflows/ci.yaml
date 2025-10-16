@@ -4,8 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'workloads/**'
   workflow_dispatch:
     inputs:
       terraform_cli_version:
