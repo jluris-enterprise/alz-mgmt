@@ -10,6 +10,14 @@ https://learn.microsoft.com/en-us/samples/azure-samples/avm-terraform-labs/avm-t
 # Azure policies
 https://github.com/Azure/Azure-Landing-Zones-Library/tree/main/platform/alz
 
+
+# last push changing version tag actions 10/17/2025 
+commit d719fe9792a3c4110211f1adf641b77fb17e3967 (HEAD -> main, origin/main, origin/HEAD)
+Author: joelluris <joelluris@gmail.com>
+Date:   Fri Oct 17 13:34:47 2025 +0400
+
+    feat: change version action tags
+
 # Errors
 
 ╷Error: a resource with the ID "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami-acr-k8s-dev-uaenorth-001/federatedIdentityCredentials/fic-pull_request" already exists - to be managed via Terraform this resource needs to be imported into the State. Please see the resource documentation for "azurerm_federated_identity_credential" for more information
