@@ -117,22 +117,22 @@ variable "tags" {
   description = "A map of tags to apply to resources"
 }
 
-variable "pod_subnet" {
-  type     = string
-  nullable = false
+# variable "pod_subnet" {
+#   type     = string
+#   nullable = false
 
-  validation {
-    condition     = can(regex("^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Network/virtualNetworks/[^/]+/subnets/pods", var.pod_subnet))
-    error_message = "The subnet ID must be a valid Azure resource ID for a pod subnet"
-  }
-}
+#   validation {
+#     condition     = can(regex("^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Network/virtualNetworks/[^/]+/subnets/pods", var.pod_subnet))
+#     error_message = "The subnet ID must be a valid Azure resource ID for a pod subnet"
+#   }
+# }
 
-variable "node_subnet" {
-  type     = string
-  nullable = false
+# variable "node_subnet" {
+#   type     = string
+#   nullable = false
 
-  validation {
-    condition     = can(regex("^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Network/virtualNetworks/[^/]+/subnets/node", var.node_subnet))
-    error_message = "The subnet ID must be a valid Azure resource ID for a node subnet"
-  }
-}
+#   validation {
+#     condition     = can(regex("^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Network/virtualNetworks/[^/]+/subnets/node", var.node_subnet))
+#     error_message = "The subnet ID must be a valid Azure resource ID for a node subnet"
+#   }
+# }

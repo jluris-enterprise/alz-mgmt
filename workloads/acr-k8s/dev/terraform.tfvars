@@ -16,6 +16,20 @@ user_assigned_managed_identities = {
 }
 
 subnets = {
+  pods = {
+    size                       = 22
+    has_nat_gateway            = false
+    has_network_security_group = false
+    delegation = [
+      {
+        name = "aks-pods-delegation"
+        service_delegation = {
+          name    = "Microsoft.ContainerService/managedClusters"
+          actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+        }
+      }
+    ]
+  }
   node = {
     size                       = 24
     has_nat_gateway            = false
