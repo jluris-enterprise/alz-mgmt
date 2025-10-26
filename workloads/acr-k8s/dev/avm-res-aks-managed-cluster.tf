@@ -98,9 +98,9 @@ module "aks_cluster" {
       node_labels = {
         "kubernetes.azure.com/scalesetpriority" = "spot"
       }
-      node_taints = [
-        "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
-      ]
+      # node_taints = [
+      #   "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
+      # ]
     }
     unp2 = {
       name                        = "userpool2"
@@ -124,6 +124,9 @@ module "aks_cluster" {
       node_labels = {
         "kubernetes.azure.com/scalesetpriority" = "spot"
       }
+      node_taints = [
+        "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
+      ]
     }
   }
   oidc_issuer_enabled    = true
