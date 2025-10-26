@@ -26,6 +26,7 @@ subnets = {
         service_delegation = {
           name    = "Microsoft.ContainerService/managedClusters"
           actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+          service = "Microsoft.ContainerService/managedClusters"
         }
       }
     ]
