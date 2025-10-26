@@ -102,25 +102,25 @@ module "aks_cluster" {
         "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
       ]
     }
-    # unp2 = {
-    #   name                        = "userpool2"
-    #   temporary_name_for_rotation = "userpool2b"
-    #   vm_size                     = "Standard_D2s_v3"
-    #   auto_scaling_enabled        = true
-    #   max_count                   = 1
-    #   max_pods                    = 30
-    #   min_count                   = 1
-    #   os_disk_size_gb             = 30
-    #   os_disk_type                = "Ephemeral"
-    #   spot_max_price              = -1
-    #   priority                    = "Spot"
-    #   eviction_policy             = "Delete"
-    #   vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-    #   pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
-    # upgrade_settings = {
-    #   max_surge = "10%"
-    # }
-    # }
+    unp2 = {
+      name                        = "userpool2"
+      temporary_name_for_rotation = "userpool2b"
+      vm_size                     = "Standard_D2s_v3"
+      auto_scaling_enabled        = true
+      max_count                   = 1
+      max_pods                    = 30
+      min_count                   = 1
+      os_disk_size_gb             = 30
+      os_disk_type                = "Ephemeral"
+      spot_max_price              = -1
+      priority                    = "Spot"
+      eviction_policy             = "Delete"
+      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+    upgrade_settings = {
+      max_surge = "10%"
+    }
+    }
   }
   oidc_issuer_enabled    = true
   local_account_disabled = true
