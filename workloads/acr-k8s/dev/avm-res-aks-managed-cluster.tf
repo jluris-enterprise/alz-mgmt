@@ -8,17 +8,17 @@ module "aks_cluster" {
   tags                = var.tags
 
   default_node_pool = {
-    name                         = "system01"
-    temporary_name_for_rotation  = "system01b"
-    vm_size                      = "Standard_D2s_v3" # check vm sku availability for your region
-    os_disk_size_gb              = 30
-    sku_tier                     = "Free"
-    vnet_subnet_id               = module.virtual_network.subnets["node"].resource_id
-    # pod_subnet_id                = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
+    name                        = "system01"
+    temporary_name_for_rotation = "system01b"
+    vm_size                     = "Standard_D2s_v3" # check vm sku availability for your region
+    os_disk_size_gb             = 30
+    sku_tier                    = "Free"
+    vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+    pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
     auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
-    min_count                   = 1
+    min_count                    = 1
     only_critical_addons_enabled = true
     zones                        = [1, 2, 3]
     upgrade_settings = {
@@ -90,12 +90,10 @@ module "aks_cluster" {
       priority                    = "Spot"
       eviction_policy             = "Delete"
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
-      auto_scaling_enabled        = true
-      # No taints - allows regular pods to schedule on spot nodes
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      auto_scaling_enabled = true
       node_labels = {
-        "kubernetes.azure.com/scalesetpriority" = "spot"
-        "nodepool"                              = "userpool1"
+        "nodepool" = "userpool1"
       }
     }
 
@@ -110,9 +108,10 @@ module "aks_cluster" {
       os_disk_size_gb             = 30
       os_disk_type                = "Ephemeral"
       priority                    = "Regular"
+      # No eviction_policy for Regular nodes
+      # No spot_max_price for Regular nodes
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
-      # No taints - allows regular pods to schedule on regular nodes
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
       node_labels = {
         "nodepool" = "userpool2"
       }
