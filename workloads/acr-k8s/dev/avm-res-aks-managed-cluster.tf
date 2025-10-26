@@ -18,7 +18,7 @@ module "aks_cluster" {
     auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
-    min_count                    = 1
+    min_count                   = 1
     only_critical_addons_enabled = true
     zones                        = [1, 2, 3]
     upgrade_settings = {
