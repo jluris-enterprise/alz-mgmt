@@ -18,7 +18,7 @@ module "aks_cluster" {
     auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
-    min_count                   = 1
+    min_count                    = 1
     only_critical_addons_enabled = true
     zones                        = [1, 2, 3]
     upgrade_settings = {
@@ -88,9 +88,13 @@ module "aks_cluster" {
       spot_max_price              = -1          # -1 means "pay up to the current market price" (default behavior).
       priority                    = "Spot"
       eviction_policy             = "Delete"
-      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
-      auto_scaling_enabled        = true
+      # vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      vnet_subnet_id = var.node_subnet
+      pod_subnet_id  = var.pod_subnet
+
+
+      # auto_scaling_enabled        = true
       # Upgrade settings doesnt support spot nodes
       # upgrade_settings = {
       #   max_surge = "10%"
@@ -115,8 +119,12 @@ module "aks_cluster" {
       spot_max_price              = -1
       priority                    = "Spot"
       eviction_policy             = "Delete"
-      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].
+      vnet_subnet_id = var.node_subnet
+      pod_subnet_id  = var.pod_subnet
+
+
       # upgrade_settings = {
       #   max_surge = "10%"
       # }
