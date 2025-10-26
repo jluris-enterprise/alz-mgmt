@@ -16,25 +16,24 @@ user_assigned_managed_identities = {
 }
 
 subnets = {
-  # Pods subnet removed to avoid service association link conflicts
-  # pods = {
-  #   size                       = 22
-  #   has_nat_gateway            = false
-  #   has_network_security_group = false
-  #   delegation = [
-  #     {
-  #       name = "aks-pods-delegation"
-  #       service_delegation = {
-  #         name    = "Microsoft.ContainerService/managedClusters"
-  #         actions = [
-  #           "Microsoft.Network/virtualNetworks/subnets/action",
-  #           "Microsoft.Network/virtualNetworks/subnets/join/action"
-  #         ]
-  #         service = "Microsoft.ContainerService/managedClusters"
-  #       }
-  #     }
-  #   ]
-  # }
+  pods = {
+    size                       = 22
+    has_nat_gateway            = false
+    has_network_security_group = false
+    delegation = [
+      {
+        name = "aks-pods-delegation"
+        service_delegation = {
+          name    = "Microsoft.ContainerService/managedClusters"
+          service = "Microsoft.ContainerService/managedClusters"
+          actions = [
+            "Microsoft.Network/virtualNetworks/subnets/action",
+            "Microsoft.Network/virtualNetworks/subnets/join/action"
+          ]
+        }
+      }
+    ]
+  }
   node = {
     size                       = 24
     has_nat_gateway            = false
