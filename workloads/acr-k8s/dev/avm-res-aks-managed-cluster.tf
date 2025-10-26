@@ -14,11 +14,11 @@ module "aks_cluster" {
     os_disk_size_gb              = 30
     sku_tier                     = "Free"
     vnet_subnet_id               = module.virtual_network.subnets["node"].resource_id
-    pod_subnet_id                = module.virtual_network.subnets["pods"].resource_id
+    # pod_subnet_id                = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
     auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
-    min_count                    = 1
+    min_count                   = 1
     only_critical_addons_enabled = true
     zones                        = [1, 2, 3]
     upgrade_settings = {
@@ -90,7 +90,7 @@ module "aks_cluster" {
       priority                    = "Spot"
       eviction_policy             = "Delete"
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
       auto_scaling_enabled        = true
       # No taints - allows regular pods to schedule on spot nodes
       node_labels = {
@@ -111,7 +111,7 @@ module "aks_cluster" {
       os_disk_type                = "Ephemeral"
       priority                    = "Regular"
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed due to delegation issue
       # No taints - allows regular pods to schedule on regular nodes
       node_labels = {
         "nodepool" = "userpool2"
