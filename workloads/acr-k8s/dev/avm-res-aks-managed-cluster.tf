@@ -117,9 +117,9 @@ module "aks_cluster" {
       eviction_policy             = "Delete"
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
       pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
-      upgrade_settings = {
-        max_surge = "10%"
-      }
+      # upgrade_settings = {
+      #   max_surge = "10%"
+      # }
       # No taints - allows regular pods to schedule on this spot node pool
       node_labels = {
         "kubernetes.azure.com/scalesetpriority" = "spot"
