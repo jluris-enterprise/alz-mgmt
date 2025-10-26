@@ -89,10 +89,8 @@ module "aks_cluster" {
       spot_max_price              = -1
       priority                    = "Spot"
       eviction_policy             = "Delete"
-      # vnet_subnet_id              = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/node"
-      # pod_subnet_id               = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/pods"
-      vnet_subnet_id              = var.node_subnet
-      pod_subnet_id               = var.pod_subnet
+      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
       auto_scaling_enabled        = true
       # No taints - allows regular pods to schedule on spot nodes
       node_labels = {
@@ -112,8 +110,8 @@ module "aks_cluster" {
       os_disk_size_gb             = 30
       os_disk_type                = "Ephemeral"
       priority                    = "Regular"
-      vnet_subnet_id              = var.node_subnet
-      pod_subnet_id               = var.pod_subnet
+      vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
+      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
       # No taints - allows regular pods to schedule on regular nodes
       node_labels = {
         "nodepool" = "userpool2"
