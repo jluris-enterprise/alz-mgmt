@@ -76,6 +76,7 @@ module "aks_cluster" {
   node_os_channel_upgrade = "Unmanaged"
 
   node_pools = {
+
     unp1 = {
       name                        = "userpool1"
       temporary_name_for_rotation = "userpool1b"
@@ -84,28 +85,22 @@ module "aks_cluster" {
       max_pods                    = 30
       min_count                   = 1
       os_disk_size_gb             = 30
-      os_disk_type                = "Ephemeral" # "Ephemeral" uses temporary storage
-      spot_max_price              = -1          # -1 means "pay up to the current market price" (default behavior).
+      os_disk_type                = "Ephemeral"
+      spot_max_price              = -1
       priority                    = "Spot"
       eviction_policy             = "Delete"
-      # vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
-      vnet_subnet_id = var.node_subnet
-      pod_subnet_id  = var.pod_subnet
-
-
-      # auto_scaling_enabled        = true
-      # Upgrade settings doesnt support spot nodes
-      # upgrade_settings = {
-      #   max_surge = "10%"
-      # }
+      # vnet_subnet_id              = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/node"
+      # pod_subnet_id               = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/pods"
+      vnet_subnet_id              = var.node_subnet
+      pod_subnet_id               = var.pod_subnet
+      auto_scaling_enabled        = true
+      # No taints - allows regular pods to schedule on spot nodes
       node_labels = {
         "kubernetes.azure.com/scalesetpriority" = "spot"
+        "nodepool"                              = "userpool1"
       }
-      # node_taints = [
-      #   "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
-      # ]
     }
+
     unp2 = {
       name                        = "userpool2"
       temporary_name_for_rotation = "userpool2b"
@@ -116,26 +111,16 @@ module "aks_cluster" {
       min_count                   = 1
       os_disk_size_gb             = 30
       os_disk_type                = "Ephemeral"
-      spot_max_price              = -1
       priority                    = "Regular"
-      eviction_policy             = "Delete"
-      # vnet_subnet_id              = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/node"
-      # pod_subnet_id               = "/subscriptions/43731ed3-ead8-4406-b85d-18e966dfdb9f/resourceGroups/rg-acr-k8s-dev-uaenorth-001/providers/Microsoft.Network/virtualNetworks/vnet-acr-k8s-dev-uaenorth-001/subnets/pods"
-      vnet_subnet_id = var.node_subnet
-      pod_subnet_id  = var.pod_subnet
-
-      # upgrade_settings = {
-      #   max_surge = "10%"
-      # }
-      # No taints - allows regular pods to schedule on this regular node pool
+      vnet_subnet_id              = var.node_subnet
+      pod_subnet_id               = var.pod_subnet
+      # No taints - allows regular pods to schedule on regular nodes
       node_labels = {
         "nodepool" = "userpool2"
       }
-      # node_taints = [
-      #   "kubernetes.azure.com/scalesetpriority=spot:NoSchedule"
-      # ]
     }
   }
+
   oidc_issuer_enabled    = true
   local_account_disabled = true
   # oms_agent = {
