@@ -1,6 +1,6 @@
 module "aks_cluster" {
   source  = "Azure/avm-res-containerservice-managedcluster/azurerm"
-  version = "0.3.0"
+  version = "0.3.3"
 
   resource_group_name = module.resource_group.name
   location            = var.location
