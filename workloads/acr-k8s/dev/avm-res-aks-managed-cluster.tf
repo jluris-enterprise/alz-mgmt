@@ -92,7 +92,11 @@ module "aks_cluster" {
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
       # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed to avoid delegation conflicts
       auto_scaling_enabled = true
-      node_taints = []  # Override default spot taint to allow regular pods
+      # NOTE: This is a SPOT node pool that normally gets tainted automatically
+      # Currently node_taints = [] overrides the default spot taint to allow regular pods
+      # If you want this node pool to be tainted (recommended for spot nodes), change to:
+      # node_taints = ["kubernetes.azure.com/scalesetpriority=spot:NoSchedule"]
+      # node_taints = []  # Override default spot taint to allow regular pods
       node_labels = {
         "nodepool" = "userpool1"
         "kubernetes.azure.com/scalesetpriority" = "spot"
