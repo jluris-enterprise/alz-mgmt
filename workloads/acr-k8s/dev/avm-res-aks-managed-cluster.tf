@@ -14,7 +14,7 @@ module "aks_cluster" {
     os_disk_size_gb             = 30
     sku_tier                    = "Free"
     vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-    pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+    # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed to avoid delegation conflicts
     auto_scaling_enabled         = true
     max_count                    = 1
     max_pods                     = 64
@@ -90,7 +90,7 @@ module "aks_cluster" {
       priority                    = "Spot"
       eviction_policy             = "Delete"
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed to avoid delegation conflicts
       auto_scaling_enabled = true
       node_taints = []  # Override default spot taint to allow regular pods
       node_labels = {
@@ -113,7 +113,7 @@ module "aks_cluster" {
       # No eviction_policy for Regular nodes
       # No spot_max_price for Regular nodes
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
-      pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
+      # pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id  # Removed to avoid delegation conflicts
       node_labels = {
         "nodepool" = "userpool2"
       }
