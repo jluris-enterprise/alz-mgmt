@@ -92,8 +92,10 @@ module "aks_cluster" {
       vnet_subnet_id              = module.virtual_network.subnets["node"].resource_id
       pod_subnet_id               = module.virtual_network.subnets["pods"].resource_id
       auto_scaling_enabled = true
+      node_taints = []  # Override default spot taint to allow regular pods
       node_labels = {
         "nodepool" = "userpool1"
+        "kubernetes.azure.com/scalesetpriority" = "spot"
       }
     }
 
@@ -102,7 +104,7 @@ module "aks_cluster" {
       temporary_name_for_rotation = "userpool2b"
       vm_size                     = "Standard_D2s_v3"
       auto_scaling_enabled        = true
-      max_count                   = 1
+      max_count                   = 3  # Increased from 1 to handle more workload
       max_pods                    = 30
       min_count                   = 1
       os_disk_size_gb             = 30
