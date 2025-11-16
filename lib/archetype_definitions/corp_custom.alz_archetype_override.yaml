@@ -5,7 +5,10 @@ policy_assignments_to_remove:
   [
     # To remove the private DNS zones policy for private endpoints
     Deploy-Private-DNS-Zones,
-    Deny-Public-IP-On-NIC
+    Deny-Public-IP-On-NIC,
+    # "Audit-PeDnsZones",
+    # "Deny-HybridNetworking",
+    "Deny-Public-Endpoints",
   ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
