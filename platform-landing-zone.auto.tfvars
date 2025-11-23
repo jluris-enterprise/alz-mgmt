@@ -363,6 +363,7 @@ hub_and_spoke_vnet_virtual_networks = {
         }
       }
     }
+    # https://registry.terraform.io/modules/Azure/avm-ptn-network-private-link-private-dns-zones/azurerm/latest
     private_dns_zones = {
       enabled = "$${primary_private_dns_zones_enabled}"
       dns_zones = {
@@ -389,6 +390,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_data_explorer" : {
           #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           # },
+          "azure_postgres_sql_database" : {
+            "zone_name" : "privatelink.postgres.database.azure.com"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
