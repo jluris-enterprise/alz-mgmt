@@ -87,6 +87,7 @@ custom_replacements = {
     primary_bastion_subnet_address_prefix              = "172.0.0.64/26"
     primary_gateway_subnet_address_prefix              = "172.0.0.128/27"
     primary_private_dns_resolver_subnet_address_prefix = "172.0.0.160/28"
+    primary_application_gateway_subnet_address_prefix  = "172.0.1.0/24"
   }
 
   /*
@@ -316,6 +317,10 @@ hub_and_spoke_vnet_virtual_networks = {
         private_dns_resolver_subnet = {
           name             = "PrivateDnsResolverSubnet"
           address_prefixes = ["$${primary_private_dns_resolver_subnet_address_prefix}"]
+        }
+        application_gateway_subnet = {
+          name             = "ApplicationGatewaySubnet"
+          address_prefixes = ["$${primary_application_gateway_subnet_address_prefix}"]
         }
       }
       firewall = {
