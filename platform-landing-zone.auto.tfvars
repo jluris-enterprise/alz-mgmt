@@ -298,19 +298,24 @@ hub_and_spoke_vnet_virtual_networks = {
       route_table_name_user_subnets = "$${primary_route_table_user_subnets_name}"
       subnets                       = {
         firewall_subnet = {
-          address_prefix = "$${primary_firewall_subnet_address_prefix}"
+          name             = "AzureFirewallSubnet"
+          address_prefixes = ["$${primary_firewall_subnet_address_prefix}"]
         }
         firewall_management_subnet = {
-          address_prefix = "$${primary_firewall_management_subnet_address_prefix}"
+          name             = "AzureFirewallManagementSubnet"
+          address_prefixes = ["$${primary_firewall_management_subnet_address_prefix}"]
         }
         gateway_subnet = {
-          address_prefix = "$${primary_gateway_subnet_address_prefix}"
+          name             = "GatewaySubnet"
+          address_prefixes = ["$${primary_gateway_subnet_address_prefix}"]
         }
         bastion_subnet = {
-          address_prefix = "$${primary_bastion_subnet_address_prefix}"
+          name             = "AzureBastionSubnet"
+          address_prefixes = ["$${primary_bastion_subnet_address_prefix}"]
         }
         private_dns_resolver_subnet = {
-          address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
+          name             = "PrivateDnsResolverSubnet"
+          address_prefixes = ["$${primary_private_dns_resolver_subnet_address_prefix}"]
         }
       }
       firewall = {
