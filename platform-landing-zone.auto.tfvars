@@ -296,7 +296,23 @@ hub_and_spoke_vnet_virtual_networks = {
       routing_address_space         = ["$${primary_hub_address_space}"]
       route_table_name_firewall     = "$${primary_route_table_firewall_name}"
       route_table_name_user_subnets = "$${primary_route_table_user_subnets_name}"
-      subnets                       = {}
+      subnets                       = {
+        firewall_subnet = {
+          address_prefix = "$${primary_firewall_subnet_address_prefix}"
+        }
+        firewall_management_subnet = {
+          address_prefix = "$${primary_firewall_management_subnet_address_prefix}"
+        }
+        gateway_subnet = {
+          address_prefix = "$${primary_gateway_subnet_address_prefix}"
+        }
+        bastion_subnet = {
+          address_prefix = "$${primary_bastion_subnet_address_prefix}"
+        }
+        private_dns_resolver_subnet = {
+          address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
+        }
+      }
       firewall = {
         enabled                          = "$${primary_firewall_enabled}"
         subnet_address_prefix            = "$${primary_firewall_subnet_address_prefix}"
