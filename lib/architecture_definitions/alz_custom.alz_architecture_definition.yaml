@@ -45,7 +45,14 @@ management_groups:
 - id: corp-development
   display_name: Corp-Development
   archetypes:
-  - online_custom
+  - corp_custom
+  exists: false
+  parent_id: corp
+
+- id: corp-production
+  display_name: Corp-Production
+  archetypes:
+  - corp_custom
   exists: false
   parent_id: corp
 
