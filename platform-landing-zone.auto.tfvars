@@ -433,7 +433,8 @@ hub_and_spoke_vnet_virtual_networks = {
           },
           "azure_ml" : {
             "zone_name" : "privatelink.api.azureml.ms"
-          },
+          }
+        }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
