@@ -87,7 +87,7 @@ custom_replacements = {
     primary_bastion_subnet_address_prefix              = "172.0.0.64/26"
     primary_gateway_subnet_address_prefix              = "172.0.0.128/27"
     primary_private_dns_resolver_subnet_address_prefix = "172.0.0.160/28"
-    primary_application_gateway_subnet_address_prefix  = "172.0.1.0/26" # Reserved for future Application Gateway use 64 addresses
+    primary_application_gateway_subnet_address_prefix  = "172.0.1.0/26"
   }
 
   /*
