@@ -255,13 +255,13 @@ You can use this section to customize the hub virtual networking that will be de
 connectivity_type = "hub_and_spoke_vnet"
 
 connectivity_resource_groups = {
-    ddos = {
-      name     = "$${ddos_resource_group_name}"
-      location = "$${starter_location_01}"
-      settings = {
-        enabled = "$${ddos_protection_plan_enabled}"
-      }
+  ddos = {
+    name     = "$${ddos_resource_group_name}"
+    location = "$${starter_location_01}"
+    settings = {
+      enabled = "$${ddos_protection_plan_enabled}"
     }
+  }
   vnet_primary = {
     name     = "$${connectivity_hub_primary_resource_group_name}"
     location = "$${starter_location_01}"
@@ -279,12 +279,12 @@ connectivity_resource_groups = {
 }
 
 hub_and_spoke_vnet_settings = {
-    ddos_protection_plan = {
-      enabled             = "$${ddos_protection_plan_enabled}"
-      name                = "$${ddos_protection_plan_name}"
-      resource_group_name = "$${ddos_resource_group_name}"
-      location            = "$${starter_location_01}"
-    }
+  ddos_protection_plan = {
+    enabled             = "$${ddos_protection_plan_enabled}"
+    name                = "$${ddos_protection_plan_name}"
+    resource_group_name = "$${ddos_resource_group_name}"
+    location            = "$${starter_location_01}"
+  }
 }
 
 hub_and_spoke_vnet_virtual_networks = {
@@ -297,7 +297,7 @@ hub_and_spoke_vnet_virtual_networks = {
       routing_address_space         = ["$${primary_hub_address_space}"]
       route_table_name_firewall     = "$${primary_route_table_firewall_name}"
       route_table_name_user_subnets = "$${primary_route_table_user_subnets_name}"
-      subnets                       = {
+      subnets = {
         firewall_subnet = {
           name             = "AzureFirewallSubnet"
           address_prefixes = ["$${primary_firewall_subnet_address_prefix}"]
@@ -399,7 +399,7 @@ hub_and_spoke_vnet_virtual_networks = {
         }
         private_link_private_dns_zones = {
           "azure_acr_registry" : {
-              "zone_name" : "privatelink.azurecr.io"
+            "zone_name" : "privatelink.azurecr.io"
           },
           "azure_storage_blob" : {
             "zone_name" : "privatelink.blob.core.windows.net"
@@ -433,7 +433,13 @@ hub_and_spoke_vnet_virtual_networks = {
           },
           "azure_ml" : {
             "zone_name" : "privatelink.api.azureml.ms"
-          }
+          },
+          "azure_ai_cog_svcs" : {
+            "zone_name" : "privatelink.cognitiveservices.azure.com"
+          },
+          "azure_ai_services" : {
+            "zone_name" : "privatelink.services.ai.azure.com"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
