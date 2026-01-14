@@ -440,6 +440,9 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_ai_services" : {
             "zone_name" : "privatelink.services.ai.azure.com"
           },
+          "azure_api_management" : {
+            "zone_name" : "privatelink.azure-api.net"
+          }
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
