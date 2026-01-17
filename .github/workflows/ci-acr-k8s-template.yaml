@@ -16,7 +16,9 @@ jobs:
   validate:
     name: Validate Terraform
     runs-on:
-      ubuntu-latest
+      - self-hosted
+      - Linux
+      - X64
     environment: awl-mgmt-plan
     steps:
       - name: Checkout Code
@@ -50,7 +52,9 @@ jobs:
     name: Validate Terraform Plan
     needs: validate
     runs-on:
-      ubuntu-latest
+      - self-hosted
+      - Linux
+      - X64
     concurrency: mgmt-tfstate
     environment: awl-mgmt-plan
     permissions:

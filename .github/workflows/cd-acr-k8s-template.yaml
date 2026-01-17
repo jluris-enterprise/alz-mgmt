@@ -20,7 +20,9 @@ jobs:
   plan:
     name: Plan with Terraform
     runs-on:
-      ubuntu-latest
+      - self-hosted
+      - Linux
+      - X64
     concurrency: mgmt-tfstate
     environment: awl-mgmt-apply
     permissions:
@@ -92,7 +94,9 @@ jobs:
     needs: plan
     name: Apply with Terraform
     runs-on:
-      ubuntu-latest
+      - self-hosted
+      - Linux
+      - X64
     concurrency: mgmt-tfstate
     environment: awl-mgmt-apply
     permissions:
