@@ -65,17 +65,15 @@ jobs:
 
       - name: Create Module Artifact
         run: |
-          $stagingDirectory = "staging"
-          $rootModuleFolder = "${{inputs.root_module_folder_relative_path}}"
-          New-Item -Path . -Name $stagingDirectory -ItemType "directory"
-          Copy-Item -Path "./*" -Exclude @(".git", ".terraform", ".github",  $stagingDirectory) -Recurse -Destination "./$stagingDirectory"
-
-          $rootModuleFolderTerraformFolder = Join-Path -Path "./$stagingDirectory" -ChildPath $rootModuleFolder -AdditionalChildPath ".terraform"
-          if(Test-Path -Path $rootModuleFolderTerraformFolder) {
-            Remove-Item -Path $rootModuleFolderTerraformFolder -Recurse -Force
-          }
-
-        shell: pwsh
+          stagingDirectory="staging"
+          rootModuleFolder="${{inputs.root_module_folder_relative_path}}"
+          mkdir -p "$stagingDirectory"
+          find . -maxdepth 1 ! -name . ! -name .git ! -name .terraform ! -name .github ! -name "$stagingDirectory" -exec cp -r {} "$stagingDirectory/" \;
+          
+          rootModuleFolderTerraformFolder="$stagingDirectory/$rootModuleFolder/.terraform"
+          if [ -d "$rootModuleFolderTerraformFolder" ]; then
+            rm -rf "$rootModuleFolderTerraformFolder"
+          fi
 
       - name: Publish Module Artifact
         uses: actions/upload-artifact@v4
