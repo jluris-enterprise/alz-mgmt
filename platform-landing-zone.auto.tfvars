@@ -398,9 +398,9 @@ hub_and_spoke_vnet_virtual_networks = {
           enabled = false
         }
         private_link_private_dns_zones = {
-          "azure_acr_registry" : {
-            "zone_name" : "privatelink.azurecr.io"
-          },
+          # "azure_acr_registry" : {
+          #   "zone_name" : "privatelink.azurecr.io"
+          # },
           "azure_storage_blob" : {
             "zone_name" : "privatelink.blob.core.windows.net"
           },
@@ -419,30 +419,30 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_postgres_sql_database" : {
           #   "zone_name" : "privatelink.postgres.database.azure.com"
           # },
-          "azure_app_service" : {
-            "zone_name" : "privatelink.azurewebsites.net"
-          },
-          "azure_search" : {
-            "zone_name" : "privatelink.search.windows.net"
-          },
-          "azure_cosmos_db_sql" : {
-            "zone_name" : "privatelink.documents.azure.com"
-          },
-          "azure_ai_oai" : {
-            "zone_name" : "privatelink.openai.azure.com"
-          },
-          "azure_ml" : {
-            "zone_name" : "privatelink.api.azureml.ms"
-          },
-          "azure_ai_cog_svcs" : {
-            "zone_name" : "privatelink.cognitiveservices.azure.com"
-          },
-          "azure_ai_services" : {
-            "zone_name" : "privatelink.services.ai.azure.com"
-          },
-          "azure_api_management" : {
-            "zone_name" : "privatelink.azure-api.net"
-          }
+          # "azure_app_service" : {
+          #   "zone_name" : "privatelink.azurewebsites.net"
+          # },
+          # "azure_search" : {
+          #   "zone_name" : "privatelink.search.windows.net"
+          # },
+          # "azure_cosmos_db_sql" : {
+          #   "zone_name" : "privatelink.documents.azure.com"
+          # },
+          # "azure_ai_oai" : {
+          #   "zone_name" : "privatelink.openai.azure.com"
+          # },
+          # "azure_ml" : {
+          #   "zone_name" : "privatelink.api.azureml.ms"
+          # },
+          # "azure_ai_cog_svcs" : {
+          #   "zone_name" : "privatelink.cognitiveservices.azure.com"
+          # },
+          # "azure_ai_services" : {
+          #   "zone_name" : "privatelink.services.ai.azure.com"
+          # },
+          # "azure_api_management" : {
+          #   "zone_name" : "privatelink.azure-api.net"
+          # }
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
