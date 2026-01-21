@@ -11,6 +11,7 @@ policy_assignments_to_remove: [
   # Deploy-vmHybr-Monitoring,
   # Deploy-VMSS-ChangeTrack,
   # Deploy-VMSS-Monitoring,
+  "Enforce-GR-KeyVault"
 ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
