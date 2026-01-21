@@ -39,7 +39,7 @@ policy_assignments_to_remove: [
   # "Enforce-GR-DataFactory0",
   # "Enforce-GR-EventGrid0",
   # "Enforce-GR-EventHub0",
-  "Enforce-GR-KeyVault",
+  # "Enforce-GR-KeyVault",
   # "Enforce-GR-KeyVaultSup0",
   # "Enforce-GR-Kubernetes0",
   # "Enforce-GR-MachLearn0",
