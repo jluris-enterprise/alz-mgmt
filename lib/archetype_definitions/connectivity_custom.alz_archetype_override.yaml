@@ -4,8 +4,8 @@ policy_assignments_to_add: []
 policy_assignments_to_remove: 
   [
     # To remove the DDOS modify policy, uncomment the following line:
-    Enable-DDoS-VNET,
-    Enforce-GR-KeyVault
+    "Enable-DDoS-VNET",
+    "Enforce-GR-KeyVault"
   ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []

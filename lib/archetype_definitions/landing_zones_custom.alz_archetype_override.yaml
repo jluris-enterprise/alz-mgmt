@@ -54,8 +54,8 @@ policy_assignments_to_remove: [
   # "Enforce-GR-VirtualDesk0",
   # "Enforce-Subnet-Private",
   # "Enforce-TLS-SSL-Q225"
-  Enable-DDoS-VNET,
-  Deny-Subnet-Without-Nsg
+  "Enable-DDoS-VNET",
+  "Deny-Subnet-Without-Nsg"
 ]
 policy_definitions_to_add: []
 policy_definitions_to_remove: []
