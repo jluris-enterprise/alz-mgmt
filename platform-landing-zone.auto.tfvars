@@ -56,7 +56,7 @@ custom_replacements = {
     primary_private_dns_zones_enabled                                    = true
     primary_private_dns_auto_registration_zone_enabled                   = true
     primary_private_dns_resolver_enabled                                 = false
-    primary_bastion_enabled                                              = true
+    primary_bastion_enabled                                              = false
 
     # Resource names primary connectivity
     primary_virtual_network_name                                 = "vnet-hub-$${starter_location_01}"
@@ -416,32 +416,35 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_data_explorer" : {
             "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           },
-          "azure_postgres_sql_database" : {
-            "zone_name" : "privatelink.postgres.database.azure.com"
-          },
-          "azure_app_service" : {
-            "zone_name" : "privatelink.azurewebsites.net"
-          },
-          "azure_search" : {
-            "zone_name" : "privatelink.search.windows.net"
-          },
-          "azure_cosmos_db_sql" : {
-            "zone_name" : "privatelink.documents.azure.com"
-          },
-          "azure_ai_oai" : {
-            "zone_name" : "privatelink.openai.azure.com"
-          },
-          "azure_ml" : {
-            "zone_name" : "privatelink.api.azureml.ms"
-          },
-          "azure_ai_cog_svcs" : {
-            "zone_name" : "privatelink.cognitiveservices.azure.com"
-          },
-          "azure_ai_services" : {
-            "zone_name" : "privatelink.services.ai.azure.com"
-          },
-          "azure_api_management" : {
-            "zone_name" : "privatelink.azure-api.net"
+          # "azure_postgres_sql_database" : {
+          #   "zone_name" : "privatelink.postgres.database.azure.com"
+          # },
+          # "azure_app_service" : {
+          #   "zone_name" : "privatelink.azurewebsites.net"
+          # },
+          # "azure_search" : {
+          #   "zone_name" : "privatelink.search.windows.net"
+          # },
+          # "azure_cosmos_db_sql" : {
+          #   "zone_name" : "privatelink.documents.azure.com"
+          # },
+          # "azure_ai_oai" : {
+          #   "zone_name" : "privatelink.openai.azure.com"
+          # },
+          # "azure_ml" : {
+          #   "zone_name" : "privatelink.api.azureml.ms"
+          # },
+          # "azure_ai_cog_svcs" : {
+          #   "zone_name" : "privatelink.cognitiveservices.azure.com"
+          # },
+          # "azure_ai_services" : {
+          #   "zone_name" : "privatelink.services.ai.azure.com"
+          # },
+          # "azure_api_management" : {
+          #   "zone_name" : "privatelink.azure-api.net"
+          # },
+          "custom_jlurisenterprise" : {
+            "zone_name" : "jlurisenterprise.com"
           }
         }
       }
