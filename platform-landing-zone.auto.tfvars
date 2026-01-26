@@ -404,6 +404,12 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_storage_blob" : {
             "zone_name" : "privatelink.blob.core.windows.net"
           },
+          "azure_storage_queue" : {
+            "zone_name" : "privatelink.queue.core.windows.net"
+          },
+          "azure_storage_table" : {
+            "zone_name" : "privatelink.table.core.windows.net"
+          },
           "azure_key_vault" : {
             "zone_name" : "privatelink.vaultcore.azure.net"
           },
