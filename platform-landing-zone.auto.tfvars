@@ -449,6 +449,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_api_management" : {
           #   "zone_name" : "privatelink.azure-api.net"
           # },
+          "azure_acr_registry" : {
+            "zone_name" : "privatelink.azurecr.io"
+          },
           "custom_jlurisenterprise" : {
             "zone_name" : "jlurisenterprise.com"
           }
