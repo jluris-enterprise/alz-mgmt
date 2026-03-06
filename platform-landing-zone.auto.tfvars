@@ -59,6 +59,8 @@ custom_replacements = {
     primary_private_dns_auto_registration_zone_enabled                   = true
     primary_private_dns_resolver_enabled                                 = false
     primary_bastion_enabled                                              = false
+    management_runner_peering_use_remote_gateways                        = false
+    management_runner_peering_allow_gateway_transit                      = false
 
     # Resource names primary connectivity
     primary_virtual_network_name                                 = "vnet-hub-$${starter_location_01}"
