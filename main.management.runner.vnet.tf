@@ -7,3 +7,12 @@ resource "azurerm_virtual_network" "management_runners" {
 
   provider = azurerm.management
 }
+
+resource "azurerm_subnet" "management_runners" {
+  name                 = "snet-platform-runners"
+  resource_group_name  = azurerm_resource_group.management_runners.name
+  virtual_network_name = azurerm_virtual_network.management_runners.name
+  address_prefixes     = [module.config.custom_replacements.management_runner_subnet_address_prefix]
+
+  provider = azurerm.management
+}

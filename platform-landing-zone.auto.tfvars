@@ -82,7 +82,8 @@ custom_replacements = {
 
     # IP Ranges Primary
     # Regional Address Space: 172.0.0.0/16
-    management_runner_virtual_network_address_space = "172.16.0.0/24"
+    management_runner_virtual_network_address_space    = "172.16.0.0/24"
+    management_runner_subnet_address_prefix            = "172.16.0.0/26"
     primary_hub_address_space                          = "172.0.0.0/16"
     primary_hub_virtual_network_address_space          = "172.0.0.0/22"
     primary_firewall_subnet_address_prefix             = "172.0.0.0/26"
