@@ -21,10 +21,7 @@ terraform {
       version = "~>3.0.0"
     }
   }
-  # backend "azurerm" {}
-  backend "local" {
-    path = "runner.tfstate"
-  }
+  backend "azurerm" {}
 }
 
 provider "azurerm" {
