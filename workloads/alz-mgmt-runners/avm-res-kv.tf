@@ -24,7 +24,7 @@ module "key_vault" {
     current_principal_key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
       principal_type             = "ServicePrincipal"
-      principal_id               = data.azure_service_principal.sp_root.id # This is the AZURE_CLIENT_ID from the provider block's authentication
+      principal_id               = data.azuread_service_principal.sp_root.object_id # This is the AZURE_CLIENT_ID from the provider block's authentication
     }
   }
   wait_for_rbac_before_key_operations = {
