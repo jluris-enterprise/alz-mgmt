@@ -138,3 +138,5 @@ variable "public_ip_addresses" {
     resource_group_name = optional(string)
   }))
 }
+
+# test
