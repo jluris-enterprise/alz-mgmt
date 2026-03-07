@@ -16,7 +16,7 @@ virtual_machines = {
     eviction_policy       = "Deallocate"
     max_bid_price         = -1 # Use -1 for max price to allow up to the on-demand price
     os_disk = {
-      name                 = "osdisk-alz-runner-01"
+      name                 = "osdisk-mgmt-uaenorth-01"
       caching              = "ReadWrite"
       storage_account_type = "Standard_LRS"
     }
