@@ -1,6 +1,6 @@
 module "avm-res-network-publicipaddress" {
-  source  = "Azure/avm-res-network-publicipaddress/azurerm"
-  version = "0.2.1"
+  source   = "Azure/avm-res-network-publicipaddress/azurerm"
+  version  = "0.2.1"
   for_each = var.public_ip_addresses
 
   name                = coalesce(try(each.value.name, null), local.resource_names.public_ip_address_name)

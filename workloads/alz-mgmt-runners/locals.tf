@@ -1,5 +1,5 @@
 locals {
-  platform_outputs = data.terraform_remote_state.alz_platform.outputs
+  platform_outputs      = data.terraform_remote_state.alz_platform.outputs
   platform_replacements = try(local.platform_outputs.templated_inputs.custom_replacements, {})
 
   management_runner_resource_group_name    = try(local.platform_outputs.management_runner_resource_group_name, lookup(local.platform_replacements, "management_runner_resource_group_name", format("rg-mgmt-platform-%s", var.location)))
