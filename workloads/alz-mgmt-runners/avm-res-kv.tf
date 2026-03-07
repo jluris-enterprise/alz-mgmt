@@ -12,6 +12,7 @@ module "key_vault" {
 
   private_endpoints = {
     primary = {
+      name                          = local.resource_names.key_vault_private_endpoint_name
       private_dns_zone_resource_ids = [data.azurerm_private_dns_zone.kv_zone.id]
       subnet_resource_id            = data.azurerm_subnet.subnet_management_pe.id
       subresource_name              = ["vault"]

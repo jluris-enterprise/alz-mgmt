@@ -2,10 +2,11 @@ variable "resource_name_templates" {
   type        = map(string)
   description = "A map of resource names to use"
   default = {
-    virtual_machine_name   = "vm-$${workload}-$${environment}-$${location}-$${sequence}"
-    network_interface_name = "nic-$${workload}-$${environment}-$${location}-$${sequence}"
-    key_vault_name         = "kv-$${environment}-$${location_short}-$${sequence}$${uniqueness}"
-    public_ip_address_name = "pip-$${workload}-$${environment}-$${location}-$${sequence}"
+    virtual_machine_name            = "vm-$${workload}-$${environment}-$${location}-$${sequence}"
+    network_interface_name          = "nic-$${workload}-$${environment}-$${location}-$${sequence}"
+    key_vault_name                  = "kv-$${environment}-$${location_short}-$${sequence}$${uniqueness}"
+    public_ip_address_name          = "pip-$${workload}-$${environment}-$${location}-$${sequence}"
+    key_vault_private_endpoint_name = "kv-pe-$${environment}-$${location_short}-$${sequence}$${uniqueness}"
   }
 }
 
@@ -95,6 +96,7 @@ variable "virtual_machines" {
     eviction_policy = optional(string)
     max_bid_price   = optional(number)
     os_disk = object({
+      name                 = string
       caching              = string
       storage_account_type = string
     })
