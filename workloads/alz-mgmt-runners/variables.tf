@@ -118,12 +118,12 @@ variable "key_vault" {
   description = "Key Vault settings"
   type = object({
     sku_name = optional(string, "standard")
-    keys = map(object({
+    keys = optional(map(object({
       name     = string
       key_type = string
       key_size = number
       key_opts = list(string)
-    }))
+    })))
   })
 }
 

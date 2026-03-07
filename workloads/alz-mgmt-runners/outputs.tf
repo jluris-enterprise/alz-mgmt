@@ -15,7 +15,7 @@ output "management_pe_subnet_name" {
 }
 
 output "dns_resource_group_name" {
-  value = data.terraform_remote_state.alz_platform.outputs.dns_resource_group_name
+  value = local.dns_resource_group_name
 }
 
 output "management_runner_subnet_id" {

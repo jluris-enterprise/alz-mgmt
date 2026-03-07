@@ -14,13 +14,20 @@ module "virtual_machine" {
   max_bid_price              = try(each.value.max_bid_price, null)
   encryption_at_host_enabled = var.enable_encryption_at_host # Turned off by default in this demo as requires the Microsoft.Compute/EncryptionAtHost feature to be enabled on the subscription
 
-  generated_secrets_key_vault_secret_config = {
-    key_vault_resource_id = module.key_vault.resource_id
+  # SSH key configuration with Key Vault integration
+  account_credentials = {
+    admin_credentials = {
+      username                           = "azureadmin"
+      generate_admin_password_or_ssh_key = true
+    }
+    key_vault_configuration = {
+      resource_id = module.key_vault.resource_id
+    }
   }
   managed_identities = {
     system_assigned = true
   }
-  os_disk = each.value.os_disk
+  os_disk                = each.value.os_disk
   source_image_reference = each.value.source_image_reference
   network_interfaces = {
     private = {
@@ -29,7 +36,7 @@ module "virtual_machine" {
         private = {
           name                          = "private"
           private_ip_subnet_resource_id = data.azurerm_subnet.subnet_management_runners.id
-          public_ip_address_resource_id = module.avm-res-network-publicipaddress["pip_runner"].id
+          public_ip_address_resource_id = module.avm-res-network-publicipaddress["pip_runner"].resource_id
         }
       }
     }
@@ -38,7 +45,7 @@ module "virtual_machine" {
 
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags
-  depends_on = [module.key_vault, azapi_update_resource.enable_encryption_at_host]
+  depends_on          = [module.key_vault, azapi_update_resource.enable_encryption_at_host]
 }
 
 resource "azapi_update_resource" "enable_encryption_at_host" {

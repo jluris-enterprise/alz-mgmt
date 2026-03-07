@@ -47,16 +47,7 @@ virtual_machines = {
 key_vault = {
   sku_name = "standard"
   keys = {
-    github_actions_runner_key = {
-      name     = "github-actions-runner-key"
-      key_type = "RSA"
-      key_size = 2048
-      key_opts = [
-        "decrypt",
-        "encrypt",
-        "sign",
-      ]
-    }
+
   }
 }
 

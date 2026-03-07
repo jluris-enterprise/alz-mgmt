@@ -6,7 +6,7 @@ module "key_vault" {
   location                      = var.location
   resource_group_name           = local.runner_resource_group.name
   tenant_id                     = data.azurerm_client_config.current.tenant_id
-  public_network_access_enabled = true
+  public_network_access_enabled = false
 
   keys = var.key_vault.keys
 
