@@ -23,7 +23,7 @@ module "key_vault" {
   role_assignments = {
     current_principal_key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
-      principal_type             = "User"
+      principal_type             = "ServicePrincipal"
       principal_id               = data.azure_service_principal.sp_root.id # This is the AZURE_CLIENT_ID from the provider block's authentication
     }
   }
