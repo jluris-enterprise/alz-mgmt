@@ -7,7 +7,7 @@ resource "random_string" "unique_name" {
 
 module "resource_group" {
   source   = "Azure/avm-res-resources-resourcegroup/azurerm"
-  version  = "0.2.1"
+  version  = "0.2.2"
   name     = local.resource_names.resource_group_name
   location = var.location
   tags     = var.tags

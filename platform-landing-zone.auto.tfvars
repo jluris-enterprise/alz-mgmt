@@ -31,18 +31,23 @@ custom_replacements = {
 
     # Resource group names
     management_resource_group_name               = "rg-management-$${starter_location_01}"
+    management_runner_resource_group_name        = "rg-mgmt-platform-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "rg-hub-$${starter_location_01}"
     dns_resource_group_name                      = "rg-hub-dns-$${starter_location_01}"
     ddos_resource_group_name                     = "rg-hub-ddos-$${starter_location_01}"
     asc_export_resource_group_name               = "rg-asc-export-$${starter_location_01}"
 
     # Resource names management
-    log_analytics_workspace_name            = "law-management-$${starter_location_01}"
-    ddos_protection_plan_name               = "ddos-$${starter_location_01}"
-    ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
-    dcr_change_tracking_name                = "dcr-change-tracking"
-    dcr_defender_sql_name                   = "dcr-defender-sql"
-    dcr_vm_insights_name                    = "dcr-vm-insights"
+    log_analytics_workspace_name             = "law-management-$${starter_location_01}"
+    management_runner_virtual_network_name   = "vnet-mgmt-platform-$${starter_location_01}"
+    management_runner_subnet_name            = "snet-mgmt-platform-$${starter_location_01}"
+    management_private_endpoints_subnet_name = "snet-mgmt-platform-pe-$${starter_location_01}"
+    management_runner_nsg_name               = "nsg-mgmt-platform-$${starter_location_01}"
+    ddos_protection_plan_name                = "ddos-$${starter_location_01}"
+    ama_user_assigned_managed_identity_name  = "uami-management-ama-$${starter_location_01}"
+    dcr_change_tracking_name                 = "dcr-change-tracking"
+    dcr_defender_sql_name                    = "dcr-defender-sql"
+    dcr_vm_insights_name                     = "dcr-vm-insights"
 
     # Resource provisioning global connectivity
     ddos_protection_plan_enabled = false
@@ -57,6 +62,8 @@ custom_replacements = {
     primary_private_dns_auto_registration_zone_enabled                   = true
     primary_private_dns_resolver_enabled                                 = false
     primary_bastion_enabled                                              = false
+    management_runner_peering_use_remote_gateways                        = false
+    management_runner_peering_allow_gateway_transit                      = false
 
     # Resource names primary connectivity
     primary_virtual_network_name                                 = "vnet-hub-$${starter_location_01}"
@@ -80,6 +87,9 @@ custom_replacements = {
 
     # IP Ranges Primary
     # Regional Address Space: 172.0.0.0/16
+    management_runner_virtual_network_address_space    = "172.16.0.0/24"
+    management_runner_subnet_address_prefix            = "172.16.0.0/26"
+    management_private_endpoints_subnet_address_prefix = "172.16.0.64/27"
     primary_hub_address_space                          = "172.0.0.0/16"
     primary_hub_virtual_network_address_space          = "172.0.0.0/22"
     primary_firewall_subnet_address_prefix             = "172.0.0.0/26"
