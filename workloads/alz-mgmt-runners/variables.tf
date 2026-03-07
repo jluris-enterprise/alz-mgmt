@@ -1,8 +1,15 @@
+variable "hub_dns_resource_group_name" {
+  description = "The resource group name of the hub dns"
+  type        = string
+}
+
 variable "resource_name_templates" {
   type        = map(string)
   description = "A map of resource names to use"
   default = {
     virtual_machine_name   = "vm-$${workload}-$${environment}-$${location}-$${sequence}"
+    network_interface_name = "nic-$${workload}-$${environment}-$${location}-$${sequence}"
+    key_vault_name         = "kv-$${environment}-$${location_short}-$${sequence}$${uniqueness}"
   }
 }
 
@@ -85,13 +92,12 @@ variable "enable_encryption_at_host" {
 variable "virtual_machines" {
   description = "A map of virtual machines to create"
   type = map(object({
-    name                  = string
-    os_type               = string
-    sku_size              = string
-    location              = string
-    priority              = string
-    eviction_policy       = string
-    max_bid_price        = number
+    os_type         = string
+    sku_size        = string
+    location        = string
+    priority        = string
+    eviction_policy = string
+    max_bid_price   = number
     os_disk = object({
       caching              = string
       storage_account_type = string
@@ -102,7 +108,10 @@ variable "virtual_machines" {
       sku       = string
       version   = string
     })
-    network_interface_ids = list(string)
+    network_interfaces = object({
+      name = string
+
+    })
     managed_identities = object({
       system_assigned = bool
     })

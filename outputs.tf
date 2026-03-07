@@ -117,3 +117,31 @@ output "virtual_wan_full_output" {
 output "templated_inputs" {
   value = module.config
 }
+
+output "management_runner_resource_group_name" {
+  value = module.config.custom_replacements.management_runner_resource_group_name
+}
+
+output "management_runner_virtual_network_name" {
+  value = module.config.custom_replacements.management_runner_virtual_network_name
+}
+
+output "management_runner_subnet_name" {
+  value = module.config.custom_replacements.management_runner_subnet_name
+}
+
+output "management_private_endpoints_subnet_name" {
+  value = module.config.custom_replacements.management_private_endpoints_subnet_name
+}
+
+output "dns_resource_group_name" {
+  value = module.config.custom_replacements.dns_resource_group_name
+}
+
+output "platform_state_storage_account_name" {
+  value = "stoalzmgmuae001wksi"
+}
+
+output "platform_state_resource_group_name" {
+  value = "rg-alz-mgmt-state-uaenorth-001"
+}

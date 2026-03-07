@@ -4,39 +4,25 @@ module "virtual_machine" {
 
   for_each                   = var.virtual_machines
   resource_group_name        = module.resource_group.name
-  os_type                    = "linux"
+  os_type                    = each.value.os_type
   name                       = local.resource_names.virtual_machine_name
-  sku_size                   = var.virtual_machine_sku
+  sku_size                   = each.value.sku_size
   location                   = var.location
-  zone                       = "1"
+  zone                       = each.value.zone
+  priority                   = each.value.priority        # Default is "Regular", set to "Spot" for Azure Spot VM, refer to https://azure.github.io/PSRule.Rules.Azure/en/rules/Azure/PSRule.Rules.Azure.Compute.VirtualMachine/ for more details on supported values and configurations when using Spot VMs
+  eviction_policy            = each.value.eviction_policy # Required when priority is set to "Spot",
+  max_bid_price              = each.value.max_bid_price
   encryption_at_host_enabled = var.enable_encryption_at_host # Turned off by default in this demo as requires the Microsoft.Compute/EncryptionAtHost feature to be enabled on the subscription
 
   generated_secrets_key_vault_secret_config = {
     key_vault_resource_id = module.key_vault.resource_id
   }
-
   managed_identities = {
     system_assigned = true
   }
-
-  source_image_reference = {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
-    version   = "latest"
-  }
-
-  network_interfaces = {
-    private = {
-      name = local.resource_names.network_interface_name
-      ip_configurations = {
-        private = {
-          name                          = "private"
-          private_ip_subnet_resource_id = module.virtual_network.subnets["virtual_machines"].resource_id
-        }
-      }
-    }
-  }
+  os_disk = each.value.os_disk
+  source_image_reference = each.value.source_image_reference
+  network_interfaces = each.value.network_interfaces
 
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags

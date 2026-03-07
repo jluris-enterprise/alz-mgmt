@@ -1,24 +1,62 @@
+data "terraform_remote_state" "alz_platform" {
+  backend = "azurerm"
+
+  config = {
+    resource_group_name  = "rg-alz-mgmt-state-uaenorth-001"
+    storage_account_name = "stoalzmgmuae001wksi"
+    container_name       = "mgmt-tfstate"
+    key                  = "terraform.tfstate"
+    subscription_id      = "42dedbdb-3ad0-438c-a796-66bb1c08686a"
+    tenant_id            = "7d1a04ec-981a-405a-951b-dd2733120e4c"
+  }
+}
+
+# Optional: keep data lookups to validate remote-state values exist in Azure.
 data "azurerm_resource_group" "runners" {
-  name     = "rg-platform-runners-uaenorth"
+  name     = data.terraform_remote_state.alz_platform.outputs.management_runner_resource_group_name
   provider = azurerm.management
 }
 
 data "azurerm_virtual_network" "vnet_management_runners" {
-  name                = "vnet-platform-mgmt-uaenorth"
+  name                = data.terraform_remote_state.alz_platform.outputs.management_runner_virtual_network_name
   resource_group_name = data.azurerm_resource_group.runners.name
   provider            = azurerm.management
 }
 
 data "azurerm_subnet" "subnet_management_runners" {
-  name                 = "snet-platform-runners"
+  name                 = data.terraform_remote_state.alz_platform.outputs.management_runner_subnet_name
   virtual_network_name = data.azurerm_virtual_network.vnet_management_runners.name
   resource_group_name  = data.azurerm_resource_group.runners.name
   provider             = azurerm.management
 }
 
-data "azurerm_subnet" "subnet_management_private_endpoints" {
-  name                 = "snet-platform-runners-pe-uaenorth"
+data "azurerm_subnet" "subnet_management_pe" {
+  name                 = data.terraform_remote_state.alz_platform.outputs.management_private_endpoints_subnet_name
   virtual_network_name = data.azurerm_virtual_network.vnet_management_runners.name
   resource_group_name  = data.azurerm_resource_group.runners.name
   provider             = azurerm.management
+}
+
+data "azurerm_private_dns_zone" "kv_zone" {
+  name                = "privatelink.vaultcore.azure.net"
+  resource_group_name = data.terraform_remote_state.alz_platform.outputs.dns_resource_group_name
+  provider            = azurerm.connectivity
+}
+
+data "azurerm_private_dns_zone" "sta_zone" {
+  name                = "privatelink.blob.core.windows.net"
+  resource_group_name = data.terraform_remote_state.alz_platform.outputs.dns_resource_group_name
+  provider            = azurerm.connectivity
+}
+
+data "azurerm_storage_account" "management_tfstate" {
+  name                = data.terraform_remote_state.alz_platform.outputs.platform_state_storage_account_name
+  resource_group_name = data.terraform_remote_state.alz_platform.outputs.platform_state_resource_group_name
+  provider            = azurerm.management
+}
+
+data "azurerm_log_analytics_workspace" "management" {
+  name                = data.terraform_remote_state.alz_platform.outputs.log_analytics_workspace_name
+  resource_group_name = data.terraform_remote_state.alz_platform.outputs.management_resource_group_name
+  provider            = azurerm.management
 }
