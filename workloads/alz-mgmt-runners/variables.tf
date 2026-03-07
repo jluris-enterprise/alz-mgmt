@@ -6,7 +6,7 @@ variable "resource_name_templates" {
     network_interface_name          = "nic-$${environment}-$${location_short}-$${sequence}"
     key_vault_name                  = "kv-$${environment}-$${location_short}-$${sequence}"
     public_ip_address_name          = "pip-$${environment}-$${location_short}-$${sequence}"
-    key_vault_private_endpoint_name = "kv-pe-$${environment}-$${location_short}-$${sequence}"
+    key_vault_private_endpoint_name = "pep-kv-$${environment}-$${location_short}-$${sequence}"
   }
 }
 
