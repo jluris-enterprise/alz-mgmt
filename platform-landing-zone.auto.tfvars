@@ -40,6 +40,7 @@ custom_replacements = {
     # Resource names management
     log_analytics_workspace_name            = "law-management-$${starter_location_01}"
     management_runner_virtual_network_name  = "vnet-platform-mgmt-$${starter_location_01}"
+    management_runner_subnet_name           = "snet-platform-mgmt-$${starter_location_01}"
     management_runner_nsg_name              = "nsg-platform-mgmt-$${starter_location_01}"
     ddos_protection_plan_name               = "ddos-$${starter_location_01}"
     ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
