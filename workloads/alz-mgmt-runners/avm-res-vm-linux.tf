@@ -38,7 +38,7 @@ module "virtual_machine" {
         private = {
           name                          = "private"
           private_ip_subnet_resource_id = data.azurerm_subnet.subnet_management_runners.id
-          public_ip_address_resource_id = module.avm-res-network-publicipaddress["pip_runner"].resource_id
+          public_ip_address_resource_id = var.enable_public_ipaddress ? module.avm-res-network-publicipaddress["pip_runner"].resource_id : null
         }
       }
     }

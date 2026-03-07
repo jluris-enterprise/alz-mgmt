@@ -47,11 +47,10 @@ virtual_machines = {
 
 key_vault = {
   sku_name = "standard"
-  keys = {
-
-  }
+  keys     = {}
 }
 
+enable_public_ipaddress = true
 public_ip_addresses = {
   pip_runner = {
     allocation_method = "Static"

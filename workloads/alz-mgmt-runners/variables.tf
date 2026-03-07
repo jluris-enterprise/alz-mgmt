@@ -89,7 +89,7 @@ variable "enable_encryption_at_host" {
 variable "virtual_machines" {
   description = "A map of virtual machines to create"
   type = map(object({
-    computer_name         = string
+    computer_name         = optional(string)
     patch_assessment_mode = string
     os_type               = string
     sku_size              = string
@@ -141,4 +141,9 @@ variable "public_ip_addresses" {
     location            = optional(string)
     resource_group_name = optional(string)
   }))
+}
+
+variable "enable_public_ipaddress" {
+  type    = bool
+  default = false
 }
