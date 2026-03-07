@@ -20,12 +20,13 @@ module "key_vault" {
     }
   }
 
-	role_assignments = {
-		current_principal_key_vault_secrets_officer = {
-			role_definition_name = "Key Vault Secrets Officer"
-			principal_id         = data.azurerm_client_config.current.object_id
-		}
-	}
+  role_assignments = {
+    current_principal_key_vault_secrets_officer = {
+      role_definition_id_or_name = "Key Vault Secrets Officer"
+      principal_type             = "ServicePrincipal"
+      principal_id               = data.azurerm_client_config.current.object_id # This is the AZURE_CLIENT_ID from the provider block's authentication
+    }
+  }
   wait_for_rbac_before_key_operations = {
     create = "60s"
   }
