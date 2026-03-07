@@ -17,6 +17,15 @@ resource "azurerm_subnet" "management_runners" {
   provider = azurerm.management
 }
 
+resource "azurerm_subnet" "management_private_endpoints" {
+  name                 = module.config.custom_replacements.management_private_endpoints_subnet_name
+  resource_group_name  = azurerm_resource_group.management_runners.name
+  virtual_network_name = azurerm_virtual_network.management_runners.name
+  address_prefixes     = [module.config.custom_replacements.management_private_endpoints_subnet_address_prefix]
+
+  provider = azurerm.management
+}
+
 resource "azurerm_network_security_group" "management_runners" {
   name                = module.config.custom_replacements.management_runner_nsg_name
   location            = module.config.custom_replacements.starter_location_01

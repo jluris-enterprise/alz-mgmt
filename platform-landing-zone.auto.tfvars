@@ -41,6 +41,7 @@ custom_replacements = {
     log_analytics_workspace_name            = "law-management-$${starter_location_01}"
     management_runner_virtual_network_name  = "vnet-platform-mgmt-$${starter_location_01}"
     management_runner_subnet_name           = "snet-platform-mgmt-$${starter_location_01}"
+    management_private_endpoints_subnet_name = "snet-platform-mgmt-private-endpoints-$${starter_location_01}"
     management_runner_nsg_name              = "nsg-platform-mgmt-$${starter_location_01}"
     ddos_protection_plan_name               = "ddos-$${starter_location_01}"
     ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
@@ -88,6 +89,7 @@ custom_replacements = {
     # Regional Address Space: 172.0.0.0/16
     management_runner_virtual_network_address_space    = "172.16.0.0/24"
     management_runner_subnet_address_prefix            = "172.16.0.0/26"
+    management_private_endpoints_subnet_address_prefix = "172.16.0.64/27"
     primary_hub_address_space                          = "172.0.0.0/16"
     primary_hub_virtual_network_address_space          = "172.0.0.0/22"
     primary_firewall_subnet_address_prefix             = "172.0.0.0/26"
