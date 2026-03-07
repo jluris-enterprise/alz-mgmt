@@ -17,6 +17,70 @@ resource "azurerm_subnet" "management_runners" {
   provider = azurerm.management
 }
 
+resource "azurerm_network_security_group" "management_runners" {
+  name                = module.config.custom_replacements.management_runner_nsg_name
+  location            = module.config.custom_replacements.starter_location_01
+  resource_group_name = azurerm_resource_group.management_runners.name
+  tags                = module.config.tags
+
+  security_rule {
+    name                       = "deny-inbound-internet"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "Internet"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "allow-outbound-dns-azure"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "53"
+    source_address_prefix      = "*"
+    destination_address_prefix = "AzurePlatformDNS"
+  }
+
+  security_rule {
+    name                       = "allow-outbound-https-internet"
+    priority                   = 110
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "Internet"
+  }
+
+  security_rule {
+    name                       = "deny-outbound-internet"
+    priority                   = 400
+    direction                  = "Outbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "Internet"
+  }
+
+  provider = azurerm.management
+}
+
+resource "azurerm_subnet_network_security_group_association" "management_runners" {
+  subnet_id                 = azurerm_subnet.management_runners.id
+  network_security_group_id = azurerm_network_security_group.management_runners.id
+
+  provider = azurerm.management
+}
+
 data "azurerm_virtual_network" "connectivity_hub_primary" {
   name                = module.config.custom_replacements.primary_virtual_network_name
   resource_group_name = module.config.custom_replacements.connectivity_hub_primary_resource_group_name
