@@ -16,27 +16,27 @@ data "terraform_remote_state" "alz_platform" {
 
 # Optional: keep data lookups to validate remote-state values exist in Azure.
 data "azurerm_resource_group" "runners" {
-  name     = data.terraform_remote_state.alz_platform.outputs.management_runner_resource_group_name
+  name     = local.runner_resource_group_name
   provider = azurerm.management
 }
 
 data "azurerm_virtual_network" "vnet_management_runners" {
   name                = data.terraform_remote_state.alz_platform.outputs.management_runner_virtual_network_name
-  resource_group_name = data.azurerm_resource_group.runners.name
+  resource_group_name = local.runner_resource_group_name
   provider            = azurerm.management
 }
 
 data "azurerm_subnet" "subnet_management_runners" {
   name                 = data.terraform_remote_state.alz_platform.outputs.management_runner_subnet_name
   virtual_network_name = data.azurerm_virtual_network.vnet_management_runners.name
-  resource_group_name  = data.azurerm_resource_group.runners.name
+  resource_group_name  = local.runner_resource_group_name
   provider             = azurerm.management
 }
 
 data "azurerm_subnet" "subnet_management_pe" {
   name                 = data.terraform_remote_state.alz_platform.outputs.management_private_endpoints_subnet_name
   virtual_network_name = data.azurerm_virtual_network.vnet_management_runners.name
-  resource_group_name  = data.azurerm_resource_group.runners.name
+  resource_group_name  = local.runner_resource_group_name
   provider             = azurerm.management
 }
 
@@ -62,4 +62,13 @@ data "azurerm_log_analytics_workspace" "management" {
   name                = data.terraform_remote_state.alz_platform.outputs.log_analytics_workspace_name
   resource_group_name = data.terraform_remote_state.alz_platform.outputs.management_resource_group_name
   provider            = azurerm.management
+}
+
+data "http" "ip" {
+  url = "https://api.ipify.org/"
+  retry {
+    attempts     = 5
+    max_delay_ms = 1000
+    min_delay_ms = 500
+  }
 }

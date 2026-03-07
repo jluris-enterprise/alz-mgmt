@@ -1,5 +1,5 @@
 output "management_runner_resource_group_name" {
-  value = data.azurerm_resource_group.runners.name
+  value = local.runner_resource_group.name
 }
 
 output "management_runner_virtual_network_name" {

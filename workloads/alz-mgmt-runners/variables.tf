@@ -95,10 +95,10 @@ variable "virtual_machines" {
   type = map(object({
     os_type         = string
     sku_size        = string
-    location        = string
-    priority        = string
-    eviction_policy = string
-    max_bid_price   = number
+    zone            = optional(string)
+    priority        = optional(string, "Regular")
+    eviction_policy = optional(string)
+    max_bid_price   = optional(number)
     os_disk = object({
       caching              = string
       storage_account_type = string
@@ -109,31 +109,30 @@ variable "virtual_machines" {
       sku       = string
       version   = string
     })
-    network_interfaces = object({
-      name = string
-
-    })
-    managed_identities = object({
-      system_assigned = bool
-    })
   }))
 }
 
 variable "key_vault" {
-  sku_name = "standard"
-  keys = object({
-    name     = string
-    key_type = string
-    key_size = number
-    key_opts = list(string)
+  description = "Key Vault settings"
+  type = object({
+    sku_name = optional(string, "standard")
+    keys = map(object({
+      name     = string
+      key_type = string
+      key_size = number
+      key_opts = list(string)
+    }))
   })
 }
 
-variable "public_ip_address" {
+variable "public_ip_addresses" {
+  description = "Public IP definitions"
   type = map(object({
-    name              = string
+    name              = optional(string)
     sku               = string
-    ip_version        = string
+    ip_version        = optional(string, "IPv4")
     allocation_method = string
+    location          = optional(string)
+    resource_group_name = optional(string)
   }))
 }

@@ -3,15 +3,15 @@ module "virtual_machine" {
   version = "0.20.0"
 
   for_each                   = var.virtual_machines
-  resource_group_name        = module.resource_group.name
+  resource_group_name        = local.runner_resource_group.name
   os_type                    = each.value.os_type
   name                       = local.resource_names.virtual_machine_name
   sku_size                   = each.value.sku_size
   location                   = var.location
-  zone                       = each.value.zone
-  priority                   = each.value.priority        # Default is "Regular", set to "Spot" for Azure Spot VM, refer to https://azure.github.io/PSRule.Rules.Azure/en/rules/Azure/PSRule.Rules.Azure.Compute.VirtualMachine/ for more details on supported values and configurations when using Spot VMs
-  eviction_policy            = each.value.eviction_policy # Required when priority is set to "Spot",
-  max_bid_price              = each.value.max_bid_price
+  zone                       = try(each.value.zone, null)
+  priority                   = try(each.value.priority, "Regular")
+  eviction_policy            = try(each.value.eviction_policy, null)
+  max_bid_price              = try(each.value.max_bid_price, null)
   encryption_at_host_enabled = var.enable_encryption_at_host # Turned off by default in this demo as requires the Microsoft.Compute/EncryptionAtHost feature to be enabled on the subscription
 
   generated_secrets_key_vault_secret_config = {
@@ -22,7 +22,18 @@ module "virtual_machine" {
   }
   os_disk = each.value.os_disk
   source_image_reference = each.value.source_image_reference
-  network_interfaces = each.value.network_interfaces
+  network_interfaces = {
+    private = {
+      name = local.resource_names.network_interface_name
+      ip_configurations = {
+        private = {
+          name                          = "private"
+          private_ip_subnet_resource_id = data.azurerm_subnet.subnet_management_runners.id
+          public_ip_address_resource_id = module.avm-res-network-publicipaddress["pip_runner"].id
+        }
+      }
+    }
+  }
 
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags

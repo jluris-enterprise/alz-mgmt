@@ -25,31 +25,14 @@ virtual_machines = {
       sku       = "22_04-lts-gen2"
       version   = "latest"
     }
-    network_interfaces = {
-      private = {
-        name = local.resource_names.network_interface_name
-        ip_configurations = {
-          private = {
-            name                          = "private"
-            private_ip_subnet_resource_id = data.azurerm_subnet.subnet_management_runners.id
-            public_ip_address_resource_id = "pip-vm-runner"
-          }
-        }
-      }
-    }
-    managed_identities = {
-      system_assigned = true
-    }
   }
 }
 
 key_vault = {
-  resource_group_name = module.resource_group.name
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  sku_name            = "standard"
+  sku_name = "standard"
   keys = {
     github_actions_runner_key = {
-      name    = "github-actions-runner-key"
+      name     = "github-actions-runner-key"
       key_type = "RSA"
       key_size = 2048
       key_opts = [
@@ -63,9 +46,7 @@ key_vault = {
 
 public_ip_addresses = {
   pip_runner = {
-    location            = var.location
-    allocation_method   = "Static"
-    sku                 = "Standard"
-    resource_group_name = module.resource_group.name
+    allocation_method = "Static"
+    sku               = "Standard"
   }
 }

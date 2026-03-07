@@ -1,4 +1,15 @@
 locals {
+  runner_resource_group_name = data.terraform_remote_state.alz_platform.outputs.management_runner_resource_group_name
+}
+
+locals {
+  runner_resource_group = {
+    name = data.azurerm_resource_group.runners.name
+    id   = data.azurerm_resource_group.runners.id
+  }
+}
+
+locals {
   name_replacements = {
     workload       = var.resource_name_workload
     environment    = var.resource_name_environment
@@ -14,8 +25,11 @@ locals {
   diagnostic_settings = {
     sendToLogAnalytics = {
       name                  = "custom"
-      workspace_resource_id = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
+      workspace_resource_id = data.azurerm_log_analytics_workspace.management.id
     }
   }
 }
 
+locals {
+  my_ip_address_split = split(".", data.http.ip.response_body)
+}
