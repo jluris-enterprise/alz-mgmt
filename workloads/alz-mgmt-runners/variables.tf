@@ -1,8 +1,3 @@
-variable "hub_dns_resource_group_name" {
-  description = "The resource group name of the hub dns"
-  type        = string
-}
-
 variable "resource_name_templates" {
   type        = map(string)
   description = "A map of resource names to use"
@@ -109,6 +104,13 @@ variable "virtual_machines" {
       sku       = string
       version   = string
     })
+    extensions = map(object({
+      name                       = string
+      publisher                  = string
+      type                       = string
+      type_handler_version       = string
+      auto_upgrade_minor_version = bool
+    }))
   }))
 }
 
@@ -128,11 +130,11 @@ variable "key_vault" {
 variable "public_ip_addresses" {
   description = "Public IP definitions"
   type = map(object({
-    name              = optional(string)
-    sku               = string
-    ip_version        = optional(string, "IPv4")
-    allocation_method = string
-    location          = optional(string)
+    name                = optional(string)
+    sku                 = string
+    ip_version          = optional(string, "IPv4")
+    allocation_method   = string
+    location            = optional(string)
     resource_group_name = optional(string)
   }))
 }

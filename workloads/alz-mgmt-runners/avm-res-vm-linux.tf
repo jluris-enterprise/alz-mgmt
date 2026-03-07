@@ -34,6 +34,7 @@ module "virtual_machine" {
       }
     }
   }
+  extensions = each.value.extensions
 
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags

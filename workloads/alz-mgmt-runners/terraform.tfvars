@@ -1,5 +1,3 @@
-hub_dns_resource_group_name = "rg-hub-dns-uaenorth"
-
 location = "uaenorth"
 
 tags = {
@@ -9,12 +7,14 @@ tags = {
 
 virtual_machines = {
   runner1 = {
-    os_type         = "linux"
-    sku_size        = "Standard_D2s_v5"
-    zone            = "1"
-    priority        = "Spot"
-    eviction_policy = "Deallocate"
-    max_bid_price   = -1 # Use -1 for max price to allow up to the on-demand price
+    computer_name         = "alz-runner-01"
+    patch_assessment_mode = "AutomaticByPlatform"
+    os_type               = "linux"
+    sku_size              = "Standard_D2s_v5"
+    zone                  = "1"
+    priority              = "Spot"
+    eviction_policy       = "Deallocate"
+    max_bid_price         = -1 # Use -1 for max price to allow up to the on-demand price
     os_disk = {
       caching              = "ReadWrite"
       storage_account_type = "Standard_LRS"
@@ -24,6 +24,22 @@ virtual_machines = {
       offer     = "0001-com-ubuntu-server-jammy"
       sku       = "22_04-lts-gen2"
       version   = "latest"
+    }
+    extensions = {
+      AzureMonitorLinuxAgent = {
+        name                       = "AzureMonitorLinuxAgent"
+        publisher                  = "Microsoft.Azure.Monitor"
+        type                       = "AzureMonitorLinuxAgent"
+        type_handler_version       = "1.39"
+        auto_upgrade_minor_version = true
+      }
+      AADSSHLoginForLinux = {
+        name                       = "AADSSHLoginForLinux"
+        publisher                  = "Microsoft.Azure.ActiveDirectory"
+        type                       = "AADSSHLoginForLinux"
+        type_handler_version       = "1.0"
+        auto_upgrade_minor_version = false
+      }
     }
   }
 }
