@@ -38,16 +38,16 @@ custom_replacements = {
     asc_export_resource_group_name               = "rg-asc-export-$${starter_location_01}"
 
     # Resource names management
-    log_analytics_workspace_name            = "law-management-$${starter_location_01}"
-    management_runner_virtual_network_name  = "vnet-mgmt-platform-$${starter_location_01}"
-    management_runner_subnet_name           = "snet-mgmt-platform-$${starter_location_01}"
+    log_analytics_workspace_name             = "law-management-$${starter_location_01}"
+    management_runner_virtual_network_name   = "vnet-mgmt-platform-$${starter_location_01}"
+    management_runner_subnet_name            = "snet-mgmt-platform-$${starter_location_01}"
     management_private_endpoints_subnet_name = "snet-mgmt-platform-pe-$${starter_location_01}"
-    management_runner_nsg_name              = "nsg-mgmt-platform-$${starter_location_01}"
-    ddos_protection_plan_name               = "ddos-$${starter_location_01}"
-    ama_user_assigned_managed_identity_name = "uami-management-ama-$${starter_location_01}"
-    dcr_change_tracking_name                = "dcr-change-tracking"
-    dcr_defender_sql_name                   = "dcr-defender-sql"
-    dcr_vm_insights_name                    = "dcr-vm-insights"
+    management_runner_nsg_name               = "nsg-mgmt-platform-$${starter_location_01}"
+    ddos_protection_plan_name                = "ddos-$${starter_location_01}"
+    ama_user_assigned_managed_identity_name  = "uami-management-ama-$${starter_location_01}"
+    dcr_change_tracking_name                 = "dcr-change-tracking"
+    dcr_defender_sql_name                    = "dcr-defender-sql"
+    dcr_vm_insights_name                     = "dcr-vm-insights"
 
     # Resource provisioning global connectivity
     ddos_protection_plan_enabled = false
