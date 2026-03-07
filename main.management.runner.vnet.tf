@@ -44,7 +44,7 @@ resource "azurerm_network_security_group" "management_runners" {
     source_port_range          = "*"
     destination_port_range     = "53"
     source_address_prefix      = "*"
-    destination_address_prefix = "168.63.129.16"
+    destination_address_prefix = "168.63.129.16" # This is a well-known IP address in Azure used for platform DNS resolution
   }
 
   security_rule {
