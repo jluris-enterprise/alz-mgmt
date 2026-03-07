@@ -1,15 +1,19 @@
 ---
-name: Continuous Integration Template - ACR-K8s
+name: Continuous Integration Template - ALZ Management Runners
 on:
   workflow_call:
     inputs:
       root_module_folder_relative_path:
-        description: 'Root Module Folder Relative Path'
-        default: 'workloads/acr-k8s/dev'
+        description: Root Module Folder Relative Path
+        default: workloads/alz-mgmt-runners
         type: string
       terraform_cli_version:
-        description: 'Terraform CLI Version'
-        default: 'latest'
+        description: Terraform CLI Version
+        default: latest
+        type: string
+      backend_state_key:
+        description: Backend state key for runner stack
+        default: alz-mgmt-runners.tfstate
         type: string
 
 jobs:
@@ -19,7 +23,7 @@ jobs:
       - self-hosted
       - Linux
       - X64
-    environment: awl-mgmt-plan
+    environment: alz-runners-plan
     steps:
       - name: Checkout Code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -33,19 +37,19 @@ jobs:
       - name: Terraform Format Check
         run: |
           terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          -chdir="${{ inputs.root_module_folder_relative_path }}" \
           fmt -check
 
       - name: Terraform Init
         run: |
-          terraform -chdir="${{inputs.root_module_folder_relative_path}}" \
+          terraform -chdir="${{ inputs.root_module_folder_relative_path }}" \
           init \
           -backend=false
 
       - name: Terraform Validate
         run: |
           terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          -chdir="${{ inputs.root_module_folder_relative_path }}" \
           validate
 
   plan:
@@ -55,13 +59,9 @@ jobs:
       - self-hosted
       - Linux
       - X64
-    concurrency: mgmt-tfstate
-    environment: awl-mgmt-plan
+    concurrency: alz-runners-tfstate
+    environment: alz-runners-plan
     permissions:
-      # NOTE: When modifying the token subject claims and adding `environment`.
-      # If the `id-token` permission is granted at the workflow level
-      # and the workflow has at least one job that does not specify an environment
-      # then the action will fail with an internal error.
       id-token: write
       contents: read
       pull-requests: write
@@ -84,20 +84,21 @@ jobs:
       - name: Terraform Init
         run: |
           terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          -chdir="${{ inputs.root_module_folder_relative_path }}" \
           init \
-          -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
-          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
-          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
-          -backend-config="key=development.tfstate"
+          -backend-config="resource_group_name=${{ vars.BACKEND_AZURE_RESOURCE_GROUP_NAME }}" \
+          -backend-config="storage_account_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME }}" \
+          -backend-config="container_name=${{ vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME }}" \
+          -backend-config="key=${{ inputs.backend_state_key }}"
 
       - name: Terraform Plan
         id: plan
         run: |
           terraform \
-          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          -chdir="${{ inputs.root_module_folder_relative_path }}" \
           plan \
-          -input=false
+          -input=false \
+          -var-file="terraform.tfvars"
 
       - name: Update Pull Request
         if: (success() || failure()) && github.event_name == 'pull_request'
