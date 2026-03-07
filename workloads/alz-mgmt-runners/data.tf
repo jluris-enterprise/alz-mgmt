@@ -65,6 +65,11 @@ data "azurerm_log_analytics_workspace" "management" {
   provider            = azurerm.management
 }
 
+data "azure_service_principal" "sp_root" {
+  display_name = "sp-alz-root"
+}
+
+
 data "http" "ip" {
   url = "https://api.ipify.org/"
   retry {

@@ -2,7 +2,8 @@ variable "resource_name_templates" {
   type        = map(string)
   description = "A map of resource names to use"
   default = {
-    virtual_machine_name            = "vm-$${environment}-$${location_short}-$${sequence}"
+    virtual_machine_name          = "vm-$${environment}-$${location_short}-$${sequence}"
+    virtual_machine_computer_name = "vm$${environment}$${sequence}"
     network_interface_name          = "nic-$${environment}-$${location_short}-$${sequence}"
     key_vault_name                  = "kv-$${environment}-$${location_short}-$${sequence}"
     public_ip_address_name          = "pip-$${environment}-$${location_short}-$${sequence}"
