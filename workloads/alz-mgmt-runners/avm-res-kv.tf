@@ -20,6 +20,12 @@ module "key_vault" {
     }
   }
 
+	role_assignments = {
+		current_principal_key_vault_secrets_officer = {
+			role_definition_name = "Key Vault Secrets Officer"
+			principal_id         = data.azurerm_client_config.current.object_id
+		}
+	}
   wait_for_rbac_before_key_operations = {
     create = "60s"
   }
