@@ -1,3 +1,6 @@
+data "azurerm_client_config" "current" {}
+# data "azuread_client_config" "current" {}
+
 data "terraform_remote_state" "alz_platform" {
   backend = "azurerm"
 

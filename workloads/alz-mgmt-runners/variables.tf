@@ -10,6 +10,7 @@ variable "resource_name_templates" {
     virtual_machine_name   = "vm-$${workload}-$${environment}-$${location}-$${sequence}"
     network_interface_name = "nic-$${workload}-$${environment}-$${location}-$${sequence}"
     key_vault_name         = "kv-$${environment}-$${location_short}-$${sequence}$${uniqueness}"
+    public_ip_address_name = "pip-$${workload}-$${environment}-$${location}-$${sequence}"
   }
 }
 
@@ -118,3 +119,21 @@ variable "virtual_machines" {
   }))
 }
 
+variable "key_vault" {
+  sku_name = "standard"
+  keys = object({
+    name     = string
+    key_type = string
+    key_size = number
+    key_opts = list(string)
+  })
+}
+
+variable "public_ip_address" {
+  type = map(object({
+    name              = string
+    sku               = string
+    ip_version        = string
+    allocation_method = string
+  }))
+}

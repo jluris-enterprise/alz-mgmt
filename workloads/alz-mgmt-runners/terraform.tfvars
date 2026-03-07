@@ -10,7 +10,7 @@ tags = {
 virtual_machines = {
   runner1 = {
     os_type         = "linux"
-    sku_size        = "Standard_B2s"
+    sku_size        = "Standard_D2s_v5"
     zone            = "1"
     priority        = "Spot"
     eviction_policy = "Deallocate"
@@ -32,6 +32,7 @@ virtual_machines = {
           private = {
             name                          = "private"
             private_ip_subnet_resource_id = data.azurerm_subnet.subnet_management_runners.id
+            public_ip_address_resource_id = "pip-vm-runner"
           }
         }
       }
@@ -42,4 +43,29 @@ virtual_machines = {
   }
 }
 
-# key_vault = {}
+key_vault = {
+  resource_group_name = module.resource_group.name
+  tenant_id           = data.azurerm_client_config.current.tenant_id
+  sku_name            = "standard"
+  keys = {
+    github_actions_runner_key = {
+      name    = "github-actions-runner-key"
+      key_type = "RSA"
+      key_size = 2048
+      key_opts = [
+        "decrypt",
+        "encrypt",
+        "sign",
+      ]
+    }
+  }
+}
+
+public_ip_addresses = {
+  pip_runner = {
+    location            = var.location
+    allocation_method   = "Static"
+    sku                 = "Standard"
+    resource_group_name = module.resource_group.name
+  }
+}

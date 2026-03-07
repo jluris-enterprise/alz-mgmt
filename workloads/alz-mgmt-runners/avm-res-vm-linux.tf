@@ -26,7 +26,6 @@ module "virtual_machine" {
 
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags
-
   depends_on = [module.key_vault, azapi_update_resource.enable_encryption_at_host]
 }
 
