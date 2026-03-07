@@ -89,12 +89,14 @@ variable "enable_encryption_at_host" {
 variable "virtual_machines" {
   description = "A map of virtual machines to create"
   type = map(object({
-    os_type         = string
-    sku_size        = string
-    zone            = optional(string)
-    priority        = optional(string, "Regular")
-    eviction_policy = optional(string)
-    max_bid_price   = optional(number)
+    computer_name         = string
+    patch_assessment_mode = string
+    os_type               = string
+    sku_size              = string
+    zone                  = optional(string)
+    priority              = optional(string, "Regular")
+    eviction_policy       = optional(string)
+    max_bid_price         = optional(number)
     os_disk = object({
       name                 = string
       caching              = string

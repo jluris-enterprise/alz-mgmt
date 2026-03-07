@@ -7,7 +7,7 @@ tags = {
 
 virtual_machines = {
   runner1 = {
-    computer_name         = "alz-runner-01"
+    # computer_name         = "vm-runner-01"
     patch_assessment_mode = "AutomaticByPlatform"
     os_type               = "linux"
     sku_size              = "Standard_D2s_v5"

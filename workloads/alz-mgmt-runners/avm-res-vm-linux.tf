@@ -4,6 +4,8 @@ module "virtual_machine" {
 
   for_each                   = var.virtual_machines
   resource_group_name        = local.runner_resource_group.name
+  computer_name              = each.value.computer_name != null ? each.value.computer_name : local.resource_names.virtual_machine_computer_name
+  patch_assessment_mode      = each.value.patch_assessment_mode
   os_type                    = each.value.os_type
   name                       = local.resource_names.virtual_machine_name
   sku_size                   = each.value.sku_size
@@ -17,7 +19,7 @@ module "virtual_machine" {
   # SSH key configuration with Key Vault integration
   account_credentials = {
     admin_credentials = {
-      username                           = "azureadmin"
+      username                           = "azlinuxadmin"
       generate_admin_password_or_ssh_key = true
     }
     key_vault_configuration = {
