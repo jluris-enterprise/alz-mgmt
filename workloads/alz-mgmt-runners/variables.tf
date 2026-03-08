@@ -123,6 +123,7 @@ variable "key_vault" {
   description = "Key Vault settings"
   type = object({
     sku_name = optional(string, "standard")
+    public_network_access_enabled = optional(bool, false) # Access via private endpoint only by default
     keys = optional(map(object({
       name     = string
       key_type = string
@@ -148,3 +149,4 @@ variable "enable_public_ipaddress" {
   type    = bool
   default = false
 }
+

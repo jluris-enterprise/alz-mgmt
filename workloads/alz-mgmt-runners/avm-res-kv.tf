@@ -6,7 +6,7 @@ module "key_vault" {
   location                      = var.location
   resource_group_name           = local.runner_resource_group.name
   tenant_id                     = data.azurerm_client_config.current.tenant_id
-  public_network_access_enabled = false # Access via private endpoint only
+  public_network_access_enabled = each.value.public_network_access_enabled # Access via private endpoint only
 
   keys = var.key_vault.keys
 
@@ -24,7 +24,7 @@ module "key_vault" {
     current_principal_key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
       principal_type             = "ServicePrincipal"
-      principal_id               = data.azuread_service_principal.sp_root.object_id # This is the AZURE_CLIENT_ID from the provider block's authentication
+      principal_id               = data.azurerm_client_config.current.client_id # This is the AZURE_CLIENT_ID from the provider block's authentication
     }
   }
   wait_for_rbac_before_key_operations = {

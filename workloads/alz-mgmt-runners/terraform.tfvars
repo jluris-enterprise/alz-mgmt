@@ -48,6 +48,7 @@ virtual_machines = {
 key_vault = {
   sku_name = "standard"
   keys     = {}
+  public_network_access_enabled = true
 }
 
 enable_public_ipaddress = true
