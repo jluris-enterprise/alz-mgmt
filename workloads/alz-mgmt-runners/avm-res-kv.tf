@@ -6,7 +6,7 @@ module "key_vault" {
   location                      = var.location
   resource_group_name           = local.runner_resource_group.name
   tenant_id                     = data.azurerm_client_config.current.tenant_id
-  public_network_access_enabled = each.value.public_network_access_enabled # Access via private endpoint only
+  public_network_access_enabled = var.key_vault.public_network_access_enabled # Access via private endpoint only
 
   keys = var.key_vault.keys
 
@@ -23,8 +23,8 @@ module "key_vault" {
   role_assignments = {
     current_principal_key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
-      principal_type             = "ServicePrincipal"
-      principal_id               = data.azurerm_client_config.current.client_id # This is the AZURE_CLIENT_ID from the provider block's authentication
+      principal_type             = "User"
+      principal_id               = data.azurerm_client_config.current.object_id
     }
   }
   wait_for_rbac_before_key_operations = {
@@ -39,3 +39,7 @@ module "key_vault" {
   diagnostic_settings = local.diagnostic_settings
   tags                = var.tags
 }
+
+# resource "azurerm_key_vault_secret" "git_app" {
+
+# }
