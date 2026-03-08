@@ -117,7 +117,7 @@ data "azurerm_virtual_network" "connectivity_hub_primary" {
 }
 
 resource "azurerm_virtual_network_peering" "management_runners_to_hub" {
-  name                         = "peer-runners-to-hub"
+  name                         = "peer-mgmt-to-hub"
   resource_group_name          = azurerm_resource_group.management_runners.name
   virtual_network_name         = azurerm_virtual_network.management_runners.name
   remote_virtual_network_id    = data.azurerm_virtual_network.connectivity_hub_primary.id
@@ -129,7 +129,7 @@ resource "azurerm_virtual_network_peering" "management_runners_to_hub" {
 }
 
 resource "azurerm_virtual_network_peering" "hub_to_management_runners" {
-  name                         = "peer-hub-to-runners"
+  name                         = "peer-hub-to-mgmt"
   resource_group_name          = module.config.custom_replacements.connectivity_hub_primary_resource_group_name
   virtual_network_name         = data.azurerm_virtual_network.connectivity_hub_primary.name
   remote_virtual_network_id    = azurerm_virtual_network.management_runners.id
