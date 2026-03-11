@@ -432,6 +432,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_data_explorer" : {
           #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           # },
+          "azure_cosmos_db_mongo" : {
+            "zone_name" : "privatelink.mongo.cosmos.azure.com"
+          },
           # "azure_postgres_sql_database" : {
           #   "zone_name" : "privatelink.postgres.database.azure.com"
           # },
