@@ -459,6 +459,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_api_management" : {
           #   "zone_name" : "privatelink.azure-api.net"
           # },
+          "azure_cosmos_db_mongo" : {
+            "zone_name" : "privatelink.mongo.cosmos.azure.com"
+          },
           "azure_acr_registry" : {
             "zone_name" : "privatelink.azurecr.io"
           },
