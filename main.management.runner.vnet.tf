@@ -33,6 +33,19 @@ locals {
       source_address_prefix      = "*"
       destination_address_prefix = "Internet"
     }
+    # ADD THIS NEW RULE ↓↓↓
+    allow_outbound_http_apt = {
+      name                       = "allow-outbound-http-apt"
+      priority                   = 120
+      direction                  = "Outbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80"
+      source_address_prefix      = "*"
+      destination_address_prefix = "Internet"
+      description                = "Allow HTTP for apt-get package downloads"
+    }
     deny_outbound_internet = {
       name                       = "deny-outbound-internet"
       priority                   = 400
