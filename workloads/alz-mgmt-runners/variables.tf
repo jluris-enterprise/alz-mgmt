@@ -131,16 +131,6 @@ variable "key_vault" {
       key_opts = list(string)
     })))
   })
-
-  validation {
-    condition = alltrue([
-      for _, key in coalesce(var.key_vault.keys, {}) : (
-        lower(key.key_type) != "ec" ||
-        length(setsubtract(toset(key.key_opts), toset(["sign", "verify"]))) == 0
-      )
-    ])
-    error_message = "For EC keys, key_opts can only include 'sign' and 'verify'. Use RSA key_type if you need wrapKey/unwrapKey."
-  }
 }
 
 variable "public_ip_addresses" {
