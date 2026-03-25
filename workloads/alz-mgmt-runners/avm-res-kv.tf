@@ -39,6 +39,3 @@ module "key_vault" {
   tags                = var.tags
 }
 
-# resource "azurerm_key_vault_secret" "git_app" {
-
-# }
