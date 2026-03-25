@@ -23,7 +23,6 @@ module "key_vault" {
   role_assignments = {
     current_principal_key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
-      principal_type             = "User"
       principal_id               = data.azurerm_client_config.current.object_id
     }
   }
