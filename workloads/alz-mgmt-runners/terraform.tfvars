@@ -51,8 +51,8 @@ key_vault = {
     runner_signing_key = {
       name     = "runner-signing-key"
       key_type = "RSA"
-      key_size = 2048
-      key_opts = ["sign", "verify"]
+      key_size = 4096
+      key_opts = ["sign", "verify", "wrapKey", "unwrapKey"]
     }
   }
   public_network_access_enabled = true
