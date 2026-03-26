@@ -32,6 +32,7 @@ custom_replacements = {
     # Resource group names
     management_resource_group_name               = "rg-management-$${starter_location_01}"
     management_runner_resource_group_name        = "rg-mgmt-platform-$${starter_location_01}"
+    identity_resource_group_name                 = "rg-identity-$${starter_location_01}"
     connectivity_hub_primary_resource_group_name = "rg-hub-$${starter_location_01}"
     dns_resource_group_name                      = "rg-hub-dns-$${starter_location_01}"
     ddos_resource_group_name                     = "rg-hub-ddos-$${starter_location_01}"
@@ -108,6 +109,7 @@ custom_replacements = {
   */
   resource_group_identifiers = {
     management_resource_group_id           = "/subscriptions/$${subscription_id_management}/resourcegroups/$${management_resource_group_name}"
+    identity_resource_group_id             = "/subscriptions/$${subscription_id_identity}/resourcegroups/$${identity_resource_group_name}"
     ddos_protection_plan_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourcegroups/$${ddos_resource_group_name}"
     primary_connectivity_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${connectivity_hub_primary_resource_group_name}"
   }

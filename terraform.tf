@@ -66,6 +66,17 @@ provider "azurerm" {
   }
 }
 
+provider "azurerm" {
+  resource_provider_registrations = "none"
+  alias                           = "identity"
+  subscription_id                 = try(var.subscription_ids["identity"], var.subscription_id_identity)
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
+}
+
 provider "azapi" {
   alias                      = "connectivity"
   skip_provider_registration = true
