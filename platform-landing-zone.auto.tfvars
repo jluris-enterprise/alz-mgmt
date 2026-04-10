@@ -452,9 +452,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_cosmos_db_sql" : {
           #   "zone_name" : "privatelink.documents.azure.com"
           # },
-          # "azure_ai_oai" : {
-          #   "zone_name" : "privatelink.openai.azure.com"
-          # },
+          "azure_ai_oai" : {
+            "zone_name" : "privatelink.openai.azure.com"
+          },
           # "azure_ml" : {
           #   "zone_name" : "privatelink.api.azureml.ms"
           # },
