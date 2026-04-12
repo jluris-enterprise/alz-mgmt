@@ -70,7 +70,7 @@ data "azuread_service_principal" "sp_root" {
 }
 
 data "azuread_user" "this" {
-  object_id = "88c915ea-4e72-4ea9-8a82-f986cf901207"
+  object_id = "5fbf1578-2e4b-4a94-b520-04838b41fc0c"
 }
 
 
