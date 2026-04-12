@@ -10,7 +10,7 @@ module "key_vault" {
   public_network_access_enabled = var.key_vault.public_network_access_enabled # Access via private endpoint only
   sku_name                      = var.key_vault_sku_name
 
-  keys = var.key_vault.keys
+  keys = try(var.key_vault.keys)
 
   private_endpoints = {
     primary = {

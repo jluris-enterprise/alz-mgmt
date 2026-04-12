@@ -49,13 +49,13 @@ enable_key_vault = true
 key_vault = {
   sku_name = "standard"
   keys = {
-    runner_signing_key = {
-      name     = "certificate-key"
-      key_type = "RSA"
-      key_size = 4096
-      #"wrapKey", "unwrapKey", "encrypt", "decrypt"]
-      key_opts = ["sign", "verify", "wrapKey", "unwrapKey"]
-    }
+    # runner_signing_key = {
+    #   name     = "certificate-key"
+    #   key_type = "RSA"
+    #   key_size = 4096
+    #   #"wrapKey", "unwrapKey", "encrypt", "decrypt"]
+    #   key_opts = ["sign", "verify", "wrapKey", "unwrapKey"]
+    # }
   }
   public_network_access_enabled = true
 }
