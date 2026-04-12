@@ -45,7 +45,8 @@ module "key_vault" {
     ip_rules = ["${local.my_ip_address}/32"] # ← /32 = exact IP only
   }
 
-  diagnostic_settings = local.diagnostic_settings
+  # Diagnostic settings managed by Azure Policy (setByPolicy-LogAnalytics)
+  diagnostic_settings = {}
   tags                = var.tags
 }
 
