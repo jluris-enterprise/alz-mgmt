@@ -40,7 +40,7 @@ module "key_vault" {
 
   network_acls = {
     bypass   = "AzureServices"
-    ip_rules = [local.my_cidr_slash_24]
+    ip_rules = ["${local.my_ip_address}/32"]  # ← /32 = exact IP only
   }
 
   diagnostic_settings = local.diagnostic_settings
