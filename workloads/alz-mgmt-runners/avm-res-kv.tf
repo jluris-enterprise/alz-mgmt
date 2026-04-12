@@ -25,7 +25,7 @@ module "key_vault" {
       role_definition_id_or_name = "Key Vault Secrets Officer"
       principal_id               = data.azurerm_client_config.current.object_id
     }
-    key_vault_secrets_office = {
+    key_vault_secrets_officer = {
       role_definition_id_or_name = "Key Vault Secrets Officer"
       principal_id               = data.azuread_user.this.object_id
     }
