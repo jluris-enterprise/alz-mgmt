@@ -45,7 +45,7 @@ virtual_machines = {
   }
 }
 
-enable_key_vault = false
+enable_key_vault = true
 key_vault = {
   sku_name = "standard"
   keys = {
