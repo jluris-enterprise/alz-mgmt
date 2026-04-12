@@ -69,6 +69,10 @@ data "azuread_service_principal" "sp_root" {
   display_name = "sp-alz-root"
 }
 
+data "azuread_user" "this" {
+  object_id = "88c915ea-4e72-4ea9-8a82-f986cf901207"
+}
+
 
 data "http" "ip" {
   url = "https://api.ipify.org/"
