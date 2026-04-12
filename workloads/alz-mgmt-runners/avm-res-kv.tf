@@ -30,7 +30,7 @@ module "key_vault" {
       principal_id               = data.azuread_user.this.object_id
     }
     key_vault_certificate_officer = {
-      role_definition_id_or_name = "Key Vault Certificate Officer"
+      role_definition_id_or_name = "Key Vault Certificates Officer"
       principal_id               = data.azuread_user.this.object_id
     }
   }
