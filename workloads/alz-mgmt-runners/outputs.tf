@@ -27,7 +27,7 @@ output "management_pe_subnet_id" {
 }
 
 output "key_vault_id" {
-  value = module.key_vault.resource_id
+  value = var.enable_key_vault ? module.key_vault["kv"].resource_id : null
 }
 
 output "runner_vm_id" {

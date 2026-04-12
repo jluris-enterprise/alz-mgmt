@@ -22,9 +22,9 @@ module "virtual_machine" {
       username                           = "azlinuxadmin"
       generate_admin_password_or_ssh_key = true
     }
-    key_vault_configuration = {
-      resource_id = module.key_vault.resource_id
-    }
+    key_vault_configuration = var.enable_key_vault ? {
+      resource_id = module.key_vault["kv"].resource_id
+    } : null
   }
   managed_identities = {
     system_assigned = true

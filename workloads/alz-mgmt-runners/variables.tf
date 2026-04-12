@@ -150,3 +150,13 @@ variable "enable_public_ipaddress" {
   default = false
 }
 
+variable "enable_key_vault" {
+  type        = bool
+  description = "Whether to create the Key Vault"
+  default     = true
+}
+
+variable "key_vault_sku_name" {
+  type    = string
+  default = "standard"
+}
