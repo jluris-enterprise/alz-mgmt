@@ -52,7 +52,8 @@ key_vault = {
       name     = "certificate-key"
       key_type = "RSA"
       key_size = 4096
-      key_opts = ["sign", "verify", ]#"wrapKey", "unwrapKey", "encrypt", "decrypt"]
+      #"wrapKey", "unwrapKey", "encrypt", "decrypt"]
+      key_opts = ["sign", "verify", ]
     }
   }
   public_network_access_enabled = true
