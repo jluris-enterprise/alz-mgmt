@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep *)",
+      "Bash(curl -s https://registry.terraform.io/v1/providers/Azure/alz/versions)",
+      "Bash(python3 -c \"import sys,json; versions=json.load\\(sys.stdin\\)['versions']; print\\('\\\\n'.join\\([v['version'] for v in versions[-5:]]\\)\\)\")"
+    ]
+  }
+}
