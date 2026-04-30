@@ -9,12 +9,12 @@ on:
       terraform_cli_version:
         description: 'Terraform CLI Version'
         required: true
-        default: 'latest'
+        default: '1.14.8'
         type: string
 
 jobs:
   validate_and_plan:
-    uses: jluris-enterprise/alz-mgmt/.github/workflows/ci-acr-k8s-template.yaml@main
+    uses: ./.github/workflows/ci-acr-k8s-template.yaml
     name: 'CI'
     permissions:
       id-token: write
@@ -22,4 +22,4 @@ jobs:
       pull-requests: write
     with:
       root_module_folder_relative_path: 'workloads/acr-k8s/dev'
-      terraform_cli_version: ${{ inputs.terraform_cli_version }}
+      terraform_cli_version: ${{ inputs.terraform_cli_version || '1.14.8' }}

@@ -9,7 +9,7 @@ on:
         type: string
       terraform_cli_version:
         description: Terraform CLI Version
-        default: latest
+        default: 1.14.8
         type: string
       backend_state_key:
         description: Backend state key for runner stack

@@ -14,7 +14,7 @@ on:
       terraform_cli_version:
         description: Terraform CLI Version
         required: true
-        default: latest
+        default: 1.14.8
         type: string
 
 jobs:
@@ -27,5 +27,5 @@ jobs:
     with:
       terraform_action: ${{ inputs.terraform_action }}
       root_module_folder_relative_path: workloads/alz-mgmt-runners
-      terraform_cli_version: ${{ inputs.terraform_cli_version }}
+      terraform_cli_version: ${{ inputs.terraform_cli_version || '1.14.8' }}
       backend_state_key: alz-mgmt-runners.tfstate
