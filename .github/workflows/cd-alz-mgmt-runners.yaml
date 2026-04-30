@@ -14,7 +14,7 @@ on:
       terraform_cli_version:
         description: Terraform CLI Version
         required: true
-        default: 1.14.8
+        default: latest
         type: string
 
 jobs:

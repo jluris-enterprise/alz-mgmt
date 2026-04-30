@@ -22,12 +22,12 @@ on:
       terraform_cli_version:
         description: 'Terraform CLI Version'
         required: true
-        default: '1.14.8'
+        default: 'latest'
         type: string
 
 jobs:
   plan_and_apply:
-    uses: ./.github/workflows/cd-template.yaml
+    uses: jluris-enterprise/alz-mgmt/.github/workflows/cd-template.yaml@main
     name: 'CD'
     permissions:
       id-token: write
