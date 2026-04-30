@@ -446,9 +446,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_app_service" : {
           #   "zone_name" : "privatelink.azurewebsites.net"
           # },
-          # "azure_search" : {
-          #   "zone_name" : "privatelink.search.windows.net"
-          # },
+          "azure_search" : {
+            "zone_name" : "privatelink.search.windows.net"
+          },
           # "azure_cosmos_db_sql" : {
           #   "zone_name" : "privatelink.documents.azure.com"
           # },
