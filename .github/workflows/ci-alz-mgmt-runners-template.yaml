@@ -24,12 +24,6 @@ jobs:
       - Linux
       - X64
     environment: alz-runners-plan
-    env:
-      # Set variables for validation blocks that have cross-variable references
-      TF_VAR_connectivity_type: "hub_and_spoke_vnet"
-      TF_VAR_starter_locations: '["uksouth"]'
-      TF_VAR_virtual_wan_virtual_hubs: '{}'
-      TF_VAR_hub_and_spoke_vnet_virtual_networks: '{}'
     steps:
       - name: Checkout Code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -71,11 +65,6 @@ jobs:
       ARM_TENANT_ID: "${{ vars.AZURE_TENANT_ID }}"
       ARM_USE_AZUREAD: true
       ARM_USE_OIDC: true
-      # Set variables for validation blocks that have cross-variable references
-      TF_VAR_connectivity_type: "hub_and_spoke_vnet"
-      TF_VAR_starter_locations: '["uksouth"]'
-      TF_VAR_virtual_wan_virtual_hubs: '{}'
-      TF_VAR_hub_and_spoke_vnet_virtual_networks: '{}'
     steps:
       - name: Checkout Code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
