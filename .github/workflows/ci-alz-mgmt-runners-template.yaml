@@ -44,7 +44,8 @@ jobs:
         run: |
           terraform -chdir="${{ inputs.root_module_folder_relative_path }}" \
           init \
-          -backend=false
+          -backend=false \
+          -var-file="terraform.tfvars"
 
       - name: Terraform Validate
         run: |
