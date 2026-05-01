@@ -13,7 +13,7 @@ on:
         type: string
       terraform_cli_version:
         description: 'Terraform CLI Version'
-        default: '1.14.8'
+        default: '1.15.0'
         type: string
 
 jobs:
@@ -47,6 +47,21 @@ jobs:
 
       - name: Terraform Init
         run: |
+          # First pass: downloads modules; fails at cross-variable validation in ALZ child modules
+          terraform \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          init \
+          -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
+          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
+          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
+          -backend-config="key=alz-terraform.tfstate" || true
+          # Patch bastion_host modules: var.zones validation references var.sku,
+          # which cannot be resolved during init's validate pass in Terraform 1.15+
+          find "${{ inputs.root_module_folder_relative_path }}/.terraform/modules" \
+            -name "variables.tf" 2>/dev/null \
+            | xargs grep -l "var\.sku" 2>/dev/null \
+            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
+          # Second pass: completes init using patched cached modules
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
@@ -124,6 +139,21 @@ jobs:
 
       - name: Terraform Init
         run: |
+          # First pass: downloads modules; fails at cross-variable validation in ALZ child modules
+          terraform \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
+          init \
+          -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
+          -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
+          -backend-config="container_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_CONTAINER_NAME}}" \
+          -backend-config="key=alz-terraform.tfstate" || true
+          # Patch bastion_host modules: var.zones validation references var.sku,
+          # which cannot be resolved during init's validate pass in Terraform 1.15+
+          find "${{ inputs.root_module_folder_relative_path }}/.terraform/modules" \
+            -name "variables.tf" 2>/dev/null \
+            | xargs grep -l "var\.sku" 2>/dev/null \
+            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
+          # Second pass: completes init using patched cached modules
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
