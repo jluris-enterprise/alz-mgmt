@@ -42,6 +42,15 @@ jobs:
 
       - name: Terraform Init
         run: |
+          # Download modules only (no validation pass that fails on cross-variable conditions)
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get
+          # Patch bastion_host modules: var.zones validation references var.sku,
+          # which cannot be resolved during init's validate pass in Terraform 1.15+
+          find "${{inputs.root_module_folder_relative_path}}/.terraform/modules" \
+            -name "variables.tf" 2>/dev/null \
+            | xargs grep -l "var\.sku" 2>/dev/null \
+            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
+          # Full init using patched cached modules (no re-download)
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
@@ -85,6 +94,15 @@ jobs:
 
       - name: Terraform Init
         run: |
+          # Download modules only (no validation pass that fails on cross-variable conditions)
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get
+          # Patch bastion_host modules: var.zones validation references var.sku,
+          # which cannot be resolved during init's validate pass in Terraform 1.15+
+          find "${{inputs.root_module_folder_relative_path}}/.terraform/modules" \
+            -name "variables.tf" 2>/dev/null \
+            | xargs grep -l "var\.sku" 2>/dev/null \
+            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
+          # Full init using patched cached modules (no re-download)
           terraform \
           -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
