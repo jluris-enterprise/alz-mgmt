@@ -13,7 +13,7 @@ on:
         type: string
       terraform_cli_version:
         description: 'Terraform CLI Version'
-        default: '1.15.0'
+        default: '1.14.8'
         type: string
 
 jobs:
@@ -47,36 +47,8 @@ jobs:
 
       - name: Terraform Init
         run: |
-          ROOT="${{inputs.root_module_folder_relative_path}}"
-          # Download modules; Terraform 1.15 fails validation after download but does NOT write modules.json
-          terraform -chdir="$ROOT" get 2>&1 | tee /tmp/tf_get_out.txt || true
-          # Reconstruct modules.json from download log so terraform init skips re-download
-          mkdir -p "$ROOT/.terraform/modules"
-          python3 - /tmp/tf_get_out.txt << 'PYEOF' > "$ROOT/.terraform/modules/modules.json"
-import sys, re, json
-text = open(sys.argv[1]).read()
-modules = [{'Key': '', 'Source': '', 'Dir': '.'}]
-dl = {}
-for m in re.finditer(r'Downloading (\S+) (\S+) for (\S+?)\.\.\.', text):
-    dl[m.group(3)] = (m.group(1), m.group(2))
-seen = set()
-for m in re.finditer(r'^\- (\S+) in (.+)$', text, re.MULTILINE):
-    key, d = m.group(1), m.group(2).strip()
-    if key in seen: continue
-    seen.add(key)
-    src, ver = dl.get(key, ('', ''))
-    e = {'Key': key, 'Dir': d}
-    if src: e.update({'Source': src, 'Version': ver})
-    modules.append(e)
-print(json.dumps({'Modules': modules}))
-PYEOF
-          # Patch bastion_host: var.zones validation cross-references var.sku (fails in TF 1.15)
-          find "$ROOT/.terraform/modules" -name "variables.tf" 2>/dev/null \
-            | xargs grep -l "var\.sku" 2>/dev/null \
-            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
-          # Full init — modules found in modules.json, no re-download
           terraform \
-          -chdir="$ROOT" \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
           -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
@@ -99,7 +71,7 @@ PYEOF
           rootModuleFolder="${{inputs.root_module_folder_relative_path}}"
           mkdir -p "$stagingDirectory"
           find . -maxdepth 1 ! -name . ! -name .git ! -name .terraform ! -name .github ! -name "$stagingDirectory" -exec cp -r {} "$stagingDirectory/" \;
-
+          
           rootModuleFolderTerraformFolder="$stagingDirectory/$rootModuleFolder/.terraform"
           if [ -d "$rootModuleFolderTerraformFolder" ]; then
             rm -rf "$rootModuleFolderTerraformFolder"
@@ -152,36 +124,8 @@ PYEOF
 
       - name: Terraform Init
         run: |
-          ROOT="${{inputs.root_module_folder_relative_path}}"
-          # Download modules; Terraform 1.15 fails validation after download but does NOT write modules.json
-          terraform -chdir="$ROOT" get 2>&1 | tee /tmp/tf_get_out.txt || true
-          # Reconstruct modules.json from download log so terraform init skips re-download
-          mkdir -p "$ROOT/.terraform/modules"
-          python3 - /tmp/tf_get_out.txt << 'PYEOF' > "$ROOT/.terraform/modules/modules.json"
-import sys, re, json
-text = open(sys.argv[1]).read()
-modules = [{'Key': '', 'Source': '', 'Dir': '.'}]
-dl = {}
-for m in re.finditer(r'Downloading (\S+) (\S+) for (\S+?)\.\.\.', text):
-    dl[m.group(3)] = (m.group(1), m.group(2))
-seen = set()
-for m in re.finditer(r'^\- (\S+) in (.+)$', text, re.MULTILINE):
-    key, d = m.group(1), m.group(2).strip()
-    if key in seen: continue
-    seen.add(key)
-    src, ver = dl.get(key, ('', ''))
-    e = {'Key': key, 'Dir': d}
-    if src: e.update({'Source': src, 'Version': ver})
-    modules.append(e)
-print(json.dumps({'Modules': modules}))
-PYEOF
-          # Patch bastion_host: var.zones validation cross-references var.sku (fails in TF 1.15)
-          find "$ROOT/.terraform/modules" -name "variables.tf" 2>/dev/null \
-            | xargs grep -l "var\.sku" 2>/dev/null \
-            | xargs sed -i '/condition.*var\.sku/c\    condition     = true' 2>/dev/null || true
-          # Full init — modules found in modules.json, no re-download
           terraform \
-          -chdir="$ROOT" \
+          -chdir="${{inputs.root_module_folder_relative_path}}" \
           init \
           -backend-config="resource_group_name=${{vars.BACKEND_AZURE_RESOURCE_GROUP_NAME}}" \
           -backend-config="storage_account_name=${{vars.BACKEND_AZURE_STORAGE_ACCOUNT_NAME}}" \
