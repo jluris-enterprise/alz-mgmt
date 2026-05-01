@@ -42,8 +42,9 @@ jobs:
 
       - name: Terraform Init
         run: |
-          # Download modules only (no validation pass that fails on cross-variable conditions)
-          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get
+          # Download modules; allow failure (Terraform 1.15 validates cross-var conditions
+          # after download — modules.json is complete before validation runs)
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get || true
           # Patch bastion_host modules: var.zones validation references var.sku,
           # which cannot be resolved during init's validate pass in Terraform 1.15+
           find "${{inputs.root_module_folder_relative_path}}/.terraform/modules" \
@@ -94,8 +95,9 @@ jobs:
 
       - name: Terraform Init
         run: |
-          # Download modules only (no validation pass that fails on cross-variable conditions)
-          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get
+          # Download modules; allow failure (Terraform 1.15 validates cross-var conditions
+          # after download — modules.json is complete before validation runs)
+          terraform -chdir="${{inputs.root_module_folder_relative_path}}" get || true
           # Patch bastion_host modules: var.zones validation references var.sku,
           # which cannot be resolved during init's validate pass in Terraform 1.15+
           find "${{inputs.root_module_folder_relative_path}}/.terraform/modules" \

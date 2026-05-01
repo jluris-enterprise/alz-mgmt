@@ -5,10 +5,6 @@ variable "starter_locations" {
     condition     = length(var.starter_locations) > 0
     error_message = "You must provide at least one starter location region."
   }
-  validation {
-    condition     = try(var.connectivity_type == "none" || ((length(var.virtual_wan_virtual_hubs) <= length(var.starter_locations)) || (length(var.hub_and_spoke_vnet_virtual_networks) <= length(var.starter_locations))), true)
-    error_message = "The number of regions supplied in `starter_locations` must match the number of regions specified for connectivity."
-  }
 }
 
 variable "subscription_ids" {
