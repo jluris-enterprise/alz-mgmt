@@ -11,7 +11,7 @@ on:
       terraform_cli_version:
         description: 'Terraform CLI Version'
         required: true
-        default: '1.14.8'
+        default: '1.15.2'
         type: string
 
 jobs:
@@ -24,4 +24,4 @@ jobs:
       pull-requests: write
     with:
       root_module_folder_relative_path: '.'
-      terraform_cli_version: ${{ inputs.terraform_cli_version || '1.14.8' }}
+      terraform_cli_version: ${{ inputs.terraform_cli_version || '1.15.2' }}
