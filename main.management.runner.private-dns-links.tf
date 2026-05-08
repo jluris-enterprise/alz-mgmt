@@ -2,7 +2,7 @@ locals {
   # Keep for_each keys plan-time known by deriving them from input config, not discovered resources.
   connectivity_private_dns_private_link_zone_names = {
     for _, zone in try(local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.dns_zones.private_link_private_dns_zones, {}) :
-    zone.zone_name => zone
+    replace(zone.zone_name, "{regionName}", module.config.custom_replacements.starter_location_01) => zone
   }
 
   connectivity_private_dns_auto_registration_zone_name = (
