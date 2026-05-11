@@ -2,7 +2,7 @@ locals {
   management_runner_nsg_rules = {
     deny_inbound_internet = {
       name                       = "deny-inbound-internet"
-      priority                   = 1000
+      priority                   = 3000
       direction                  = "Inbound"
       access                     = "Deny"
       protocol                   = "*"
@@ -13,7 +13,7 @@ locals {
     }
     allow_outbound_dns_azure = {
       name                       = "allow-outbound-dns-azure"
-      priority                   = 1000
+      priority                   = 110
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -24,7 +24,7 @@ locals {
     }
     allow_outbound_https_internet = {
       name                       = "allow-outbound-https-internet"
-      priority                   = 1200
+      priority                   = 120
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -36,7 +36,7 @@ locals {
     # ADD THIS NEW RULE ↓↓↓
     allow_outbound_http_apt = {
       name                       = "allow-outbound-http-apt"
-      priority                   = 1300
+      priority                   = 130
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -48,7 +48,7 @@ locals {
     }
     deny_outbound_internet = {
       name                       = "deny-outbound-internet"
-      priority                   = 4000
+      priority                   = 400
       direction                  = "Outbound"
       access                     = "Deny"
       protocol                   = "*"
