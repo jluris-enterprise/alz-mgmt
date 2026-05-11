@@ -13,7 +13,7 @@ locals {
     }
     allow_outbound_dns_azure = {
       name                       = "allow-outbound-dns-azure"
-      priority                   = 110
+      priority                   = 200
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "*"
@@ -24,7 +24,7 @@ locals {
     }
     allow_outbound_https_internet = {
       name                       = "allow-outbound-https-internet"
-      priority                   = 120
+      priority                   = 210
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
@@ -33,10 +33,9 @@ locals {
       source_address_prefix      = "*"
       destination_address_prefix = "Internet"
     }
-    # ADD THIS NEW RULE ↓↓↓
     allow_outbound_http_apt = {
       name                       = "allow-outbound-http-apt"
-      priority                   = 130
+      priority                   = 220
       direction                  = "Outbound"
       access                     = "Allow"
       protocol                   = "Tcp"
