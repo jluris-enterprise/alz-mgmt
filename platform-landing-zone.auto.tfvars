@@ -434,27 +434,27 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_data_explorer" : {
           #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           # },
-          "azure_cosmos_db_mongo" : {
-            "zone_name" : "privatelink.mongo.cosmos.azure.com"
-          },
+          # "azure_cosmos_db_mongo" : {
+          #   "zone_name" : "privatelink.mongo.cosmos.azure.com"
+          # },
           # "azure_automation": {
           #   "zone_name": "privatelink.azure-automation.net"
           # },
-          # "azure_postgres_sql_database" : {
-          #   "zone_name" : "privatelink.postgres.database.azure.com"
-          # },
+          "azure_postgres_sql_database" : {
+            "zone_name" : "privatelink.postgres.database.azure.com"
+          },
           # "azure_app_service" : {
           #   "zone_name" : "privatelink.azurewebsites.net"
           # },
-          "azure_search" : {
-            "zone_name" : "privatelink.search.windows.net"
-          },
+          # "azure_search" : {
+          #   "zone_name" : "privatelink.search.windows.net"
+          # },
           # "azure_cosmos_db_sql" : {
           #   "zone_name" : "privatelink.documents.azure.com"
           # },
-          "azure_ai_oai" : {
-            "zone_name" : "privatelink.openai.azure.com"
-          },
+          # "azure_ai_oai" : {
+          #   "zone_name" : "privatelink.openai.azure.com"
+          # },
           # "azure_ml" : {
           #   "zone_name" : "privatelink.api.azureml.ms"
           # },
