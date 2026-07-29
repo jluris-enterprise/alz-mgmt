@@ -1,8 +1,20 @@
+module "regions" {
+  source  = "Azure/avm-utl-regions/azurerm"
+  version = "0.5.2"
+
+  enable_telemetry   = var.enable_telemetry
+  recommended_filter = false
+}
+
 locals {
   # Keep for_each keys plan-time known by deriving them from input config, not discovered resources.
   connectivity_private_dns_private_link_zone_names = {
     for _, zone in try(local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.dns_zones.private_link_private_dns_zones, {}) :
-    replace(zone.zone_name, "{regionName}", module.config.custom_replacements.starter_location_01) => zone
+    replace(
+      replace(zone.zone_name, "{regionName}", module.config.custom_replacements.starter_location_01),
+      "{regionCode}",
+      module.regions.regions_by_name_or_display_name[module.config.custom_replacements.starter_location_01].geo_code
+    ) => zone
   }
 
   connectivity_private_dns_auto_registration_zone_name = (
