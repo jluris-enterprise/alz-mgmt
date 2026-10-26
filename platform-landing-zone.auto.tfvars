@@ -473,6 +473,9 @@ hub_and_spoke_vnet_virtual_networks = {
           "custom_jlurisenterprise" : {
             "zone_name" : "jlurisenterprise.com"
           }
+          "azure_site_recovery": {
+            "zone_name": "privatelink.siterecovery.windowsazure.com"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
