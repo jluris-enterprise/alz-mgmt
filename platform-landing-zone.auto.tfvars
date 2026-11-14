@@ -476,6 +476,9 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_site_recovery": {
             "zone_name": "privatelink.siterecovery.windowsazure.com"
           },
+          "azure_storage_file": {
+            "zone_name": "privatelink.file.core.windows.net"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
