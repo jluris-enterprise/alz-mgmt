@@ -62,3 +62,5 @@ ls terraform.tf
 terraform workspace show
 terraform state list | grep 'avm_res_network_privatednszone.*azure_aks_mgmt'
 
+terraform state pull > ~/alz-state-before-dns-move.tfstate
+chmod 600 ~/alz-state-before-dns-move.tfstate
