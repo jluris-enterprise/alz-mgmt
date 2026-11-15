@@ -479,6 +479,9 @@ hub_and_spoke_vnet_virtual_networks = {
           "azure_storage_file": {
             "zone_name": "privatelink.file.core.windows.net"
           },
+          "azure_aks_mgmt_uaen" : {
+            "zone_name" : "privatelink.uaenorth.azmk8s.io"
+          },
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
