@@ -44,7 +44,7 @@ locals {
 }
 
 locals {
-  my_ip_address = data.http.ip.response_body
+  my_ip_address = trimspace(data.http.ip.response_body)
 }
 
 resource "random_string" "unique_name" {

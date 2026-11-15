@@ -7,7 +7,7 @@ module "key_vault" {
   location                      = var.location
   resource_group_name           = local.runner_resource_group.name
   tenant_id                     = data.azurerm_client_config.current.tenant_id
-  public_network_access_enabled = var.key_vault.public_network_access_enabled # Access via private endpoint only
+  public_network_access_enabled = var.key_vault.public_network_access_enabled
   sku_name                      = var.key_vault_sku_name
 
   keys = try(var.key_vault.keys)

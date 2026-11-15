@@ -16,6 +16,10 @@ terraform {
       source  = "hashicorp/azuread"
       version = "~>3.7"
     }
+    http = {
+      source  = "hashicorp/http"
+      version = "~>3.0"
+    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "~>3.0.0"
