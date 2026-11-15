@@ -60,7 +60,7 @@ key_vault = {
   public_network_access_enabled = true
 }
 
-enable_public_ipaddress = false
+enable_public_ipaddress = true
 
 public_ip_addresses = {
   pip_runner = {
