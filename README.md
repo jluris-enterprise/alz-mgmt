@@ -46,3 +46,19 @@ terraform apply -var-file ./examples/full-multi-region/hub-and-spoke-vnet.tfvars
 terraform init
 terraform apply -var-file ./examples/full-multi-region/virtual-wan.tfvars
 ```
+
+# Terraform connecting to state file
+terraform init -reconfigure \
+  -backend-config="resource_group_name=rg-alz-mgmt-state-uaenorth-001" \
+  -backend-config="storage_account_name=stoalzmgmuae001wksi" \
+  -backend-config="container_name=mgmt-tfstate" \
+  -backend-config="key=alz-terraform.tfstate" \
+  -backend-config="use_azuread_auth=true"
+
+cd /mnt/c/Users/joell/Documents/alz/alz-mgmt
+pwd
+ls terraform.tf
+
+terraform workspace show
+terraform state list | grep 'avm_res_network_privatednszone.*azure_aks_mgmt'
+
