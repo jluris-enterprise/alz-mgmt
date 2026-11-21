@@ -413,9 +413,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_acr_registry" : {
           #   "zone_name" : "privatelink.azurecr.io"
           # },
-          "azure_storage_blob" : {
-            "zone_name" : "privatelink.blob.core.windows.net"
-          },
+          # "azure_storage_blob" : {
+          #   "zone_name" : "privatelink.blob.core.windows.net"
+          # },
           # "azure_storage_queue" : {
           #   "zone_name" : "privatelink.queue.core.windows.net"
           # },
@@ -428,9 +428,9 @@ hub_and_spoke_vnet_virtual_networks = {
           # "azure_aks_mgmt_uks" : {
           #   "zone_name" : "privatelink.{regionName}.azmk8s.io"
           # },
-          "azure_backup" : {
-            "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
-          },
+          # "azure_backup" : {
+          #   "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
+          # },
           # "azure_data_explorer" : {
           #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
           # },
@@ -473,12 +473,12 @@ hub_and_spoke_vnet_virtual_networks = {
           "custom_jlurisenterprise" : {
             "zone_name" : "jlurisenterprise.com"
           }
-          "azure_site_recovery": {
-            "zone_name": "privatelink.siterecovery.windowsazure.com"
-          },
-          "azure_storage_file": {
-            "zone_name": "privatelink.file.core.windows.net"
-          },
+          # "azure_site_recovery": {
+          #   "zone_name": "privatelink.siterecovery.windowsazure.com"
+          # },
+          # "azure_storage_file": {
+          #   "zone_name": "privatelink.file.core.windows.net"
+          # },
           "azure_aks_mgmt_uaen" : {
             "zone_name" : "privatelink.uaenorth.azmk8s.io"
           },
