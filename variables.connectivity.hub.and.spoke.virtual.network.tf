@@ -12,21 +12,10 @@ DESCRIPTION
 }
 
 variable "hub_and_spoke_vnet_virtual_networks" {
-  type = map(object({
-    hub_virtual_network = any
-    virtual_network_gateways = optional(object({
-      subnet_address_prefix                     = string
-      subnet_default_outbound_access_enabled    = optional(bool, false)
-      route_table_creation_enabled              = optional(bool, false)
-      route_table_name                          = optional(string)
-      route_table_bgp_route_propagation_enabled = optional(bool, false)
-      express_route                             = optional(any)
-      vpn                                       = optional(any)
-    }))
-    private_dns_zones    = optional(any)
-    private_dns_resolver = optional(any)
-    bastion              = optional(any)
-  }))
+  # Untyped on purpose: a typed object silently drops attributes it doesn't declare (e.g. enabled_resources,
+  # firewall, location), which would make the hub module fall back to its defaults (firewall/bastion/gateways ON).
+  # The avm-ptn-alz-connectivity-hub-and-spoke-vnet module validates the full schema itself.
+  type        = any
   default     = {}
   description = <<DESCRIPTION
 A map of hub networks to create.

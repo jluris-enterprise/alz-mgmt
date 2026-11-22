@@ -27,7 +27,8 @@ output "hub_and_spoke_vnet_firewall_public_ip_addresses" {
 }
 
 output "hub_and_spoke_vnet_firewall_policy_ids" {
-  value = local.connectivity_hub_and_spoke_vnet_enabled ? module.hub_and_spoke_vnet[0].firewall_policy_ids : null
+  # hub-and-spoke 0.17 renamed firewall_policy_ids -> firewall_policies (output name kept for compatibility)
+  value = local.connectivity_hub_and_spoke_vnet_enabled ? module.hub_and_spoke_vnet[0].firewall_policies : null
 }
 
 output "hub_and_spoke_vnet_route_tables_firewall" {

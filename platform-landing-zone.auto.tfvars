@@ -112,6 +112,7 @@ custom_replacements = {
     identity_resource_group_id             = "/subscriptions/$${subscription_id_identity}/resourcegroups/$${identity_resource_group_name}"
     ddos_protection_plan_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourcegroups/$${ddos_resource_group_name}"
     primary_connectivity_resource_group_id = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${connectivity_hub_primary_resource_group_name}"
+    dns_resource_group_id                  = "/subscriptions/$${subscription_id_connectivity}/resourceGroups/$${dns_resource_group_name}"
   }
 
   /*
@@ -291,20 +292,34 @@ connectivity_resource_groups = {
 }
 
 hub_and_spoke_vnet_settings = {
+  enabled_resources = {
+    ddos_protection_plan = "$${ddos_protection_plan_enabled}"
+  }
   ddos_protection_plan = {
-    enabled             = "$${ddos_protection_plan_enabled}"
     name                = "$${ddos_protection_plan_name}"
     resource_group_name = "$${ddos_resource_group_name}"
     location            = "$${starter_location_01}"
   }
 }
 
+# Layout for Azure/avm-ptn-alz-connectivity-hub-and-spoke-vnet 0.17.x (inputs flattened in 0.13, enabled flags moved in 0.14).
+# IMPORTANT: every enabled_resources flag defaults to TRUE in the module. Keep them all set explicitly.
 hub_and_spoke_vnet_virtual_networks = {
   primary = {
+    location          = "$${starter_location_01}"
+    default_parent_id = "$${primary_connectivity_resource_group_id}"
+    enabled_resources = {
+      firewall                              = "$${primary_firewall_enabled}"
+      firewall_policy                       = "$${primary_firewall_enabled}"
+      bastion                               = "$${primary_bastion_enabled}"
+      virtual_network_gateway_express_route = "$${primary_virtual_network_gateway_express_route_enabled}"
+      virtual_network_gateway_vpn           = "$${primary_virtual_network_gateway_vpn_enabled}"
+      private_dns_zones                     = "$${primary_private_dns_zones_enabled}"
+      private_dns_resolver                  = "$${primary_private_dns_resolver_enabled}"
+      nat_gateway                           = false
+    }
     hub_virtual_network = {
       name                          = "$${primary_virtual_network_name}"
-      resource_group_name           = "$${connectivity_hub_primary_resource_group_name}"
-      location                      = "$${starter_location_01}"
       address_space                 = ["$${primary_hub_virtual_network_address_space}"]
       routing_address_space         = ["$${primary_hub_address_space}"]
       route_table_name_firewall     = "$${primary_route_table_firewall_name}"
@@ -335,41 +350,37 @@ hub_and_spoke_vnet_virtual_networks = {
           address_prefixes = ["$${primary_application_gateway_subnet_address_prefix}"]
         }
       }
-      firewall = {
-        enabled                          = "$${primary_firewall_enabled}"
-        subnet_address_prefix            = "$${primary_firewall_subnet_address_prefix}"
-        management_subnet_address_prefix = "$${primary_firewall_management_subnet_address_prefix}"
-        name                             = "$${primary_firewall_name}"
-        sku_name                         = "AZFW_VNet"
-        sku_tier                         = "Standard"
-        zones                            = "$${starter_location_01_availability_zones}"
-        default_ip_configuration = {
-          public_ip_config = {
-            name  = "$${primary_firewall_public_ip_name}"
-            zones = "$${starter_location_01_availability_zones}"
-          }
-        }
-        management_ip_enabled = "$${primary_firewall_management_ip_enabled}"
-        management_ip_configuration = {
-          public_ip_config = {
-            name  = "$${primary_firewall_management_public_ip_name}"
-            zones = "$${starter_location_01_availability_zones}"
-          }
-        }
-        firewall_policy = {
-          name = "$${primary_firewall_policy_name}"
+    }
+    firewall = {
+      subnet_address_prefix            = "$${primary_firewall_subnet_address_prefix}"
+      management_subnet_address_prefix = "$${primary_firewall_management_subnet_address_prefix}"
+      name                             = "$${primary_firewall_name}"
+      sku_name                         = "AZFW_VNet"
+      sku_tier                         = "Standard"
+      zones                            = "$${starter_location_01_availability_zones}"
+      management_ip_enabled            = "$${primary_firewall_management_ip_enabled}"
+      default_ip_configuration = {
+        public_ip_config = {
+          name  = "$${primary_firewall_public_ip_name}"
+          zones = "$${starter_location_01_availability_zones}"
         }
       }
+      management_ip_configuration = {
+        public_ip_config = {
+          name  = "$${primary_firewall_management_public_ip_name}"
+          zones = "$${starter_location_01_availability_zones}"
+        }
+      }
+    }
+    firewall_policy = {
+      name = "$${primary_firewall_policy_name}"
     }
     virtual_network_gateways = {
       subnet_address_prefix = "$${primary_gateway_subnet_address_prefix}"
       express_route = {
-        enabled                               = "$${primary_virtual_network_gateway_express_route_enabled}"
-        location                              = "$${starter_location_01}"
         name                                  = "$${primary_virtual_network_gateway_express_route_name}"
         sku                                   = "$${starter_location_01_virtual_network_gateway_sku_express_route}"
         hosted_on_behalf_of_public_ip_enabled = "$${primary_virtual_network_gateway_express_route_hobo_public_ip_enabled}"
-        parent_id                             = "$${primary_connectivity_resource_group_id}"
         ip_configurations = {
           default = {
             public_ip = {
@@ -380,11 +391,8 @@ hub_and_spoke_vnet_virtual_networks = {
         }
       }
       vpn = {
-        enabled   = "$${primary_virtual_network_gateway_vpn_enabled}"
-        location  = "$${starter_location_01}"
-        name      = "$${primary_virtual_network_gateway_vpn_name}"
-        sku       = "$${starter_location_01_virtual_network_gateway_sku_vpn}"
-        parent_id = "$${primary_connectivity_resource_group_id}"
+        name = "$${primary_virtual_network_gateway_vpn_name}"
+        sku  = "$${starter_location_01_virtual_network_gateway_sku_vpn}"
         ip_configurations = {
           active_active_1 = {
             public_ip = {
@@ -402,105 +410,94 @@ hub_and_spoke_vnet_virtual_networks = {
       }
     }
     # https://registry.terraform.io/modules/Azure/avm-ptn-network-private-link-private-dns-zones/azurerm/latest
+    # Zone keys below are part of Terraform state addresses: renaming a key recreates that zone.
     private_dns_zones = {
-      enabled = "$${primary_private_dns_zones_enabled}"
-      dns_zones = {
-        resource_group_name = "$${dns_resource_group_name}"
-        private_link_private_dns_zones_regex_filter = {
-          enabled = false
+      parent_id = "$${dns_resource_group_id}"
+      private_link_private_dns_zones_regex_filter = {
+        enabled = false
+      }
+      private_link_private_dns_zones = {
+        "azure_storage_blob" = {
+          zone_name = "privatelink.blob.core.windows.net"
         }
-        private_link_private_dns_zones = {
-          # "azure_acr_registry" : {
-          #   "zone_name" : "privatelink.azurecr.io"
-          # },
-          "azure_storage_blob" : {
-            "zone_name" : "privatelink.blob.core.windows.net"
-          },
-          # "azure_storage_queue" : {
-          #   "zone_name" : "privatelink.queue.core.windows.net"
-          # },
-          # "azure_storage_table" : {
-          #   "zone_name" : "privatelink.table.core.windows.net"
-          # },
-          "azure_key_vault" : {
-            "zone_name" : "privatelink.vaultcore.azure.net"
-          },
-          # "azure_aks_mgmt_uks" : {
-          #   "zone_name" : "privatelink.{regionName}.azmk8s.io"
-          # },
-          # "azure_backup" : {
-          #   "zone_name" : "privatelink.{regionCode}.backup.windowsazure.com"
-          # },
-          # "azure_data_explorer" : {
-          #   "zone_name" : "privatelink.{regionName}.kusto.windows.net"
-          # },
-          # "azure_cosmos_db_mongo" : {
-          #   "zone_name" : "privatelink.mongo.cosmos.azure.com"
-          # },
-          # "azure_automation": {
-          #   "zone_name": "privatelink.azure-automation.net"
-          # },
-          "azure_postgres_sql_database" : {
-            "zone_name" : "privatelink.postgres.database.azure.com"
-          },
-          # "azure_app_service" : {
-          #   "zone_name" : "privatelink.azurewebsites.net"
-          # },
-          # "azure_search" : {
-          #   "zone_name" : "privatelink.search.windows.net"
-          # },
-          # "azure_cosmos_db_sql" : {
-          #   "zone_name" : "privatelink.documents.azure.com"
-          # },
-          # "azure_ai_oai" : {
-          #   "zone_name" : "privatelink.openai.azure.com"
-          # },
-          # "azure_ml" : {
-          #   "zone_name" : "privatelink.api.azureml.ms"
-          # },
-          # "azure_ai_cog_svcs" : {
-          #   "zone_name" : "privatelink.cognitiveservices.azure.com"
-          # },
-          # "azure_ai_services" : {
-          #   "zone_name" : "privatelink.services.ai.azure.com"
-          # },
-          # "azure_api_management" : {
-          #   "zone_name" : "privatelink.azure-api.net"
-          # },
-          "azure_acr_registry" : {
-            "zone_name" : "privatelink.azurecr.io"
-          },
-          "custom_jlurisenterprise" : {
-            "zone_name" : "jlurisenterprise.com"
-          }
-          # "azure_site_recovery": {
-          #   "zone_name": "privatelink.siterecovery.windowsazure.com"
-          # },
-          # "azure_storage_file": {
-          #   "zone_name": "privatelink.file.core.windows.net"
-          # },
-          "azure_aks_mgmt_uaen" : {
-            "zone_name" : "privatelink.uaenorth.azmk8s.io"
-          },
+        # "azure_storage_queue" = {
+        #   zone_name = "privatelink.queue.core.windows.net"
+        # }
+        # "azure_storage_table" = {
+        #   zone_name = "privatelink.table.core.windows.net"
+        # }
+        "azure_key_vault" = {
+          zone_name = "privatelink.vaultcore.azure.net"
+        }
+        # "azure_aks_mgmt_uks" = {
+        #   zone_name = "privatelink.{regionName}.azmk8s.io"
+        # }
+        # "azure_backup" = {
+        #   zone_name = "privatelink.{regionCode}.backup.windowsazure.com"
+        # }
+        # "azure_data_explorer" = {
+        #   zone_name = "privatelink.{regionName}.kusto.windows.net"
+        # }
+        # "azure_cosmos_db_mongo" = {
+        #   zone_name = "privatelink.mongo.cosmos.azure.com"
+        # }
+        # "azure_automation" = {
+        #   zone_name = "privatelink.azure-automation.net"
+        # }
+        "azure_postgres_sql_database" = {
+          zone_name = "privatelink.postgres.database.azure.com"
+        }
+        # "azure_app_service" = {
+        #   zone_name = "privatelink.azurewebsites.net"
+        # }
+        # "azure_search" = {
+        #   zone_name = "privatelink.search.windows.net"
+        # }
+        # "azure_cosmos_db_sql" = {
+        #   zone_name = "privatelink.documents.azure.com"
+        # }
+        # "azure_ai_oai" = {
+        #   zone_name = "privatelink.openai.azure.com"
+        # }
+        # "azure_ml" = {
+        #   zone_name = "privatelink.api.azureml.ms"
+        # }
+        # "azure_ai_cog_svcs" = {
+        #   zone_name = "privatelink.cognitiveservices.azure.com"
+        # }
+        # "azure_ai_services" = {
+        #   zone_name = "privatelink.services.ai.azure.com"
+        # }
+        # "azure_api_management" = {
+        #   zone_name = "privatelink.azure-api.net"
+        # }
+        "azure_acr_registry" = {
+          zone_name = "privatelink.azurecr.io"
+        }
+        "custom_jlurisenterprise" = {
+          zone_name = "jlurisenterprise.com"
+        }
+        # "azure_site_recovery" = {
+        #   zone_name = "privatelink.siterecovery.windowsazure.com"
+        # }
+        # "azure_storage_file" = {
+        #   zone_name = "privatelink.file.core.windows.net"
+        # }
+        "azure_aks_mgmt_uaen" = {
+          zone_name = "privatelink.uaenorth.azmk8s.io"
         }
       }
       auto_registration_zone_enabled = "$${primary_private_dns_auto_registration_zone_enabled}"
       auto_registration_zone_name    = "$${primary_auto_registration_zone_name}"
     }
     private_dns_resolver = {
-      enabled               = "$${primary_private_dns_resolver_enabled}"
       subnet_address_prefix = "$${primary_private_dns_resolver_subnet_address_prefix}"
-      dns_resolver = {
-        name = "$${primary_private_dns_resolver_name}"
-      }
+      name                  = "$${primary_private_dns_resolver_name}"
     }
     bastion = {
-      enabled               = "$${primary_bastion_enabled}"
       subnet_address_prefix = "$${primary_bastion_subnet_address_prefix}"
-      bastion_host = {
-        name  = "$${primary_bastion_host_name}"
-        zones = "$${starter_location_01_availability_zones}"
-      }
+      name                  = "$${primary_bastion_host_name}"
+      zones                 = "$${starter_location_01_availability_zones}"
       bastion_public_ip = {
         name  = "$${primary_bastion_host_public_ip_name}"
         zones = "$${starter_location_01_availability_zones}"
