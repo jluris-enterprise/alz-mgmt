@@ -476,6 +476,9 @@ hub_and_spoke_vnet_virtual_networks = {
         }
         "custom_jlurisenterprise" = {
           zone_name = "jlurisenterprise.com"
+          # Not a Private Link zone: without this the module sets resolutionPolicy on its VNet links, which Azure rejects
+          # ("The ResolutionPolicy property is applicable exclusively to private link zones"). Set this on every custom zone.
+          private_dns_zone_supports_private_link = false
         }
         # "azure_site_recovery" = {
         #   zone_name = "privatelink.siterecovery.windowsazure.com"
