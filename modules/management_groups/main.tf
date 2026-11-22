@@ -18,5 +18,6 @@ module "management_groups" {
   override_policy_definition_parameter_assign_permissions_unset = try(var.management_group_settings.override_policy_definition_parameter_assign_permissions_unset, null)
   management_group_role_assignments                             = try(var.management_group_settings.management_group_role_assignments, null)
   role_assignment_definition_lookup_enabled                     = try(var.management_group_settings.role_assignment_definition_lookup_enabled, true)
-  policy_assignment_non_compliance_message_settings             = try(var.management_group_settings.policy_assignment_non_compliance_message_settings, {})
+  # prefer_existing keeps each assignment's own non-compliance message (module default "replace" overwrites them).
+  policy_assignment_non_compliance_message_settings = try(var.management_group_settings.policy_assignment_non_compliance_message_settings, { merge_mode = "prefer_existing" })
 }
