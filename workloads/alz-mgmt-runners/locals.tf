@@ -9,8 +9,6 @@ locals {
   dns_resource_group_name                  = try(local.platform_outputs.dns_resource_group_name, lookup(local.platform_replacements, "dns_resource_group_name", format("rg-hub-dns-%s", var.location)))
   management_resource_group_name           = try(local.platform_outputs.management_resource_group_name, try(local.platform_outputs.templated_inputs.management_resource_settings.resource_group_name, format("rg-management-%s", var.location)))
   log_analytics_workspace_name             = try(local.platform_outputs.log_analytics_workspace_name, try(local.platform_outputs.templated_inputs.management_resource_settings.log_analytics_workspace_name, format("law-management-%s", var.location)))
-  platform_state_storage_account_name      = try(local.platform_outputs.platform_state_storage_account_name, "stoalzmgmuae001wksi")
-  platform_state_resource_group_name       = try(local.platform_outputs.platform_state_resource_group_name, "rg-alz-mgmt-state-uaenorth-001")
 
   runner_resource_group_name = local.management_runner_resource_group_name
 }

@@ -47,18 +47,6 @@ data "azurerm_private_dns_zone" "kv_zone" {
   provider            = azurerm.connectivity
 }
 
-data "azurerm_private_dns_zone" "sta_zone" {
-  name                = "privatelink.blob.core.windows.net"
-  resource_group_name = local.dns_resource_group_name
-  provider            = azurerm.connectivity
-}
-
-data "azurerm_storage_account" "management_tfstate" {
-  name                = local.platform_state_storage_account_name
-  resource_group_name = local.platform_state_resource_group_name
-  provider            = azurerm.management
-}
-
 data "azurerm_log_analytics_workspace" "management" {
   name                = local.log_analytics_workspace_name
   resource_group_name = local.management_resource_group_name
