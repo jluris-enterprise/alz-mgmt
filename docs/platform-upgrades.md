@@ -11,7 +11,7 @@ Last updated: 2026-11-22.
 | ALZ policy library (`platform/alz`) | [`lib/alz_library_metadata.json`](../lib/alz_library_metadata.json) | `2025.09.2` | `2026.11.0` | Done (PR #3) |
 | `Azure/avm-ptn-alz` (management groups, policy) | [`modules/management_groups/main.tf`](../modules/management_groups/main.tf) | `0.12.3` | `0.23.0` | Done (PR #4) |
 | `Azure/avm-ptn-alz-management` (Log Analytics, AMA, DCRs) | [`modules/management_resources/main.tf`](../modules/management_resources/main.tf) | `0.7.0` | `0.10.0` | Done (PR #5) |
-| `Azure/avm-ptn-alz-connectivity-hub-and-spoke-vnet` (hub VNet, firewall, DNS, bastion) | [`main.connectivity.hub.and.spoke.virtual.network.tf`](../main.connectivity.hub.and.spoke.virtual.network.tf) | `0.12.0` | `0.17.2` | In progress (`0.18.x` deferred until the ALZ accelerator adopts it) |
+| `Azure/avm-ptn-alz-connectivity-hub-and-spoke-vnet` (hub VNet, firewall, DNS, bastion) | [`main.connectivity.hub.and.spoke.virtual.network.tf`](../main.connectivity.hub.and.spoke.virtual.network.tf) | `0.12.0` | `0.17.2` | Done (PR #6, plus the custom-zone fix). `0.18.x` is deferred until the ALZ accelerator adopts it. |
 | `Azure/alz` provider | [`terraform.tf`](../terraform.tf) | `0.21.0` | `0.22.1` | Optional; `avm-ptn-alz 0.23.0` only needs `~> 0.21` |
 
 `avm-ptn-alz-connectivity-virtual-wan` (`0.11.8`) is also declared, but this platform uses hub and spoke, so it deploys nothing. Leave it until there is a reason to change it.
@@ -110,6 +110,7 @@ The target is `0.17.2`, not `0.18.x`, because the latest ALZ accelerator (v17.7.
 - **Runner links:** [`main.management.runner.private-dns-links.tf`](../main.management.runner.private-dns-links.tf) reads `private_dns_zones.private_link_private_dns_zones`. The old path, inside `try()`, would have returned `{}` and planned the deletion of all runner VNet links. `try()` was removed so a wrong path now fails the plan.
 - **DNS link moves:** 0.16 moved DNS links from azurerm to azapi. The module's moved blocks cover only the standard ALZ zone keys. [`moved.connectivity.hub.and.spoke.virtual.network.tf`](../moved.connectivity.hub.and.spoke.virtual.network.tf) covers `azure_postgres_sql_database`, `custom_jlurisenterprise` and `azure_aks_mgmt_uaen`. **Any new non-standard zone key added before this upgrade is applied needs a block there too.**
 - **Output rename:** the module output `firewall_policy_ids` was renamed to `firewall_policies`.
+- **Custom zones need `private_dns_zone_supports_private_link = false`.** Zones that aren't Private Link zones, such as `jlurisenterprise.com`, need this setting. Otherwise the module sets `resolutionPolicy` on their VNet links, and Azure rejects the apply with `400 The ResolutionPolicy property is applicable exclusively to private link zones`. Plans can't catch this. The first apply of 0.17.2 failed on exactly this link, and the rest of the apply completed.
 - **Validation:** a local read-only plan (`-lock=false`) against real state showed 22 to add (telemetry only), 37 to change (in place) and 0 to destroy.
 
 ### Notes on the `avm-ptn-alz-management` 0.10.0 upgrade
