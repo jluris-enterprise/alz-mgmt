@@ -20,7 +20,7 @@ locals {
   connectivity_private_dns_auto_registration_zone_name = (
     try(local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.auto_registration_zone_enabled, false)
     && try(local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.auto_registration_zone_name, "") != ""
-  ) ? {
+    ) ? {
     (local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.auto_registration_zone_name) = {
       zone_name = local.hub_and_spoke_vnet_virtual_networks.primary.private_dns_zones.auto_registration_zone_name
     }
