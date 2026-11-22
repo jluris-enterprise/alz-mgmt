@@ -6,9 +6,9 @@ on:
       - main
     paths-ignore:
       - 'workloads/**'
-  pull_request:
-    paths-ignore:
-      - 'workloads/**'
+  # pull_request:
+  #   paths-ignore:
+  #     - 'workloads/**'
   workflow_dispatch:
     inputs:
       terraform_action:
