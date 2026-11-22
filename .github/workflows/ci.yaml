@@ -16,7 +16,8 @@ on:
 
 jobs:
   validate_and_plan:
-    uses: ./.github/workflows/ci-template.yaml
+    # uses: ./.github/workflows/ci-template.yaml
+    uses: jluris-enterprise/alz-mgmt/.github/workflows/ci-template.yaml@main
     name: 'CI'
     permissions:
       id-token: write
